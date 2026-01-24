@@ -1,0 +1,27 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "black-forest-labs",
+  "owner": {
+    "name": "Black Forest Labs",
+    "url": "https://blackforestlabs.ai"
+  },
+  "metadata": {
+    "description": "Official skills from Black Forest Labs for FLUX image generation - prompting guidelines and API integration patterns",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "flux-best-practices",
+      "description": "BFL skills for image generation including best practices for prompting, T2I, I2I, structured JSON, and API integration patterns",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/bfl-api",
+        "./skills/flux-best-practices"
+      ],
+      "author": {
+        "name": "Kerem Nalbant"
+      }
+    }
+  ]
+}
