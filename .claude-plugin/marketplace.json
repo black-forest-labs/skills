@@ -16,8 +16,8 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/flux-best-practices",
-        "./skills/bfl-api"
+        "./skills/bfl-api",
+        "./skills/flux-best-practices"
       ],
       "author": {
         "name": "Kerem Nalbant"
