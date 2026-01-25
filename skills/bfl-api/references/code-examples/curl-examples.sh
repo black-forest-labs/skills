@@ -100,6 +100,38 @@ echo "Saved to output.png"
 
 
 # =============================================================================
+# IMAGE-TO-IMAGE EDITING
+# =============================================================================
+# Preferred: Pass image URLs directly - simpler and more convenient than base64.
+# The API fetches URLs automatically. Both URL and base64 work.
+
+echo ""
+echo "=== Image-to-Image Edit Example ==="
+
+# Edit an image using its URL directly
+I2I_RESPONSE=$(curl -s -X POST "${BASE_URL}/v1/flux-2-pro" \
+  -H "x-key: ${API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Change the background to a sunset beach",
+    "input_image": "https://example.com/photo.jpg"
+  }')
+
+echo "I2I Response: ${I2I_RESPONSE}"
+
+# Multi-reference example (combine elements from multiple images)
+# curl -s -X POST "${BASE_URL}/v1/flux-2-max" \
+#   -H "x-key: ${API_KEY}" \
+#   -H "Content-Type: application/json" \
+#   -d '{
+#     "prompt": "Person from image 1 wearing outfit from image 2 in setting from image 3",
+#     "input_image": "https://example.com/person.jpg",
+#     "input_image_2": "https://example.com/outfit.jpg",
+#     "input_image_3": "https://example.com/location.jpg"
+#   }'
+
+
+# =============================================================================
 # MODEL ENDPOINT EXAMPLES
 # =============================================================================
 

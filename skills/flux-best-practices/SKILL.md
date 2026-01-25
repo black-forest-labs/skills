@@ -38,7 +38,7 @@ Use this skill when generating prompts for any BFL FLUX model to ensure optimal 
 | Production balanced | FLUX.2 [pro]      | Quality + speed               |
 | Typography/text     | FLUX.2 [flex]     | Best text rendering           |
 | Local/development   | FLUX.2 [dev]      | Open weights                  |
-| Image editing       | FLUX.2 [pro/max]  | Use input_image parameter     |
+| Image editing       | FLUX.2 [pro/max]  | Pass image URL directly to input_image |
 | Inpainting          | FLUX.1 Fill       | Object removal/completion     |
 | Context editing     | FLUX.1 Kontext    | Older model, prefer FLUX.2    |
 

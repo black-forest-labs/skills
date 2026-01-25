@@ -19,6 +19,21 @@ Simply provide your source image as a reference and describe the desired changes
 
 > **Note:** FLUX.2 models are recommended for image editing. They provide better results than the older FLUX.1 Kontext models.
 
+## Providing Images
+
+**Preferred: Use URLs directly** - simpler and more convenient than base64.
+
+When you have an image URL, pass it directly to `input_image`:
+
+```json
+{
+  "prompt": "Change the background to a beach sunset",
+  "input_image": "https://example.com/photo.jpg"
+}
+```
+
+The API fetches URLs automatically. Both URL and base64 work, but URLs are recommended when available.
+
 ## Basic Edit Patterns
 
 ### Simple Modifications

@@ -102,15 +102,15 @@ Inpainting and object removal.
 
 > **Important:** All FLUX.2 models (klein, pro, max, flex) support image-to-image editing via the `input_image` parameter. FLUX.2 is recommended over FLUX.1 Kontext for editing.
 
+> **Preferred: Use URLs directly** - The API fetches URLs automatically, which is simpler and more convenient than downloading and encoding to base64. Both URL and base64 work, but URLs are recommended when available.
+
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `prompt` | string | Yes | Edit instruction |
-| `input_image` | string | Yes | **URL or Base64** - URLs are fetched automatically, no conversion needed |
-| `input_image_2` - `input_image_8` | string | No | Additional references (URL or Base64) |
+| `input_image` | string | Yes | **URL (preferred)** or base64 - API fetches URLs automatically |
+| `input_image_2` - `input_image_8` | string | No | Additional reference URLs or base64 |
 | `width` | integer | No | Output width |
 | `height` | integer | No | Output height |
-
-> **Tip:** When you have a public image URL, just pass it directly to `input_image` - no need to download and convert to base64.
 
 ### FLUX.2 [flex] Specific
 

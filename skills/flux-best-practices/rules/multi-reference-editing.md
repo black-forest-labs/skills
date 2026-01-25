@@ -18,6 +18,22 @@ FLUX.2 models support multiple reference images for advanced editing:
 
 > **Note:** FLUX.2 models are recommended over FLUX.1 Kontext Max for better results.
 
+## Providing Images
+
+**Preferred: Use URLs directly** - simpler and more convenient than base64.
+
+Pass image URLs directly to `input_image`, `input_image_2`, etc.:
+
+```json
+{
+  "prompt": "Person from image 1 wearing outfit from image 2",
+  "input_image": "https://example.com/person.jpg",
+  "input_image_2": "https://example.com/outfit.jpg"
+}
+```
+
+The API fetches URLs automatically. Both URL and base64 work, but URLs are recommended when available.
+
 ## Reference Methods
 
 ### Natural Language Description

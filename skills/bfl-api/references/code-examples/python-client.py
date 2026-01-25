@@ -204,15 +204,25 @@ class BFLClient:
         """
         Generate an image from another image (image-to-image).
 
+        Preferred: Pass image URLs directly - simpler and more convenient than base64.
+        The API fetches URLs automatically. Both URL and base64 work.
+
         Args:
-            model: Model to use (e.g., "flux-kontext", "flux-kontext-max")
+            model: Model to use (e.g., "flux-2-pro", "flux-2-max")
             prompt: Edit instructions
-            input_image: Base64 or URL of input image
-            additional_images: List of additional reference images
+            input_image: Image URL (preferred) or base64
+            additional_images: List of additional reference image URLs or base64
             **kwargs: Additional parameters
 
         Returns:
             GenerationResult with edited image
+
+        Example:
+            result = client.generate_i2i(
+                "flux-2-pro",
+                "Change the background to a sunset",
+                "https://example.com/photo.jpg"  # URL is simpler!
+            )
         """
         payload = {
             "prompt": prompt,

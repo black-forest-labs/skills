@@ -56,6 +56,24 @@ Result URLs from the API are temporary. Download images immediately after genera
 
 > **Tip:** All FLUX.2 models support image editing via the `input_image` parameter - no separate editing endpoint needed.
 
+### Image Input for Editing
+
+**Preferred: Use URLs directly** - simpler and more convenient than base64.
+
+When editing images, pass the image URL directly to `input_image`:
+
+```bash
+curl -X POST "https://api.bfl.ai/v1/flux-2-pro" \
+  -H "x-key: $BFL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Change the background to a sunset",
+    "input_image": "https://example.com/photo.jpg"
+  }'
+```
+
+The API fetches URLs automatically. Both URL and base64 work, but URLs are recommended when available.
+
 | FLUX.1 Kontext | `/v1/flux-kontext` |
 | FLUX.1 Kontext Max | `/v1/flux-kontext-max` |
 

@@ -218,6 +218,21 @@ export class BFLClient {
 
   /**
    * Generate an image from another image (image-to-image).
+   *
+   * Preferred: Pass image URLs directly - simpler and more convenient than base64.
+   * The API fetches URLs automatically. Both URL and base64 work.
+   *
+   * @param model - Model to use (e.g., "flux-2-pro", "flux-2-max")
+   * @param prompt - Edit instructions
+   * @param inputImage - Image URL (preferred) or base64
+   * @param options - Additional options including more reference image URLs or base64
+   *
+   * @example
+   * const result = await client.generateI2I(
+   *   "flux-2-pro",
+   *   "Change the background to a sunset",
+   *   "https://example.com/photo.jpg"  // URL is simpler!
+   * );
    */
   async generateI2I(
     model: string,
