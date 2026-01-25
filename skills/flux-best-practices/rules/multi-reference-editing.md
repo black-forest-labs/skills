@@ -16,7 +16,7 @@ FLUX.2 models support multiple reference images for advanced editing:
 - **FLUX.2 [max]**: Up to 8 via API, 10 in playground - highest quality
 - **FLUX.2 [flex]**: Up to 8 via API - best for typography
 
-> **Note:** Legacy FLUX.1 Kontext Max is no longer recommended. FLUX.2 models provide superior results.
+> **Note:** FLUX.2 models are recommended over FLUX.1 Kontext Max for better results.
 
 ## Reference Methods
 

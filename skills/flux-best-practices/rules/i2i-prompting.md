@@ -17,7 +17,7 @@ All FLUX.2 models support image-to-image editing via reference images:
 
 Simply provide your source image as a reference and describe the desired changes. The model understands image context and can modify specific elements while preserving others.
 
-> **Note:** Legacy FLUX.1 Kontext models are no longer recommended. FLUX.2 models provide superior editing results.
+> **Note:** FLUX.2 models are recommended for image editing. They provide better results than the older FLUX.1 Kontext models.
 
 ## Basic Edit Patterns
 

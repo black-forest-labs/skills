@@ -100,13 +100,17 @@ Inpainting and object removal.
 
 ### Image-to-Image (I2I)
 
+> **Important:** All FLUX.2 models (klein, pro, max, flex) support image-to-image editing via the `input_image` parameter. FLUX.2 is recommended over FLUX.1 Kontext for editing.
+
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `prompt` | string | Yes | Edit instruction |
-| `input_image` | string | Yes | Base64 or URL |
-| `input_image_2` - `input_image_8` | string | No | Additional references |
+| `input_image` | string | Yes | **URL or Base64** - URLs are fetched automatically, no conversion needed |
+| `input_image_2` - `input_image_8` | string | No | Additional references (URL or Base64) |
 | `width` | integer | No | Output width |
 | `height` | integer | No | Output height |
+
+> **Tip:** When you have a public image URL, just pass it directly to `input_image` - no need to download and convert to base64.
 
 ### FLUX.2 [flex] Specific
 
@@ -170,7 +174,50 @@ curl -X POST "https://api.bfl.ai/v1/flux-2-max" \
   }'
 ```
 
-### I2I Request
+### I2I Request (FLUX.2 - Recommended)
+
+Edit images using any FLUX.2 model by passing the source image URL directly:
+
+```bash
+curl -X POST "https://api.bfl.ai/v1/flux-2-klein-9b" \
+  -H "x-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Change the floor color to light blue",
+    "input_image": "https://example.com/room-photo.jpg"
+  }'
+```
+
+For higher quality edits, use FLUX.2 [pro] or [max]:
+
+```bash
+curl -X POST "https://api.bfl.ai/v1/flux-2-pro" \
+  -H "x-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Change the background to a beach sunset",
+    "input_image": "https://example.com/portrait.jpg"
+  }'
+```
+
+### Multi-Reference I2I (FLUX.2)
+
+```bash
+curl -X POST "https://api.bfl.ai/v1/flux-2-max" \
+  -H "x-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Person from image 1 wearing outfit from image 2 in setting from image 3",
+    "input_image": "https://example.com/person.jpg",
+    "input_image_2": "https://example.com/outfit.jpg",
+    "input_image_3": "https://example.com/location.jpg"
+  }'
+```
+
+### I2I with FLUX.1 Kontext
+
+> **Note:** FLUX.1 Kontext endpoints are available, but FLUX.2 models provide better results.
+
 ```bash
 curl -X POST "https://api.bfl.ai/v1/flux-kontext" \
   -H "x-key: YOUR_API_KEY" \
@@ -178,19 +225,6 @@ curl -X POST "https://api.bfl.ai/v1/flux-kontext" \
   -d '{
     "prompt": "Change the background to a beach sunset",
     "input_image": "https://example.com/image.jpg"
-  }'
-```
-
-### Multi-Reference I2I
-```bash
-curl -X POST "https://api.bfl.ai/v1/flux-kontext-max" \
-  -H "x-key: YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "prompt": "Person from image 1 wearing outfit from image 2 in setting from image 3",
-    "input_image": "base64_or_url_1",
-    "input_image_2": "base64_or_url_2",
-    "input_image_3": "base64_or_url_3"
   }'
 ```
 
