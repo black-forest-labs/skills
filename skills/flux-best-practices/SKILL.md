@@ -51,6 +51,10 @@ Use this skill when generating prompts for any BFL FLUX model to ensure optimal 
 5. **Quote text** - Use "quoted text" for typography rendering
 6. **Hex colors** - Use #RRGGBB format with color description
 
+## Related
+
+For API integration (endpoints, polling, webhooks), see the **bfl-api** skill.
+
 ## Rules Reference
 
 Read individual rule files for detailed guidance:

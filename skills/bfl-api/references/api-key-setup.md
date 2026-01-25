@@ -13,7 +13,7 @@ Run this first to check if your key is configured and valid:
 
 ```bash
 # Check if key is set
-[ -z "$BFL_API_KEY" ] && echo "❌ BFL_API_KEY not set" || echo "✓ Key configured"
+[ -z "$BFL_API_KEY" ] && echo "Error: BFL_API_KEY not set" || echo "OK: Key configured"
 ```
 
 If not set, follow the steps below.

@@ -15,7 +15,7 @@ BASE_URL="https://api.bfl.ai"
 # Always check this before making requests to avoid "Not authenticated" errors
 
 if [ "$API_KEY" = "YOUR_API_KEY" ] || [ -z "$API_KEY" ]; then
-  echo "❌ Error: BFL_API_KEY not set"
+  echo "Error: BFL_API_KEY not set"
   echo ""
   echo "To fix:"
   echo "  1. Get a key at https://dashboard.bfl.ai/get-started"
@@ -23,7 +23,7 @@ if [ "$API_KEY" = "YOUR_API_KEY" ] || [ -z "$API_KEY" ]; then
   exit 1
 fi
 
-echo "✓ API key configured"
+echo "OK: API key configured"
 
 # -----------------------------------------------------------------------------
 # Example 1: Basic Image Generation with FLUX.2 Pro
