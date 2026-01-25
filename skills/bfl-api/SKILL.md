@@ -21,6 +21,10 @@ echo $BFL_API_KEY
 
 If empty or you see "Not authenticated" errors, see [API Key Setup](#api-key-setup) below.
 
+## Important: Image URLs Expire in 10 Minutes
+
+Result URLs from the API are temporary. Download images immediately after generation completes - do not store or cache the URLs themselves.
+
 ## When to Use
 
 - Setting up BFL API client
@@ -61,6 +65,15 @@ If empty or you see "Not authenticated" errors, see [API Key Setup](#api-key-set
 |------|---------------------|
 | Standard (most endpoints) | 24 |
 | Kontext-max | 6 |
+
+### Polling vs Webhooks
+
+| Approach | Use When |
+|----------|----------|
+| **Polling** | Scripts, CLI tools, local development, single requests, simple integrations |
+| **Webhooks** | Production apps, high volume, server-to-server, when you need immediate notification |
+
+**Start with polling** - it's simpler and works everywhere. Switch to webhooks when you need to scale or want event-driven architecture.
 
 ### Key Behaviors
 
@@ -107,6 +120,10 @@ x-key: YOUR_API_KEY
 3. When Ready, download result URL
    └─> URL expires in 10 minutes - download immediately
 ```
+
+## Related
+
+For prompting best practices (T2I, I2I, typography, colors), see the **flux-best-practices** skill.
 
 ## References
 

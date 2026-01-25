@@ -34,9 +34,9 @@ You can also add this as a plugin marketplace in Claude Code:
 Comprehensive guide for all FLUX models including:
 
 - **Core Principles** - Universal prompting best practices
-- **Model-Specific Guides** - FLUX.2 (klein, max, pro, flex, dev) and FLUX.1 (pro, Kontext, Fill)
+- **Model-Specific Guides** - FLUX.2 ([klein], [max], [pro], [flex], [dev]) and FLUX.1
 - **T2I Prompting** - Text-to-image patterns and techniques
-- **I2I Prompting** - Image-to-image editing with Kontext
+- **I2I Prompting** - Image-to-image editing with FLUX.2 reference images
 - **JSON Structured Prompting** - Complex scene composition
 - **Hex Color Prompting** - Precise color specification (#RRGGBB)
 - **Typography** - Text rendering and font styles
@@ -48,9 +48,9 @@ Comprehensive guide for all FLUX models including:
 
 API integration guide covering:
 
-- **Endpoints** - Complete endpoint documentation for all models
+- **Endpoints** - Complete endpoint documentation for all FLUX.2 and FLUX.1 models
 - **Polling Patterns** - Async polling with exponential backoff
-- **Rate Limiting** - Handling 24 concurrent (6 for Kontext Max)
+- **Rate Limiting** - Handling 24 concurrent requests
 - **Error Handling** - Error codes and recovery strategies
 - **Webhook Integration** - Production webhook setup and verification
 - **Code Examples** - Python and TypeScript clients
@@ -59,14 +59,15 @@ API integration guide covering:
 
 ### Model Selection
 
-| Use Case            | Recommended Model |
-| ------------------- | ----------------- |
-| Fastest generation  | FLUX.2 [klein]    |
-| Highest quality     | FLUX.2 [max]      |
-| Production balanced | FLUX.2 [pro]      |
-| Typography/text     | FLUX.2 [flex]     |
-| Image editing       | FLUX.1 Kontext    |
-| Inpainting          | FLUX.1 Fill       |
+| Model | Best For | Pricing |
+| ----- | -------- | ------- |
+| FLUX.2 [klein] | Fastest generation, real-time | from $0.014/image |
+| FLUX.2 [pro] | Production balanced | from $0.03/MP |
+| FLUX.2 [flex] | Typography/text | from $0.06/MP |
+| FLUX.2 [max] | Highest quality, grounding search | from $0.07/MP |
+| FLUX.2 [dev] | Local development | Free (non-commercial) |
+
+*All FLUX.2 models support both text-to-image and image editing natively—no need for separate models. FLUX.1 models are also available.*
 
 ### Prompt Structure
 
