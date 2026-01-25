@@ -5,13 +5,18 @@ description: How to obtain and configure a BFL API key
 
 # API Key Setup
 
-## Check if Configured
+> **Important:** Always verify your API key before attempting image generation. Missing or invalid keys result in "Not authenticated" errors.
+
+## Quick Validation
+
+Run this first to check if your key is configured and valid:
 
 ```bash
-echo $BFL_API_KEY
+# Check if key is set
+[ -z "$BFL_API_KEY" ] && echo "❌ BFL_API_KEY not set" || echo "✓ Key configured"
 ```
 
-If empty, follow steps below.
+If not set, follow the steps below.
 
 ## Get a Key
 

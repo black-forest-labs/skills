@@ -11,6 +11,16 @@ metadata:
 
 Use this skill when integrating BFL FLUX APIs into applications for image generation, editing, and processing.
 
+## First: Check API Key
+
+**Before generating images, verify your API key is set:**
+
+```bash
+echo $BFL_API_KEY
+```
+
+If empty or you see "Not authenticated" errors, see [API Key Setup](#api-key-setup) below.
+
 ## When to Use
 
 - Setting up BFL API client
