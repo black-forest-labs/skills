@@ -17,7 +17,7 @@ Decision guide for selecting the optimal FLUX model based on your requirements.
 | Typography | FLUX.2 [flex] |
 | Image Editing | FLUX.2 [klein], [pro], or [max] |
 | Local/Free | FLUX.2 [dev] |
-| Inpainting | FLUX.1 Fill (legacy) |
+| Inpainting | FLUX.1 Fill |
 
 ## Decision Tree
 
@@ -43,8 +43,8 @@ What's your primary need?
 ├─ Need REAL-TIME web information?
 │   └─ FLUX.2 [max] (grounding search)
 │
-└─ Legacy options (FLUX.1 family)
-    ├─ FLUX.1 Kontext - older context-aware editing
+└─ FLUX.1 family (older models)
+    ├─ FLUX.1 Kontext - context-aware editing
     └─ FLUX.1 Fill - inpainting/object removal
 ```
 
@@ -117,7 +117,7 @@ What's your primary need?
 - Multi-reference support (up to 8-10 images)
 - Best editing consistency
 - Maintains identity across scenes
-- Superior quality over legacy Kontext
+- Superior quality over FLUX.1 Kontext
 
 ### Photo Editing / Retouching
 **Recommended: FLUX.2 [klein], [pro], or [max]**
@@ -125,10 +125,10 @@ What's your primary need?
 - Style transfer
 - Object modification
 - Attribute changes
-- Better results than legacy FLUX.1 Kontext
+- Better results than FLUX.1 Kontext
 
 ### Object Removal / Completion
-**Recommended: FLUX.1 Fill (legacy)**
+**Recommended: FLUX.1 Fill**
 - Clean inpainting
 - Background completion
 - Artifact removal
@@ -196,7 +196,7 @@ What's your primary need?
 ### Editing Existing Images
 - **Fast edits**: FLUX.2 [klein] with reference images
 - **Quality edits**: FLUX.2 [max] or [pro] with reference images
-- **Legacy option**: FLUX.1 Kontext (not recommended)
+- **Alternative**: FLUX.1 Kontext (FLUX.2 preferred)
 
 ### Rate Limit Sensitivity
 - **Prefer**: FLUX.2 models (24 concurrent limit)
@@ -211,7 +211,7 @@ Balance?    → FLUX.2 [pro]
 Text?       → FLUX.2 [flex]
 Edit?       → FLUX.2 [klein/pro/max] with reference images
 Free?       → FLUX.2 [dev]
-Fill gaps?  → FLUX.1 Fill (legacy)
+Fill gaps?  → FLUX.1 Fill
 ```
 
-**Key insight:** All FLUX.2 models support image editing natively via reference images. There's no need to use legacy FLUX.1 Kontext models for editing tasks.
+**Key insight:** All FLUX.2 models support image editing natively via reference images. FLUX.2 is recommended over FLUX.1 Kontext for editing tasks.

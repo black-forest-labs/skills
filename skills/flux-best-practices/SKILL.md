@@ -15,7 +15,7 @@ Use this skill when generating prompts for any BFL FLUX model to ensure optimal 
 
 - Creating prompts for FLUX.2 or FLUX.1 models
 - Text-to-image (T2I) generation
-- Image-to-image (I2I) editing with Kontext
+- Image-to-image (I2I) editing with FLUX.2 models
 - Structured scene generation with JSON
 - Typography and text rendering
 - Multi-reference style transfer
@@ -38,8 +38,9 @@ Use this skill when generating prompts for any BFL FLUX model to ensure optimal 
 | Production balanced | FLUX.2 [pro]      | Quality + speed               |
 | Typography/text     | FLUX.2 [flex]     | Best text rendering           |
 | Local/development   | FLUX.2 [dev]      | Open weights                  |
-| Image editing       | FLUX.1 Kontext    | Context-aware editing         |
+| Image editing       | FLUX.2 [pro/max]  | Use input_image parameter     |
 | Inpainting          | FLUX.1 Fill       | Object removal/completion     |
+| Context editing     | FLUX.1 Kontext    | Older model, prefer FLUX.2    |
 
 ### Critical Rules
 
@@ -58,7 +59,7 @@ Read individual rule files for detailed guidance:
 - [rules/flux2-models.md](rules/flux2-models.md) - FLUX.2 family: klein, max, pro, flex, dev
 - [rules/flux1-models.md](rules/flux1-models.md) - FLUX.1 family: pro, Kontext, Fill
 - [rules/t2i-prompting.md](rules/t2i-prompting.md) - Text-to-image prompting patterns
-- [rules/i2i-prompting.md](rules/i2i-prompting.md) - Image-to-image editing with Kontext
+- [rules/i2i-prompting.md](rules/i2i-prompting.md) - Image-to-image editing with FLUX.2
 - [rules/json-structured-prompting.md](rules/json-structured-prompting.md) - Complex scene composition
 - [rules/hex-color-prompting.md](rules/hex-color-prompting.md) - Precise color specification
 - [rules/typography-text.md](rules/typography-text.md) - Text rendering and typography

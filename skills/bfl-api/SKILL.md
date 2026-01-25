@@ -39,6 +39,9 @@ Use this skill when integrating BFL FLUX APIs into applications for image genera
 | FLUX.2 [max] | `/v1/flux-2-max` |
 | FLUX.2 [pro] | `/v1/flux-2-pro` |
 | FLUX.2 [flex] | `/v1/flux-2-flex` |
+
+> **Tip:** All FLUX.2 models support image editing via the `input_image` parameter - no separate editing endpoint needed.
+
 | FLUX.1 Kontext | `/v1/flux-kontext` |
 | FLUX.1 Kontext Max | `/v1/flux-kontext-max` |
 

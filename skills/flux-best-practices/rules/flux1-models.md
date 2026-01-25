@@ -1,22 +1,22 @@
 ---
 name: flux1-models
-description: Prompting guidelines for FLUX.1 model family (legacy)
+description: Prompting guidelines for FLUX.1 model family
 ---
 
-# FLUX.1 Model Family (Legacy)
+# FLUX.1 Model Family
 
-> **Important:** FLUX.1 models are legacy. For most use cases, prefer FLUX.2 models which offer superior performance for both generation and editing tasks.
+> **Tip:** FLUX.2 models are the latest generation and recommended for most use cases. FLUX.1 models are still available for specific needs.
 
 Guide to FLUX.1 models and their specialized capabilities.
 
 ## Model Overview
 
-| Model | Purpose | Status |
-|-------|---------|--------|
-| FLUX1.1 [pro] | Text-to-image | Legacy - use FLUX.2 [pro] instead |
-| FLUX.1 Kontext | Image-to-image | Legacy - use FLUX.2 with references instead |
-| FLUX.1 Kontext Max | Image-to-image | Legacy - use FLUX.2 [max] with references instead |
-| FLUX.1 Fill | Inpainting | Still useful for specific inpainting tasks |
+| Model | Purpose | Notes |
+|-------|---------|-------|
+| FLUX1.1 [pro] | Text-to-image | FLUX.2 [pro] offers improved results |
+| FLUX.1 Kontext | Image-to-image | FLUX.2 with references recommended |
+| FLUX.1 Kontext Max | Image-to-image | FLUX.2 [max] with references recommended |
+| FLUX.1 Fill | Inpainting | Useful for specific inpainting tasks |
 
 ## FLUX1.1 [pro]
 
@@ -40,9 +40,9 @@ shallow depth of field with bokeh background, joyful expression, professional
 pet photography style
 ```
 
-## FLUX.1 Kontext - Image Editing (Legacy)
+## FLUX.1 Kontext - Image Editing
 
-> **Deprecated:** Use FLUX.2 models with reference images instead. FLUX.2 provides better editing quality and performance.
+> **Recommendation:** FLUX.2 models with reference images provide improved editing results.
 
 Context-aware image-to-image editing model for transformations and modifications.
 
@@ -52,7 +52,6 @@ Context-aware image-to-image editing model for transformations and modifications
 - Style transfer capabilities
 - Object modification
 - Basic to complex transformations
-- **Note:** FLUX.2 models now handle all these tasks with better results
 
 ### Prompting Strategies
 
