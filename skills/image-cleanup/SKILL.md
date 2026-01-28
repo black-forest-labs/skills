@@ -1,19 +1,28 @@
 ---
 name: image-cleanup
-description: Remove unwanted elements from images using BFL's Flux Kontext API. Remove text and watermarks, clear furniture from rooms, or remove any specified object. Use when users want to clean up photos by removing distracting or unwanted content.
+description: Remove unwanted elements from images using BFL FLUX image-to-image editing. Remove text and watermarks, clear furniture from rooms, or remove any specified object. Use when users want to clean up photos by removing distracting or unwanted content.
 metadata:
   author: playground
   version: "1.0"
-  category: image-editing
+  tags: flux, bfl, image-editing, removal, cleanup, i2i
 ---
 
 # Image Cleanup & Removal
 
-Guide for crafting prompts to remove unwanted elements from images using Black Forest Labs' Flux Kontext API.
+Guide for crafting prompts to remove unwanted elements from images using BFL FLUX image-to-image editing.
 
-## API Endpoint
+## Model Selection
 
-Use the Flux Kontext image-to-image endpoint. Pass the source image and a removal prompt.
+Use FLUX.2 models with `input_image` parameter for removal tasks:
+- **FLUX.2 [pro]** - Recommended for most cleanup tasks
+- **FLUX.2 [max]** - Best quality for complex removals
+- **FLUX.1 Fill** - Alternative for inpainting-style removal with masks
+
+For API integration details, see the **bfl-api** skill. For general prompting best practices, see **flux-best-practices**.
+
+## How to Use
+
+Pass the source image URL to `input_image` and describe what to remove in the prompt.
 
 ## Removal Types
 
@@ -168,3 +177,8 @@ Remove the trash can next to the bench completely
 ```
 Remove the parked cars from the street, filling the areas naturally
 ```
+
+## Related Skills
+
+- **bfl-api** - API endpoints, authentication, polling patterns
+- **flux-best-practices** - General prompting principles and model selection

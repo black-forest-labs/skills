@@ -1,19 +1,28 @@
 ---
 name: image-creative
-description: Create artistic image transformations using BFL's Flux Kontext API. Teleport subjects to new locations/styles, convert to cartoon/manga, create movie posters, exaggerate muscles, or change hairstyles. Use when users want fun, artistic, or dramatic visual transformations of their images.
+description: Create artistic image transformations using BFL FLUX image-to-image editing. Teleport subjects to new locations/styles, convert to cartoon/manga, create movie posters, exaggerate muscles, or change hairstyles. Use when users want fun, artistic, or dramatic visual transformations of their images.
 metadata:
   author: playground
   version: "1.0"
-  category: image-editing
+  tags: flux, bfl, image-editing, creative, style-transfer, i2i
 ---
 
 # Creative Image Transformations
 
-Guide for crafting prompts to achieve creative image transformations using Black Forest Labs' Flux Kontext API.
+Guide for crafting prompts to achieve creative image transformations using BFL FLUX image-to-image editing.
 
-## API Endpoint
+## Model Selection
 
-Use the Flux Kontext image-to-image endpoint. Pass the source image and a transformation prompt.
+Use FLUX.2 models with `input_image` parameter for creative transformations:
+- **FLUX.2 [pro]** - Recommended for most creative edits
+- **FLUX.2 [max]** - Best quality for complex style transfers
+- **FLUX.2 [flex]** - Best for transformations involving text/typography (e.g., movie posters)
+
+For API integration details, see the **bfl-api** skill. For general prompting best practices, see **flux-best-practices**.
+
+## How to Use
+
+Pass the source image URL to `input_image` and describe the desired transformation in the prompt.
 
 ## Transformation Types
 
@@ -166,3 +175,8 @@ Edit the hair to a modern fade haircut with textured top, keeping the natural ha
 | Movie Poster | `3:4` | Include title + text |
 | Bodybuilder | (preserve original) | Keep pose, exaggerate muscles |
 | Haircut | (preserve original) | Adapt to subject |
+
+## Related Skills
+
+- **bfl-api** - API endpoints, authentication, polling patterns
+- **flux-best-practices** - General prompting principles, style transfer patterns

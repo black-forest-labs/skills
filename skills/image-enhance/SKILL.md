@@ -1,19 +1,27 @@
 ---
 name: image-enhance
-description: Enhance images professionally using BFL's Flux Kontext API. Adjust lighting and studio setups, create professional product photography, zoom on subjects, colorize black-and-white photos, or change camera angles and perspectives. Use when users want practical image improvements or professional-quality enhancements.
+description: Enhance images professionally using BFL FLUX image-to-image editing. Adjust lighting and studio setups, create professional product photography, zoom on subjects, colorize black-and-white photos, or change camera angles and perspectives. Use when users want practical image improvements or professional-quality enhancements.
 metadata:
   author: playground
   version: "1.0"
-  category: image-editing
+  tags: flux, bfl, image-editing, enhancement, lighting, product-photo, i2i
 ---
 
 # Professional Image Enhancement
 
-Guide for crafting prompts to achieve professional image enhancements using Black Forest Labs' Flux Kontext API.
+Guide for crafting prompts to achieve professional image enhancements using BFL FLUX image-to-image editing.
 
-## API Endpoint
+## Model Selection
 
-Use the Flux Kontext image-to-image endpoint. Pass the source image and an enhancement prompt.
+Use FLUX.2 models with `input_image` parameter for enhancement tasks:
+- **FLUX.2 [pro]** - Recommended for most enhancement tasks
+- **FLUX.2 [max]** - Best quality for detailed relighting and product photography
+
+For API integration details, see the **bfl-api** skill. For general prompting best practices, see **flux-best-practices**.
+
+## How to Use
+
+Pass the source image URL to `input_image` and describe the desired enhancement in the prompt.
 
 ## Enhancement Types
 
@@ -216,3 +224,8 @@ Restore color with a cool, desaturated film look
 | Zoom | (preserve original) | Specify subject + zoom level |
 | Move Camera | (preserve original) | Use cinematographic terms |
 | Colorize | (preserve original) | Specify style/era/mood |
+
+## Related Skills
+
+- **bfl-api** - API endpoints, authentication, polling patterns
+- **flux-best-practices** - General prompting principles, lighting terminology
