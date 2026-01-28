@@ -51,9 +51,14 @@ Use this skill when generating prompts for any BFL FLUX model to ensure optimal 
 5. **Quote text** - Use "quoted text" for typography rendering
 6. **Hex colors** - Use #RRGGBB format with color description
 
-## Related
+## Related Skills
 
 For API integration (endpoints, polling, webhooks), see the **bfl-api** skill.
+
+For specialized image editing tasks, see these focused skills:
+- **image-cleanup** - Remove text, watermarks, furniture, or any unwanted elements
+- **image-creative** - Artistic transformations: cartoonify, movie posters, style teleportation
+- **image-enhance** - Professional enhancements: relighting, product photography, colorization
 
 ## Rules Reference
 

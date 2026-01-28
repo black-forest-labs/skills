@@ -185,10 +185,14 @@ x-key: YOUR_API_KEY
    └─> URL expires in 10 minutes - download immediately
 ```
 
-## Related
+## Related Skills
 
-- **Prompting best practices** (T2I, I2I, typography, colors): see the **flux-best-practices** skill
-- **Multi-reference patterns** (character consistency, style transfer, pose guidance): see `flux-best-practices/rules/multi-reference-editing.md`
+- **flux-best-practices** - Prompting best practices (T2I, I2I, typography, colors)
+- **image-cleanup** - Remove text, watermarks, furniture, or any unwanted elements
+- **image-creative** - Artistic transformations: cartoonify, movie posters, style teleportation
+- **image-enhance** - Professional enhancements: relighting, product photography, colorization
+
+For multi-reference patterns (character consistency, style transfer, pose guidance), see `flux-best-practices/rules/multi-reference-editing.md`.
 
 ## References
 
