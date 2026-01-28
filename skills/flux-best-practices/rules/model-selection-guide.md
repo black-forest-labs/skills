@@ -84,7 +84,7 @@ What's your primary need?
 | FLUX.2 [klein] 9B | 1.5c   | 0.2c | $0.015  | $0.017  | High volume, better quality |
 | FLUX.2 [pro]      | 3c     | 1.5c | $0.03   | $0.045  | Production workloads        |
 | FLUX.2 [max]      | 7c     | 3c   | $0.07   | $0.10   | Hero images, premium        |
-| FLUX.2 [flex]     | 6c     | 6c   | $0.06   | $0.12   | Typography                  |
+| FLUX.2 [flex]     | 5c     | 5c   | $0.05   | $0.10   | Typography                  |
 | FLUX.2 [dev]      | -      | -    | Free    | Free    | Local dev (non-commercial)  |
 
 > **Pricing formula:** `(firstMP + (outputMP-1) * mpPrice) + (inputMP * mpPrice)` in cents
