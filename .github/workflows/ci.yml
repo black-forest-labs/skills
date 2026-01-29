@@ -1,0 +1,49 @@
+name: Skills CI
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'skills/**'
+      - 'packages/**'
+  pull_request:
+    branches: [master, main]
+    paths:
+      - 'skills/**'
+      - 'packages/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/build
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: packages/build/pnpm-lock.yaml
+
+      - run: pnpm install
+
+      - name: Validate AGENTS.md is up-to-date
+        run: pnpm validate
+
+      - name: Build AGENTS.md
+        run: pnpm build
+
+      - name: Check for uncommitted changes
+        working-directory: .
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "AGENTS.md is out of sync. Run 'pnpm build' from packages/build and commit the changes."
+            git diff
+            exit 1
+          fi

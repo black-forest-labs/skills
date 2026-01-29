@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "January 2026",
+  "abstract": "Comprehensive prompting and workflow guide for BFL FLUX image generation models. Covers all FLUX.2 and FLUX.1 models including text-to-image, image-to-image editing, JSON structured prompting, color specification, typography, and multi-reference editing. Each rule includes detailed explanations, examples of effective vs ineffective approaches, and model-specific guidance.",
+  "references": [
+    "https://docs.bfl.ai",
+    "https://bfl.ai"
+  ]
+}

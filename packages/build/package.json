@@ -1,0 +1,26 @@
+{
+  "name": "@bfl/skills-build",
+  "version": "1.0.0",
+  "description": "Build tooling for BFL FLUX skills - compiles rules into AGENTS.md",
+  "type": "module",
+  "scripts": {
+    "build": "tsx src/build.ts --all",
+    "build-flux": "tsx src/build.ts --skill=flux-best-practices",
+    "build-api": "tsx src/build.ts --skill=bfl-api",
+    "validate": "tsx src/validate.ts",
+    "dev": "pnpm build && pnpm validate"
+  },
+  "keywords": [
+    "flux",
+    "bfl",
+    "skills",
+    "llm",
+    "agents"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  }
+}
