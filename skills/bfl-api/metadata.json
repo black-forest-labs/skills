@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "January 2026",
+  "abstract": "BFL FLUX API integration guide covering endpoints, async polling patterns, rate limiting, error handling, webhooks, and regional endpoints with Python and TypeScript code examples.",
+  "references": [
+    "https://docs.bfl.ai",
+    "https://api.bfl.ai"
+  ]
+}
