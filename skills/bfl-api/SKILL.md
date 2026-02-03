@@ -56,7 +56,7 @@ Result URLs from the API are temporary. Download images immediately after genera
 | FLUX.2 [klein] 9B | `/v1/flux-2-klein-9b` | 1.5c   | 0.2c | $0.015  | $0.017  | Balanced quality/speed             |
 | FLUX.2 [pro]      | `/v1/flux-2-pro`      | 3c     | 1.5c | $0.03   | $0.045  | Production, fast turnaround        |
 | FLUX.2 [max]      | `/v1/flux-2-max`      | 7c     | 3c   | $0.07   | $0.10   | Maximum quality                    |
-| FLUX.2 [flex]     | `/v1/flux-2-flex`     | 6c     | 6c   | $0.06   | $0.12   | Typography, adjustable controls    |
+| FLUX.2 [flex]     | `/v1/flux-2-flex`     | 5c     | 5c   | $0.05   | $0.10   | Typography, adjustable controls    |
 | FLUX.2 [dev]      | -                     | -      | -    | Free    | Free    | Local development (non-commercial) |
 
 > **Pricing formula:** `(firstMP + (outputMP-1) * mpPrice) + (inputMP * mpPrice)` in cents
