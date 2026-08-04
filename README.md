@@ -17,8 +17,15 @@ npx skills add black-forest-labs/skills --skill flux-best-practices
 # API integration only
 npx skills add black-forest-labs/skills --skill bfl-api
 
-# FLUX 3 video workflow only
+# FLUX 3 video router
 npx skills add black-forest-labs/skills --skill flux3-video
+
+# FLUX 3 specialist skills
+npx skills add black-forest-labs/skills --skill flux3-prompt-doctor
+npx skills add black-forest-labs/skills --skill flux3-cinematic-video
+npx skills add black-forest-labs/skills --skill flux3-keyframes-continuation
+npx skills add black-forest-labs/skills --skill flux3-audio-dialogue
+npx skills add black-forest-labs/skills --skill flux3-generate
 ```
 
 ### Claude Code Plugin
@@ -60,19 +67,71 @@ API integration guide covering:
 
 ### 3. flux3-video
 
-End-to-end FLUX 3 video workflow covering:
+Thin router for general FLUX 3 video requests:
 
-- **Prompt Doctor** - Resolve mode, action, invariants, timing, camera, audio, and text before generation
-- **Mode Routing** - Choose text-to-video, image-to-video, video continuation, or draft enhancement
-- **Motion-First Prompting** - Direct subject action, camera behavior, environmental response, and continuity
-- **Keyframes** - Animate one frame, bridge start/end frames, or choreograph timestamped waypoints
-- **Synchronized Audio** - Direct dialogue, voiceover, ambience, effects, and music
-- **Draft Iteration** - Compare draft variants and enhance the selected generation without replanning
-- **Video Review** - Check action, continuity, physics, typography, audio, and edit points
+- **Intent Routing** - Select only the specialist skills required for the request
+- **Handoff Contract** - Preserve mode, action, sources, invariants, delivery, audio, text, and risks
+- **Minimal Context** - Avoid loading unrelated video guidance
+
+### 4. flux3-prompt-doctor
+
+Pre-generation diagnosis and readiness gate:
+
+- **Requirements Triage** - Separate explicit facts, assumptions, and blocking questions
+- **Mode Selection** - Route text, images, video, and draft caches by what must survive
+- **Feasibility Review** - Resolve contradictory camera, timing, source, audio, and text requirements
+- **Verdicts** - Return `READY`, `NEEDS INFO`, or `REVISE` with a concrete next action
+
+### 5. flux3-cinematic-video
+
+Shot direction and motion-first prompting:
+
+- **Shot Contracts** - Define one required action, opening, payoff, and delivery
+- **Motion Hierarchy** - Coordinate subject, camera, environment, and secondary motion
+- **Camera Direction** - Align framing, angle, movement, focus, and perspective
+- **Controlled Variants** - Change one consequential dimension per trial
+
+### 6. flux3-keyframes-continuation
+
+Source-conditioned video control:
+
+- **Opening and Closing Frames** - Animate one frame or bridge two exact endpoints
+- **Keyframe Timelines** - Use ordered or timestamped visual waypoints
+- **Video Continuation** - Continue from the observed ending of an existing clip
+- **Invariant Ledgers** - Preserve identity, geometry, environment, camera, and momentum
+
+### 7. flux3-audio-dialogue
+
+Synchronized sound direction:
+
+- **Dialogue and Voiceover** - Assign exact lines, speakers, and delivery anchors
+- **Ambience and Effects** - Tie sound to locations, objects, and visible actions
+- **Mix Hierarchy** - Protect foreground speech from competing layers
+- **Finishing Plan** - Reserve exact sync and final mixing for deterministic post
+
+### 8. flux3-generate
+
+Public API execution and result validation:
+
+- **Payload Construction** - Build strict `t2v`, `i2v`, `v2v`, and `draft_enhance` requests
+- **Submission and Polling** - Track real task IDs through documented terminal states
+- **Draft Enhancement** - Preserve and enhance the selected draft cache
+- **Download and Validation** - Save expiring artifacts, inspect media streams, and package review evidence
 
 ## Quick Reference
 
-### FLUX 3 Video Workflows
+### FLUX 3 Skill Routing
+
+| Request | Skill |
+| --- | --- |
+| Diagnose or repair a brief | `flux3-prompt-doctor` |
+| Direct a new shot from an idea | `flux3-cinematic-video` |
+| Animate frames or continue video | `flux3-keyframes-continuation` |
+| Direct speech, ambience, effects, or music | `flux3-audio-dialogue` |
+| Submit, poll, enhance, download, or technically validate | `flux3-generate` |
+| Route a general FLUX 3 video request | `flux3-video` |
+
+### FLUX 3 API Modes
 
 | Mode | Input | Best for |
 | --- | --- | --- |

@@ -17,9 +17,11 @@ Authenticate with the `x-key` header. The endpoint is asynchronous and returns a
 | `v2v` | `prompt`, `start_video` | Continue an existing clip |
 | `draft_enhance` | `draft_cache` | Render an approved draft at full quality |
 
+The aliases `text-to-video`, `image-continuation`, `video-continuation`, and `draft-enhance` are also accepted. Normalize them to the canonical mode tokens above for validation and recordkeeping.
+
 The schema is strict. A field outside its mode or an unknown field returns `422`.
 
-## Common settings
+## Common Settings
 
 - `aspect_ratio`: `auto`, `21:9`, `2:1`, `16:9`, `4:3`, `1:1`, `3:4`, or `9:16`
 - `resolution`: `hd` or `fhd`
@@ -29,7 +31,7 @@ The schema is strict. A field outside its mode or an unknown field returns `422`
 - `draft`: boolean; drafts render at HD
 - `batch`: 1–4, only with `draft: true`
 
-## Text-to-video
+## Text-to-Video
 
 ```json
 {
@@ -42,7 +44,7 @@ The schema is strict. A field outside its mode or an unknown field returns `422`
 }
 ```
 
-## Image-to-video
+## Image-to-Video
 
 One opening frame:
 
@@ -79,7 +81,7 @@ Keyframe rules:
 - Times must be non-negative, increasing, and at least 1/24 second apart. With an explicit duration, each timestamp must fall within it; with `duration: "auto"`, the clip runs to the final timestamp and rounds up to a whole second.
 - Images may be public HTTP(S) URLs or inline base64 PNG/JPEG/WebP, up to 20 MB each.
 
-## Video continuation
+## Video Continuation
 
 ```json
 {
@@ -92,7 +94,7 @@ Keyframe rules:
 
 The input is one MP4 supplied by public URL or inline base64, up to 50 MB.
 
-## Draft and enhance
+## Draft and Enhance
 
 Explore:
 
@@ -116,7 +118,7 @@ Commit the selected draft:
 }
 ```
 
-`draft_enhance` takes no other generation fields. Download the chosen cache before its signed URL expires.
+`draft_enhance` takes no other generation fields. `draft_cache` may be a signed URL or inline base64 up to 128 MB. Download the chosen cache before its signed URL expires.
 
 ## Polling
 
@@ -148,14 +150,15 @@ while True:
         video_url = result["result"]["sample"]
         video = requests.get(video_url)
         video.raise_for_status()
-        open("output.mp4", "wb").write(video.content)
+        with open("output.mp4", "wb") as output:
+            output.write(video.content)
         break
     if status in {"Error", "Request Moderated", "Content Moderated", "Task not found"}:
         raise RuntimeError(f"Task ended: {status}")
     time.sleep(5)
 ```
 
-## Operational constraints
+## Operational Constraints
 
 - Result MP4 and draft-cache URLs are signed and expire after roughly two hours. Download them immediately.
 - The organization concurrency limit is 5 active generations.

@@ -1,0 +1,12 @@
+{
+  "name": "flux3-cinematic-video",
+  "version": "1.0.0",
+  "description": "Turn ideas, scripts, and treatments into cinematic FLUX 3 shot plans and motion-first prompts.",
+  "author": "Black Forest Labs",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "references": [
+    "https://docs.bfl.ai/guides/prompting_video_text_to_video",
+    "https://docs.bfl.ai/guides/prompting_video_camera_terms"
+  ]
+}

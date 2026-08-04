@@ -20,10 +20,10 @@
 - **Environment:**
 - **Opening frame:**
 - **Payoff / closing frame:**
-- **Shot structure:** one continuous shot / explicit multi-shot sequence
+- **Shot structure:** one continuous shot / explicit sequence
 - **Continuity invariants:**
 
-## Camera and look
+## Camera and Look
 
 - **Framing and angle:**
 - **Camera movement:**
@@ -31,7 +31,7 @@
 - **Lighting source and direction:**
 - **Palette / finish:**
 
-## Timing and delivery
+## Timing and Delivery
 
 - **Duration:** 5–20 seconds / auto
 - **Aspect ratio:**
@@ -49,14 +49,20 @@
 
 ## Text
 
-- **Strategy:** absent / spoken / physical in-scene / generated graphic / deterministic post
+- **Strategy:** absent / spoken / physical in-scene / generated / deterministic post
 - **Exact copy:**
 - **When and where it appears:**
 
-## Production boundaries
+## Production Boundaries
 
 - **Elements reserved for deterministic post:**
 - **Known generation risks:**
 - **First iteration variable:**
 
-The brief is ready when mode, action, invariants, delivery, camera, audio, and text strategy can be understood without inventing missing requirements.
+## Prompt Doctor Verdict
+
+- **State:** `READY` / `NEEDS INFO` / `REVISE`
+- **Reason:**
+- **Next action:**
+
+The brief is ready when the next skill can act without inventing mode, action, source roles, invariants, delivery, camera, audio, text strategy, or production boundaries.

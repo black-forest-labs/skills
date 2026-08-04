@@ -1,0 +1,12 @@
+{
+  "name": "flux3-audio-dialogue",
+  "version": "1.0.0",
+  "description": "Direct FLUX 3 dialogue, voiceover, ambience, effects, music, silence, and audiovisual timing.",
+  "author": "Black Forest Labs",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "references": [
+    "https://docs.bfl.ai/guides/prompting_video_audio",
+    "https://docs.bfl.ai/api-reference/flux3"
+  ]
+}

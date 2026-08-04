@@ -1,13 +1,12 @@
 {
   "name": "flux3-video",
   "version": "1.0.0",
-  "description": "Create, animate, continue, and review FLUX 3 videos with mode routing, prompt validation, synchronized audio direction, and production-safe iteration.",
+  "description": "Route FLUX 3 video requests across prompt diagnosis, cinematic direction, source-conditioned control, audio, and API execution.",
   "author": "Black Forest Labs",
   "organization": "Black Forest Labs",
   "date": "August 2026",
   "references": [
     "https://docs.bfl.ai/flux_3/flux3_video",
-    "https://docs.bfl.ai/guides/prompting_video_overview",
-    "https://docs.bfl.ai/api-reference/flux3"
+    "https://docs.bfl.ai/guides/prompting_video_overview"
   ]
 }

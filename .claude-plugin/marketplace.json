@@ -12,13 +12,18 @@
   "plugins": [
     {
       "name": "flux-best-practices",
-      "description": "BFL skills for FLUX image and video generation including FLUX 3 video prompting, mode routing, synchronized audio, T2I, I2I, structured JSON, and API integration patterns",
+      "description": "BFL skills for FLUX image and video generation including FLUX 3 prompt diagnosis, cinematic direction, keyframes, continuation, synchronized audio, generation, T2I, I2I, and API integration",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/bfl-api",
         "./skills/flux-best-practices",
-        "./skills/flux3-video"
+        "./skills/flux3-video",
+        "./skills/flux3-prompt-doctor",
+        "./skills/flux3-cinematic-video",
+        "./skills/flux3-keyframes-continuation",
+        "./skills/flux3-audio-dialogue",
+        "./skills/flux3-generate"
       ],
       "author": {
         "name": "Kerem Nalbant"

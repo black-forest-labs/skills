@@ -1,0 +1,12 @@
+{
+  "name": "flux3-generate",
+  "version": "1.0.0",
+  "description": "Submit, poll, enhance, download, and technically validate FLUX 3 video jobs through the public API.",
+  "author": "Black Forest Labs",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "references": [
+    "https://docs.bfl.ai/api-reference/flux3",
+    "https://docs.bfl.ai/flux_3/flux3_video"
+  ]
+}

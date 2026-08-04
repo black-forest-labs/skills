@@ -1,0 +1,12 @@
+{
+  "name": "flux3-keyframes-continuation",
+  "version": "1.0.0",
+  "description": "Animate source images, bridge keyframes, and continue existing videos with FLUX 3 while preserving temporal and visual invariants.",
+  "author": "Black Forest Labs",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "references": [
+    "https://docs.bfl.ai/guides/prompting_video_image_to_video",
+    "https://docs.bfl.ai/api-reference/flux3"
+  ]
+}

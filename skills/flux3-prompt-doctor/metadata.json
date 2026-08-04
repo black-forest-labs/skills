@@ -1,0 +1,12 @@
+{
+  "name": "flux3-prompt-doctor",
+  "version": "1.0.0",
+  "description": "Diagnose FLUX 3 briefs and prompts before generation, resolving route, requirements, feasibility, and payload intent.",
+  "author": "Black Forest Labs",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "references": [
+    "https://docs.bfl.ai/guides/prompting_video_overview",
+    "https://docs.bfl.ai/api-reference/flux3"
+  ]
+}
