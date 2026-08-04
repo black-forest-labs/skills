@@ -7,9 +7,9 @@ Judge the full clip at speed, then frame by frame around the event. A request th
 A draft is a low-step preview. It will look rougher than the final: less fine material detail, softer texture, coarser grain. That is the trade it makes for speed and cost.
 
 - **On a draft**, judge sections 1–4 only: editorial utility, physical legibility, composition and camera, continuity. These carry through to the full render, because `draft_enhance` replays the same prompt, seed, and settings.
-- **Defer sections 5 and 6** — material and light, audio finish — until the full-quality render. A draft cannot answer them fairly.
+- **Defer sections 5 and 6** (material and light, audio finish) until the full-quality render. A draft cannot answer them fairly.
 
-Rejecting a draft for softness discards a concept that would have worked. Rejecting it for a broken event, an unreadable frame, or a continuity jump is correct — those do not improve with more steps.
+Rejecting a draft for softness discards a concept that would have worked. Rejecting it for a broken event, an unreadable frame, or a continuity jump is correct; those do not improve with more steps.
 
 ## 1. Editorial utility
 
@@ -59,9 +59,9 @@ Generated audio adds texture. Production-critical timing and finishing belong in
 
 ## Verdicts
 
-- **Ship** — compelling, useful, and physically coherent. Record any tolerated defect.
-- **Usable with a defect** — strong enough for an edit, with a named limitation or post fix.
-- **Experimental** — teaches a capability boundary but is not production-safe.
-- **Reject** — physics, continuity, concept, or utility fails.
+- **Ship**: compelling, useful, and physically coherent. Record any tolerated defect.
+- **Usable with a defect**: strong enough for an edit, with a named limitation or post fix.
+- **Experimental**: teaches a capability boundary but is not production-safe.
+- **Reject**: physics, continuity, concept, or utility fails.
 
 Judge against these criteria rather than against a preference for the clip you just made. Confirm a shot with whoever owns the edit before treating it as final.

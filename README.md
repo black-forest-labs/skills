@@ -65,60 +65,16 @@ API integration guide covering:
 - **Webhook Integration** - Production webhook setup and verification
 - **Code Examples** - Python and TypeScript clients
 
-### 3. flux3-video
+### 3. The FLUX 3 video suite
 
-Thin router for general FLUX 3 video requests:
+Six skills that hand off to each other; install only what you need:
 
-- **Intent Routing** - Select only the specialist skills required for the request
-- **Handoff Contract** - Preserve attached input, action, sources, invariants, delivery, audio, text, and risks
-- **Minimal Context** - Avoid loading unrelated video guidance
-
-### 4. flux3-prompt-doctor
-
-Pre-generation diagnosis and readiness gate:
-
-- **Requirements Triage** - Separate explicit facts, assumptions, and blocking questions
-- **Input Routing** - Decide which single input, if any, the media belongs in based on what must survive
-- **Feasibility Review** - Resolve contradictory camera, timing, source, audio, and text requirements
-- **Verdicts** - Return `READY`, `NEEDS INFO`, or `REVISE` with a concrete next action
-
-### 5. flux3-cinematic-inserts
-
-Shot craft for standalone text-to-video generations:
-
-- **Creative Contracts** - Build one shot around a single motivated event with a readable payoff
-- **Concept Field Guide** - Reliable, experimental, and parked patterns, with the prompt levers for each
-- **Camera and Continuity** - One physically consistent camera setup; no cuts, resets, or frozen frames
-- **Draft-First Iteration** - Settle the concept on cheap previews, then replay the winner at full quality
-- **Variation Ladder** - Change one consequential dimension per trial
-- **Review Scorecard** - Judge editorial utility and physical legibility, not just a successful task
-
-### 6. flux3-keyframes-continuation
-
-Source-conditioned video control:
-
-- **Keyframes** - Put images on screen at chosen frame positions, or bridge two exact endpoints
-- **Reference Images and Video** - Carry a subject or cast into a new scene without showing the source
-- **Video Continuation** - Continue from the observed ending of an existing clip
-- **Invariant Ledgers** - Preserve identity, geometry, environment, camera, and momentum
-
-### 7. flux3-audio-dialogue
-
-Synchronized sound direction:
-
-- **Dialogue and Voiceover** - Assign exact lines, visible speakers, and delivery anchors
-- **Ambience and Effects** - Tie sound to locations, objects, and visible actions
-- **Mix Hierarchy** - Protect foreground speech from competing layers
-- **Finishing Plan** - Reserve exact sync and final mixing for deterministic post
-
-### 8. flux3-generate
-
-API execution and result validation:
-
-- **Request Construction** - Build a strict request around a single attached input, validated against the live reference
-- **Submission and Polling** - Track real task IDs through documented terminal states
-- **Draft Enhancement** - Preserve and enhance the selected draft cache
-- **Download and Validation** - Save expiring artifacts, inspect media streams, and package review evidence
+- `flux3-video` - thin router across the five specialists
+- `flux3-prompt-doctor` - readiness verdicts (`READY` / `NEEDS INFO` / `REVISE`) before generation
+- `flux3-cinematic-inserts` - shot craft for text-only generation, with a field guide of proven concepts
+- `flux3-keyframes-continuation` - keyframes, reference images and video, continuation
+- `flux3-audio-dialogue` - dialogue, voiceover, ambience, effects, music
+- `flux3-generate` - request construction, polling, drafts, downloads, validation
 
 ## Quick Reference
 
@@ -135,7 +91,7 @@ API execution and result validation:
 
 ### FLUX 3 Inputs
 
-A request is a prompt plus **at most one** input field. The field you attach is the instruction — there is no generation `mode`.
+A request is a prompt plus **at most one** input field. The field you attach is the instruction; there is no generation `mode`.
 
 | Attach | What the model does |
 | --- | --- |
@@ -147,7 +103,7 @@ A request is a prompt plus **at most one** input field. The field you attach is 
 
 ### Draft, then commit
 
-A full render takes several minutes. Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`, so you can settle concept and composition cheaply before paying for finish. `draft_enhance` then replays that cache at full quality — same prompt, same seed, same settings — so the final render is the shot you approved rather than a fresh attempt.
+A full render takes several minutes. Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`, so you can settle concept and composition cheaply before paying for finish. `draft_enhance` then replays that cache at full quality (same prompt, seed, and settings), so the final render is the shot you approved rather than a fresh attempt.
 
 Judge a draft on event legibility, composition, and continuity. Softness and coarse texture are artifacts of low-step rendering and resolve at full quality.
 
@@ -163,7 +119,7 @@ See [docs.bfl.ai](https://docs.bfl.ai) for current fields, limits, and endpoints
 | FLUX.2 [max]   | Highest quality, grounding search | from $0.07/MP         |
 | FLUX.2 [dev]   | Local development                 | Free (non-commercial) |
 
-_All FLUX.2 models support both text-to-image and image editing natively—no need for separate models. FLUX.1 models are also available._
+_All FLUX.2 models support both text-to-image and image editing natively, no need for separate models. FLUX.1 models are also available._
 
 ### Prompt Structure
 

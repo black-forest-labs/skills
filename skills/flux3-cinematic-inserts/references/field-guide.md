@@ -88,11 +88,11 @@ Near-monochrome, rain, fog, darkness, practical lights, and deliberate compositi
 
 Use these as tests with explicit review, not as promised production assets:
 
-- fine material behavior — ice skitter, egg crisping, quench bubbles, ferrofluid;
-- restrained swarms — motion is plausible but rarely exceptional;
-- simple physical text — one handwritten or inked phrase can work; sequential character creation does not;
-- product material response — the physics may work while the concept stays boring;
-- long single takes — simple events can still stutter or jump scenes.
+- fine material behavior: ice skitter, egg crisping, quench bubbles, ferrofluid;
+- restrained swarms: motion is plausible but rarely exceptional;
+- simple physical text: one handwritten or inked phrase can work; sequential character creation does not;
+- product material response: the physics may work while the concept stays boring;
+- long single takes: simple events can still stutter or jump scenes.
 
 ## Park or reroute
 
