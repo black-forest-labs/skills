@@ -89,6 +89,7 @@ Shot craft for standalone text-to-video generations:
 - **Creative Contracts** - Build one shot around a single motivated event with a readable payoff
 - **Concept Field Guide** - Proven, experimental, and parked lanes, with the prompt levers for each
 - **Camera and Continuity** - One physically consistent camera setup; no cuts, resets, or frozen frames
+- **Draft-First Iteration** - Settle the concept on cheap previews, then replay the winner at full quality
 - **Variation Ladder** - Change one consequential dimension per trial
 - **Review Scorecard** - Judge editorial utility and physical legibility, not just a successful task
 
@@ -144,7 +145,13 @@ A request is a prompt plus **at most one** input field. The field you attach is 
 | `reference_video` | Builds a new clip with the subjects from yours |
 | `start_video` | Continues from the final frames of your clip |
 
-`draft_enhance` is a separate mode that replays a cached draft at full quality. See [docs.bfl.ai](https://docs.bfl.ai) for current fields, limits, and endpoints.
+### Draft, then commit
+
+A full render takes several minutes. Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`, so you can settle concept and composition cheaply before paying for finish. `draft_enhance` then replays that cache at full quality — same prompt, same seed, same settings — so the final render is the shot you approved rather than a fresh attempt.
+
+Judge a draft on event legibility, composition, and continuity. Softness and coarse texture are artifacts of low-step rendering and resolve at full quality.
+
+See [docs.bfl.ai](https://docs.bfl.ai) for current fields, limits, and endpoints.
 
 ### Model Selection
 

@@ -113,11 +113,24 @@ Record the local path, request metadata, task ID, seed, and final status. Do not
 
 Complete when the expected files exist locally and are non-empty.
 
-### 5. Explore drafts without losing causality
+### 5. Draft before committing
 
-Adding `draft: true` returns a fast low-step preview plus a `draft_cache`: an encrypted bundle pinning the final prompt, seed, and settings for that generation. Compare drafts against the same success criterion, preserve the chosen cache, then send only that cache through `draft_enhance` to render it at full quality without replanning.
+Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`: an encrypted bundle pinning the final prompt, seed, and settings for that generation.
 
-Between prompt reruns, change one consequential dimension at a time. After two structurally similar misses, return to `flux3-prompt-doctor`, `flux3-cinematic-inserts`, or `flux3-keyframes-continuation` when available instead of accumulating adjectives.
+Drafting is the default for anything unproven. A full render takes several minutes and costs more; a draft answers the question you actually have — does this work? — sooner and cheaper. The trade is render quality, not correctness: composition, motion, event legibility, and continuity all read from a draft.
+
+Choose by the question:
+
+- **Exploring** — concept, composition, or motion still in doubt. Draft.
+- **Committing** — the shot is settled, or a draft has been approved. Render at full quality, or enhance the chosen cache.
+
+Skip drafting when the request is a known-good repeat and only the asset is needed.
+
+Send only the chosen cache through `draft_enhance`. Because it replays the same prompt, seed, and settings, the result is the shot that was approved rather than a fresh attempt — which is exactly why draft-to-cache identity has to be preserved when several drafts are in play.
+
+Warn rather than silently proceed when a reviewer rejects a draft for softness or missing fine detail. Those are artifacts of low-step rendering and improve at full quality; a broken event, unreadable framing, or a continuity jump does not.
+
+Between reruns, change one consequential dimension at a time. After two structurally similar misses, return to `flux3-prompt-doctor`, `flux3-cinematic-inserts`, or `flux3-keyframes-continuation` when available instead of accumulating adjectives.
 
 Complete when the selected full-quality render descends from its own chosen draft cache.
 
@@ -147,11 +160,13 @@ Complete when the technical verdict and review evidence are recorded.
 2. **Inventing a `mode` for generation.** The attached input field carries the intent.
 3. **Attaching more than one input.** Pick the field that matches what must survive.
 4. **Submitting an unresolved brief.** Return to the specialist that owns the missing decision.
-5. **Polling forever, or retrying a `429` in a loop.** Stop on terminal states; wait out concurrency limits.
-6. **Saving only result URLs.** Download the MP4 and draft cache before they expire.
-7. **Enhancing the wrong draft.** Preserve draft-to-cache identity.
-8. **Calling a decodable file creatively approved.** Technical validation and creative review are separate gates.
-9. **Leaking API keys.** Keep authentication in environment variables and headers only.
+5. **Spending a full render to find out whether a concept works.** Draft first.
+6. **Rejecting a draft for softness.** Low-step previews look rough by design; judge the concept.
+7. **Polling forever, or retrying a `429` in a loop.** Stop on terminal states; wait out concurrency limits.
+8. **Saving only result URLs.** Download the MP4 and draft cache before they expire.
+9. **Enhancing the wrong draft.** Preserve draft-to-cache identity.
+10. **Calling a decodable file creatively approved.** Technical validation and creative review are separate gates.
+11. **Leaking API keys.** Keep authentication in environment variables and headers only.
 
 ## Verification Checklist
 
@@ -159,6 +174,7 @@ Complete when the technical verdict and review evidence are recorded.
 - [ ] Preconditions are explicit and ready
 - [ ] Zero or one input field, and no unknown fields
 - [ ] Coupled constraints checked, not assumed independent
+- [ ] Unproven concepts were drafted before a full render
 - [ ] Task ID and polling URL come from a real submission
 - [ ] Polling ends only on a documented terminal state
 - [ ] MP4 and selected draft cache are downloaded before expiry

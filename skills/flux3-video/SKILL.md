@@ -35,6 +35,7 @@ Use a specialist directly when the request already names one narrow job.
 2. **Choose one visual-direction skill.** Use `flux3-cinematic-inserts` for generation from an idea; use `flux3-keyframes-continuation` when supplied media must appear, carry a subject, or continue.
 3. **Add audio only when sound matters.** Load `flux3-audio-dialogue` for speech, voice, ambience, effects, music, or deliberate silence.
 4. **Generate only when execution is requested.** Use `flux3-generate` after the prompt and payload intent are ready.
+5. **Draft before committing on anything unproven.** A full render takes several minutes; a low-step draft answers whether the concept works, and the chosen draft replays at full quality without replanning.
 
 Do not load every specialist by default. Each additional skill must own a decision or deliverable in the current request.
 

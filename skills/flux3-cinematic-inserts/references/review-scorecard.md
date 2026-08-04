@@ -2,6 +2,15 @@
 
 Judge the full clip at speed, then frame by frame around the event. A request that returned successfully is not the same as a shot worth using.
 
+## Drafts and full renders are judged differently
+
+A draft is a low-step preview. It will look rougher than the final: less fine material detail, softer texture, coarser grain. That is the trade it makes for speed and cost.
+
+- **On a draft**, judge sections 1–4 only: editorial utility, physical legibility, composition and camera, continuity. These carry through to the full render, because `draft_enhance` replays the same prompt, seed, and settings.
+- **Defer sections 5 and 6** — material and light, audio finish — until the full-quality render. A draft cannot answer them fairly.
+
+Rejecting a draft for softness discards a concept that would have worked. Rejecting it for a broken event, an unreadable frame, or a continuity jump is correct — those do not improve with more steps.
+
 ## 1. Editorial utility
 
 - Does the clip work as B-roll, a bridge, a hero texture, or a clean capability insert?

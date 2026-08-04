@@ -153,7 +153,7 @@ Complete when the plan maps to one request carrying one intent.
 
 Return exactly one state with a reason and next action:
 
-- **READY** — all consequential decisions are explicit. Include the route and compact handoff.
+- **READY** — all consequential decisions are explicit. Include the route and compact handoff. Recommend a draft first when the concept is unproven: a full render takes several minutes, and a cheap low-step preview answers whether the idea works before anyone pays for finish.
 - **NEEDS INFO** — a missing human choice changes the route, payload, or production method. Ask only the blocking questions.
 - **REVISE** — requirements conflict, exceed the action budget, or create an invalid payload. Name the conflict and propose the minimum repair.
 

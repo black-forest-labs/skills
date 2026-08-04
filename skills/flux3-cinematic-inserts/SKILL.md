@@ -106,9 +106,24 @@ Translate tone into evidence: lighting source, direction, contrast, and color; p
 
 Complete when every style phrase changes something visible or audible.
 
-### 7. Generate and iterate with a variation ladder
+### 7. Draft first, then commit
 
-Hand the finished prompt to `flux3-generate` as a text-only request — no input field attached. Draft mode is the cheap way to explore before committing to a full-quality render.
+Hand the finished prompt to `flux3-generate` as a text-only request — no input field attached.
+
+Default to `draft: true` for anything unproven. A draft is a fast, low-step preview that costs less and returns sooner than a full render, which takes several minutes. It answers the question you actually have early on — does this concept work? — and it hands back a `draft_cache` you can replay at full quality later without rewriting anything.
+
+Ask which question you are asking:
+
+- **Exploring** — is the concept right, does the event read, is the composition working? Draft.
+- **Committing** — the concept is settled and you need the deliverable. Render at full quality, or enhance the draft you already chose.
+
+Skip drafting when the concept is one you have shipped before and you only need the asset.
+
+**Judge a draft on concept, not on finish.** Low-step previews look rougher than the final: fine material detail, texture, and grain will be worse. Read a draft for event legibility, composition, camera behavior, and continuity. Rejecting a strong concept because the preview looks soft is the fastest way to throw away a good shot.
+
+Because `draft_enhance` replays the same prompt, seed, and settings, the full-quality render is the same shot you approved — not a fresh roll of the dice.
+
+### 8. Iterate with a variation ladder
 
 For a new concept, generate one pilot or a small ladder in which each variant changes only one consequential dimension:
 
@@ -117,11 +132,13 @@ For a new concept, generate one pilot or a small ladder in which each variant ch
 3. composition or aspect ratio;
 4. duration or payoff.
 
+Run the ladder as drafts. Cheap variants are what make a controlled ladder worth running at all — at full-render cost the temptation is to change several things at once and lose the causal signal.
+
 After two structurally similar misses, stop rerolling. Change the concept, the conditioning approach, or the production method. Do not spend retries trying to make a text-only generation deterministic.
 
 Complete when every rerun tests a named hypothesis, and none exists only because the previous clip was close.
 
-### 8. Review as an editor
+### 9. Review as an editor
 
 Apply every item in [references/review-scorecard.md](references/review-scorecard.md). A technically valid clip is not enough: it must be useful, physically legible, compositionally deliberate, and interesting.
 
@@ -146,9 +163,11 @@ Return:
 4. **Using incompatible camera terms.** Write one physical camera contract.
 5. **Spending words on invisible mood labels.** Convert style into visible evidence.
 6. **Adding unmotivated spectacle.** Sparks, bells, and effects need a reason on screen.
-7. **Changing several variables between trials.** Preserve causal learning with controlled variants.
-8. **Treating generated audio as an edit clock.** It is texture; sync belongs in post.
-9. **Promising exact typography or edit timing.** Plan deterministic post.
+7. **Burning full renders on an unproven concept.** Draft first; a full generation takes minutes.
+8. **Rejecting a draft because it looks rough.** Low-step previews are meant to look rough. Judge the concept.
+9. **Changing several variables between trials.** Preserve causal learning with controlled variants.
+10. **Treating generated audio as an edit clock.** It is texture; sync belongs in post.
+11. **Promising exact typography or edit timing.** Plan deterministic post.
 
 ## Verification Checklist
 
@@ -159,6 +178,8 @@ Return:
 - [ ] The continuity contract rules out cuts, resets, and frozen frames
 - [ ] Style is expressed through visible or audible evidence
 - [ ] Audio and text have clear owners
+- [ ] An unproven concept was drafted before a full render
+- [ ] Drafts were judged on concept and legibility, not on finish
 - [ ] Each variant changes one named dimension
 - [ ] The clip is reviewed as an editor would, not only as a technician
 
