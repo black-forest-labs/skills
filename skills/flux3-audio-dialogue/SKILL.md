@@ -20,7 +20,7 @@ Direct synchronized sound as part of a FLUX 3 scene. Give each layer a source, o
 - The desired clip should be intentionally silent
 - Generated audio failed and needs a controlled revision
 
-When available, use `flux3-cinematic-video` or `flux3-keyframes-continuation` for visual direction and `flux3-generate` for API execution.
+When available, use `flux3-cinematic-inserts` or `flux3-keyframes-continuation` for visual direction and `flux3-generate` for API execution.
 
 ## Workflow
 

@@ -22,7 +22,7 @@ npx skills add black-forest-labs/skills --skill flux3-video
 
 # FLUX 3 specialist skills
 npx skills add black-forest-labs/skills --skill flux3-prompt-doctor
-npx skills add black-forest-labs/skills --skill flux3-cinematic-video
+npx skills add black-forest-labs/skills --skill flux3-cinematic-inserts
 npx skills add black-forest-labs/skills --skill flux3-keyframes-continuation
 npx skills add black-forest-labs/skills --skill flux3-audio-dialogue
 npx skills add black-forest-labs/skills --skill flux3-generate
@@ -82,14 +82,15 @@ Pre-generation diagnosis and readiness gate:
 - **Feasibility Review** - Resolve contradictory camera, timing, source, audio, and text requirements
 - **Verdicts** - Return `READY`, `NEEDS INFO`, or `REVISE` with a concrete next action
 
-### 5. flux3-cinematic-video
+### 5. flux3-cinematic-inserts
 
-Shot direction and motion-first prompting:
+Shot craft for standalone text-to-video generations:
 
-- **Shot Contracts** - Define one required action, opening, payoff, and delivery
-- **Motion Hierarchy** - Coordinate subject, camera, environment, and secondary motion
-- **Camera Direction** - Align framing, angle, movement, focus, and perspective
-- **Controlled Variants** - Change one consequential dimension per trial
+- **Creative Contracts** - Build one shot around a single motivated event with a readable payoff
+- **Concept Field Guide** - Proven, experimental, and parked lanes, with the prompt levers for each
+- **Camera and Continuity** - One physically consistent camera setup; no cuts, resets, or frozen frames
+- **Variation Ladder** - Change one consequential dimension per trial
+- **Review Scorecard** - Judge editorial utility and physical legibility, not just a successful task
 
 ### 6. flux3-keyframes-continuation
 
@@ -125,7 +126,7 @@ API execution and result validation:
 | Request | Skill |
 | --- | --- |
 | Diagnose or repair a brief | `flux3-prompt-doctor` |
-| Direct a new shot from an idea | `flux3-cinematic-video` |
+| Write a text-to-video prompt for a new shot | `flux3-cinematic-inserts` |
 | Build from supplied images or video | `flux3-keyframes-continuation` |
 | Direct speech, ambience, effects, or music | `flux3-audio-dialogue` |
 | Submit, poll, enhance, download, or technically validate | `flux3-generate` |

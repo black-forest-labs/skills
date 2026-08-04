@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "abstract": "Shot craft for standalone FLUX 3 text-to-video generations. Builds a single premium shot around one motivated physical or atmospheric event, with a creative contract, a field guide to concepts the model renders well, a physically consistent camera contract, a single-variable variation ladder, and an editorial review scorecard.",
+  "references": [
+    "https://docs.bfl.ai"
+  ]
+}

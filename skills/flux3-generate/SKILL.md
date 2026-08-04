@@ -117,7 +117,7 @@ Complete when the expected files exist locally and are non-empty.
 
 Adding `draft: true` returns a fast low-step preview plus a `draft_cache`: an encrypted bundle pinning the final prompt, seed, and settings for that generation. Compare drafts against the same success criterion, preserve the chosen cache, then send only that cache through `draft_enhance` to render it at full quality without replanning.
 
-Between prompt reruns, change one consequential dimension at a time. After two structurally similar misses, return to `flux3-prompt-doctor`, `flux3-cinematic-video`, or `flux3-keyframes-continuation` when available instead of accumulating adjectives.
+Between prompt reruns, change one consequential dimension at a time. After two structurally similar misses, return to `flux3-prompt-doctor`, `flux3-cinematic-inserts`, or `flux3-keyframes-continuation` when available instead of accumulating adjectives.
 
 Complete when the selected full-quality render descends from its own chosen draft cache.
 
@@ -137,7 +137,7 @@ Technical validity does not imply creative success.
 
 Preserve the secret-free request, task ID, seed, downloaded artifacts, stream facts, and any frame or audio inspection outputs. Record observed defects without turning technical validity into creative approval.
 
-Hand creative review to the relevant installed specialist: `flux3-cinematic-video` for action and camera, `flux3-keyframes-continuation` for source continuity, and `flux3-audio-dialogue` for speech and sound. If those skills are unavailable, return the evidence with a self-contained review handoff instead of impersonating their criteria.
+Hand creative review to the relevant installed specialist: `flux3-cinematic-inserts` for action and camera, `flux3-keyframes-continuation` for source continuity, and `flux3-audio-dialogue` for speech and sound. If those skills are unavailable, return the evidence with a self-contained review handoff instead of impersonating their criteria.
 
 Complete when the technical verdict and review evidence are recorded.
 

@@ -21,7 +21,7 @@ Control what a FLUX 3 video begins from, passes through, ends on, carries forwar
 - Continuing from an existing clip's ending
 - Diagnosing morphs, identity drift, resets, or broken transitions
 
-When available, use `flux3-cinematic-video` for prompt-only generation and `flux3-prompt-doctor` first when the relationship between the source and desired result is unclear.
+When available, use `flux3-cinematic-inserts` for text-only generation and `flux3-prompt-doctor` first when the relationship between the source and desired result is unclear.
 
 ## Pick the Field, Not a Mode
 

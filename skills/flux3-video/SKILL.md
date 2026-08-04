@@ -24,7 +24,7 @@ Use a specialist directly when the request already names one narrow job.
 | User intent | Primary skill |
 | --- | --- |
 | Diagnose or repair a brief before generation | `flux3-prompt-doctor` |
-| Turn an idea, script, or treatment into a shot | `flux3-cinematic-video` |
+| Write a text-to-video prompt for a new shot | `flux3-cinematic-inserts` |
 | Build from supplied images or video — frames, references, or continuation | `flux3-keyframes-continuation` |
 | Direct dialogue, voiceover, ambience, effects, or music | `flux3-audio-dialogue` |
 | Submit, poll, enhance, download, or technically review a job | `flux3-generate` |
@@ -32,7 +32,7 @@ Use a specialist directly when the request already names one narrow job.
 ## Composition Rules
 
 1. **Start with diagnosis when consequential choices are missing.** Use `flux3-prompt-doctor` until the brief is `READY`.
-2. **Choose one visual-direction skill.** Use `flux3-cinematic-video` for generation from an idea; use `flux3-keyframes-continuation` when supplied media must appear, carry a subject, or continue.
+2. **Choose one visual-direction skill.** Use `flux3-cinematic-inserts` for generation from an idea; use `flux3-keyframes-continuation` when supplied media must appear, carry a subject, or continue.
 3. **Add audio only when sound matters.** Load `flux3-audio-dialogue` for speech, voice, ambience, effects, music, or deliberate silence.
 4. **Generate only when execution is requested.** Use `flux3-generate` after the prompt and payload intent are ready.
 
@@ -58,7 +58,7 @@ A handoff is complete when the receiving skill can act without inventing a conse
 ## Default Sequence
 
 ```text
-Prompt Doctor → Cinematic Video OR Keyframes & Continuation
+Prompt Doctor → Cinematic Inserts OR Keyframes & Continuation
               → Audio & Dialogue when needed
               → Generate when execution is requested
 ```

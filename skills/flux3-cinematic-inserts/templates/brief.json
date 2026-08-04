@@ -1,0 +1,33 @@
+{
+  "outcome": "A standalone cinematic insert used as [B-roll / visual bridge / hero texture / capability probe]",
+  "subject": "The visible subject and material",
+  "action": "One visible cause, physical response, and payoff",
+  "attached_input": "none",
+  "aspect_ratio": "16:9",
+  "duration": 5,
+  "shot_structure": "one continuous shot",
+  "camera_intent": "locked and deliberate; movement only if it serves the event",
+  "audio_strategy": {
+    "enabled": true,
+    "layers": {
+      "ambient": "intentional room or environment bed",
+      "effects": "material sounds motivated by visible contact",
+      "music": "none unless the edit needs it",
+      "speech": "none"
+    }
+  },
+  "text_strategy": {
+    "kind": "absent"
+  },
+  "continuity_contract": [
+    "same set and object geometry",
+    "continuous real-time motion",
+    "no cuts, transitions, frozen or repeated frames, teleportation, or resets"
+  ],
+  "acceptance": [
+    "cause, response, and payoff are legible",
+    "physics remain plausible",
+    "the clip has a clear editorial use",
+    "the final frame works as a clean edit point or still"
+  ]
+}

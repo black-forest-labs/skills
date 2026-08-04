@@ -18,7 +18,7 @@ Protect decisions the model should not invent. Diagnose a FLUX 3 brief before ex
 - Exact timing, typography, speaker identity, or synchronization may exceed generation control
 - A prompt or payload needs a readiness verdict before submission
 
-Do not use this skill to write the final cinematic prompt or call the API. When available, hand a `READY` brief to `flux3-cinematic-video` for prompt-only shots, `flux3-keyframes-continuation` for source-conditioned shots, `flux3-audio-dialogue` when sound needs specialist direction, and `flux3-generate` for execution. Otherwise, return a self-contained handoff naming the specialist needed.
+Do not use this skill to write the final cinematic prompt or call the API. When available, hand a `READY` brief to `flux3-cinematic-inserts` for text-only shots, `flux3-keyframes-continuation` for source-conditioned shots, `flux3-audio-dialogue` when sound needs specialist direction, and `flux3-generate` for execution. Otherwise, return a self-contained handoff naming the specialist needed.
 
 ## Readiness Contract
 

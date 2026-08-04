@@ -1,9 +1,0 @@
-{
-  "version": "1.0.0",
-  "organization": "Black Forest Labs",
-  "date": "August 2026",
-  "abstract": "Shot direction for FLUX 3 text-driven video. Turns ideas, scripts, and treatments into shot contracts with a motion hierarchy, a physically consistent camera contract, style expressed as visible evidence, multi-shot structure, and controlled single-variable variants.",
-  "references": [
-    "https://docs.bfl.ai"
-  ]
-}
