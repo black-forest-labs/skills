@@ -236,7 +236,7 @@ Classify the result as **approved**, **usable with a known defect**, **experimen
 6. **Treating generated audio as an edit clock.** Use it for coherent texture; finish exact sync and mixing in post.
 7. **Assuming repeated voice direction fixes speaker identity.** Audition and compare takes by ear.
 8. **Relying on generated typography for production-critical copy.** Reserve space and add exact copy deterministically when lettering must be guaranteed.
-9. **Polling forever after a terminal state.** Stop on `Error`, `Request Moderated`, or `Content Moderated`.
+9. **Polling forever after a terminal state.** Stop on `Error`, `Request Moderated`, `Content Moderated`, or `Task not found`.
 10. **Saving only the result URL.** Download the MP4 and any draft cache before signed URLs expire.
 
 ## Verification Checklist

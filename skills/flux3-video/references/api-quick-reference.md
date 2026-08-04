@@ -76,7 +76,7 @@ Keyframe rules:
 - 2 images pin opening and closing frames.
 - 3–10 images become ordered waypoints and require explicit duration when untimed.
 - Timestamped pairs use seconds followed by image.
-- Times must be non-negative, increasing, at least 1/24 second apart, and within an explicit duration.
+- Times must be non-negative, increasing, and at least 1/24 second apart. With an explicit duration, each timestamp must fall within it; with `duration: "auto"`, the clip runs to the final timestamp and rounds up to a whole second.
 - Images may be public HTTP(S) URLs or inline base64 PNG/JPEG/WebP, up to 20 MB each.
 
 ## Video continuation
