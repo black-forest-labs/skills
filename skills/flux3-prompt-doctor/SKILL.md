@@ -81,7 +81,33 @@ Mark a brief for revision when it demands many sequential actions, multiple loca
 
 Complete when the required action remains observable without depending on explanation.
 
-### 4. Resolve contradictions
+### 4. Decide shot structure
+
+One generation can hold either a single unbroken take or several shots with real cuts. Decide which, and make the brief say so.
+
+For one take, ask for `one continuous unbroken shot`. Hand it to `flux3-cinematic-inserts`.
+
+For a sequence, label the shots and mark each transition:
+
+```text
+SHOT ONE: wide aerial of a desert highway at dawn, a single red car speeding through.
+HARD CUT. SHOT TWO: interior close-up, the driver's hands drumming the wheel to the radio.
+HARD CUT. SHOT THREE: from the roadside, the car shrinking into the heat haze.
+Warm engine hum under one continuous music bed across all three shots.
+```
+
+Two constraints make a sequence work:
+
+- **Consecutive shots must contrast strongly** in scale, location, or color. Near-identical coverage blends into a continuous take instead of reading as a cut.
+- **Each shot still needs its own action budget.** Three shots in a short clip means three beats, not three complete scenes.
+
+Audio can run across the cuts — one music bed under a whole sequence holds together.
+
+Mark a brief for revision when it wants many shots inside a short duration, or when the cuts it describes are between near-identical framings.
+
+Complete when the brief states one continuous take or an explicit shot count, and a sequence contrasts enough to read.
+
+### 5. Resolve contradictions
 
 Call out incompatible requirements such as:
 
@@ -96,7 +122,7 @@ Offer the smallest concrete revision that preserves the user's outcome.
 
 Complete when framing, motion, timing, source roles, audio, and text describe one feasible production method.
 
-### 5. Assign deterministic finishing
+### 6. Assign deterministic finishing
 
 Reserve these for post when exactness is a success condition:
 
@@ -108,7 +134,7 @@ Reserve these for post when exactness is a success condition:
 
 Generation can create source footage and causal timing intent; it is not a deterministic compositor, edit timeline, or final mix.
 
-### 6. Validate request intent
+### 7. Validate request intent
 
 Check intent, not schema. `flux3-generate` validates fields against the live reference; this step confirms the plan produces a coherent request at all:
 
@@ -147,6 +173,7 @@ Warnings that do not block generation belong under **Production risks**, not in 
 - [ ] Every source has one role, and at most one input is attached
 - [ ] The attached field matches what must survive
 - [ ] One required action fits the duration
+- [ ] Shot structure is stated, and any sequence contrasts enough to read as cuts
 - [ ] Camera and shot structure are internally consistent
 - [ ] Audio and text strategies are explicit
 - [ ] Deterministic finishing is assigned where exactness matters

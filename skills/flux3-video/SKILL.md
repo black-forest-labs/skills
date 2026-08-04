@@ -31,7 +31,7 @@ Use a specialist directly when the request already names one narrow job.
 
 ## Composition Rules
 
-1. **Start with diagnosis when consequential choices are missing.** Use `flux3-prompt-doctor` until the brief is `READY`.
+1. **Start with diagnosis when consequential choices are missing.** Use `flux3-prompt-doctor` until the brief is `READY`. It also owns the shot-structure decision — one continuous take or an explicit multi-shot sequence.
 2. **Choose one visual-direction skill.** Use `flux3-cinematic-inserts` for generation from an idea; use `flux3-keyframes-continuation` when supplied media must appear, carry a subject, or continue.
 3. **Add audio only when sound matters.** Load `flux3-audio-dialogue` for speech, voice, ambience, effects, music, or deliberate silence.
 4. **Generate only when execution is requested.** Use `flux3-generate` after the prompt and payload intent are ready.
