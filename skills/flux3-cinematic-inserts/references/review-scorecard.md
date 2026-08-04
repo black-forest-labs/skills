@@ -13,7 +13,7 @@ Rejecting a draft for softness discards a concept that would have worked. Reject
 
 ## 1. Editorial utility
 
-- Does the clip work as B-roll, a bridge, a hero texture, or a clean capability insert?
+- Does the clip work as B-roll, a bridge, a material detail, or a focused test shot?
 - Is there a clear setup, event, and payoff?
 - Is the concept interesting, not merely correct or attractive?
 - Is there a usable opening or ending frame?

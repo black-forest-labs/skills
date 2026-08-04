@@ -1,6 +1,6 @@
 ---
 name: flux3-cinematic-inserts
-description: Use when writing a FLUX 3 text-to-video prompt for a standalone shot. Covers shot craft, proven concept lanes, camera, continuity, and review.
+description: Use when writing a FLUX 3 text-to-video prompt for a standalone shot. Covers shot craft, reliable concept patterns, camera, continuity, and review.
 metadata:
   author: Black Forest Labs
   version: "1.0.0"
@@ -9,15 +9,15 @@ metadata:
 
 # FLUX 3 Cinematic Inserts
 
-Build one premium standalone shot around **one motivated physical or atmospheric event**. The unit is an insert: B-roll, a visual bridge, a hero texture shot, or a capability probe — not a finished commercial or a deterministic animation.
+Build one standalone shot around **one motivated physical or atmospheric event**. The shot can serve as B-roll, a visual bridge, a material detail, or a test of a specific capability; it is not a finished commercial or deterministic animation.
 
-Your prompt is interpreted and expanded before generation, so plain language works. Write as you would brief a colleague. The rewriting preserves what you specify, so precision buys control: every choice you state stays yours, and everything you leave out becomes the model's.
+Use plain language and state the choices that matter. Treat unspecified details as unconstrained rather than assuming they will be preserved.
 
 ## When to Use
 
 - Writing or repairing a text-to-video prompt for a single shot
 - Directing camera, light, material behavior, and physical response
-- Choosing a concept that this model actually renders well
+- Choosing a concept that tends to work in testing
 - Reviewing a returned clip as an editor rather than as a technician
 
 Use `flux3-keyframes-continuation` instead when supplied images or video must appear, carry a subject, or continue. Use `flux3-prompt-doctor` first when consequential choices remain unresolved, and `flux3-generate` to submit, poll, and validate.
@@ -55,9 +55,9 @@ Use [templates/brief.json](templates/brief.json) as the handoff shape, and `flux
 
 Complete when one sentence states the shot's visible cause, response, and payoff.
 
-### 3. Choose a proven lane
+### 3. Choose a reliable pattern
 
-Prefer:
+Start with patterns that tend to work:
 
 - atmospheric light through fog, rain, steam, glass, or darkness;
 - wet surfaces and reflections that visibly distort and settle;
@@ -66,9 +66,9 @@ Prefer:
 - simple ignition or practical-light changes with a visible source;
 - restrained noir or near-monochrome environments.
 
-Read [references/field-guide.md](references/field-guide.md) before settling on a concept. Treat anything it marks experimental or parked as a capability probe, not a production promise.
+Read [references/field-guide.md](references/field-guide.md) before settling on a concept. Treat anything it marks experimental or parked as a test, not a production promise.
 
-Complete when the concept maps to one proven lane and has one heightened but motivated moment.
+Complete when the concept maps to one reliable pattern and has one heightened but motivated moment.
 
 ### 4. Write the shot as a causal chain
 
@@ -110,7 +110,7 @@ Complete when every style phrase changes something visible or audible.
 
 Hand the finished prompt to `flux3-generate` as a text-only request — no input field attached.
 
-Default to `draft: true` for anything unproven. A draft is a fast, low-step preview that costs less and returns sooner than a full render, which takes several minutes. It answers the question you actually have early on — does this concept work? — and it hands back a `draft_cache` you can replay at full quality later without rewriting anything.
+Default to `draft: true` for anything unproven. A draft is a fast, low-step preview that costs less and returns sooner than a full render, which takes several minutes. It tests whether the concept works before you commit to a full render and returns a `draft_cache` that can be replayed at full quality later.
 
 Ask which question you are asking:
 
@@ -159,7 +159,7 @@ Return:
 
 1. **Appending "cinematic video" to an image prompt.** Direct motion, camera, and physical response.
 2. **Staging an event with no visible cause.** Keep source, contact, and response in one frame.
-3. **Overloading a short clip.** One event, made premium, beats three events rendered thinly.
+3. **Overloading a short clip.** One clear event beats three events rendered thinly.
 4. **Using incompatible camera terms.** Write one physical camera contract.
 5. **Spending words on invisible mood labels.** Convert style into visible evidence.
 6. **Adding unmotivated spectacle.** Sparks, bells, and effects need a reason on screen.
@@ -173,7 +173,7 @@ Return:
 
 - [ ] The deliverable is honestly a standalone single-event shot
 - [ ] Cause, response, and payoff are each explicit
-- [ ] The concept sits in a proven lane
+- [ ] The concept fits a reliable pattern or is explicitly treated as a test
 - [ ] Camera terms are physically compatible
 - [ ] The continuity contract rules out cuts, resets, and frozen frames
 - [ ] Style is expressed through visible or audible evidence
@@ -185,7 +185,7 @@ Return:
 
 ## Positioning Boundary
 
-This skill creates evocative standalone footage, not finished communication. Generated sound can be excellent texture but is not an edit clock. Physically correct can still be boring. The winning unit is one simple event made premium through composition, motivated light, material response, and a clean payoff.
+This skill creates standalone footage, not finished communication. Generated sound can provide useful texture but is not an edit clock. A physically correct shot can still be uninteresting. A usable shot has one clear event, deliberate composition, motivated light, material response, and a clean payoff.
 
 ## References
 

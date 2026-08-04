@@ -9,7 +9,7 @@ metadata:
 
 # FLUX 3 Prompt Doctor
 
-Protect decisions the model should not invent. Diagnose a FLUX 3 brief before expanding its prompt or constructing an API payload.
+Resolve the decisions that affect routing, content, or delivery before expanding a FLUX 3 brief into a prompt or API payload.
 
 ## When to Use
 
@@ -22,21 +22,22 @@ Do not use this skill to write the final cinematic prompt or call the API. When 
 
 ## Readiness Contract
 
-A brief is ready only when it answers:
+A brief is ready when the decisions that affect the next action are explicit. Ask for a missing answer only when it changes the route, payload, success criterion, or production method. Use a documented default or label an assumption for everything else.
 
-| Decision | Question |
+| Decision | Capture when it affects the request |
 | --- | --- |
-| Outcome | Where will the clip be used, and what visible fact makes it successful? |
-| Subject | Who or what must appear? |
-| Action | What single movement, event, or state change is non-negotiable? |
-| Input intent | Generate from text alone, or attach one input — exact frames, subject references, a cast video, or a clip to continue? |
-| Source roles | What must each image, video, or draft cache contribute? |
-| Invariants | What identity, geometry, wardrobe, framing, motion, environment, or end state must survive? |
-| Delivery | Which aspect ratio, duration, and resolution are intentional? |
-| Shot structure | One continuous shot or an explicit sequence? |
-| Camera | Which framing, angle, movement, and focus behavior matter? |
-| Audio | Which speech, ambience, effects, music, or silence is required? |
-| Text | Spoken, physical in-scene, generated, absent, or deterministic post? |
+| Decision | Capture when it affects the request |
+| Outcome | The visible success condition or intended use is unclear |
+| Subject | The subject or identity is unclear |
+| Action | The required movement, event, or state change is unclear or overloaded |
+| Input intent | The request could use text alone, exact frames, subject references, a cast video, or continuation |
+| Source roles | Supplied images, video, or draft cache have more than one possible job |
+| Invariants | Identity, geometry, wardrobe, framing, motion, environment, or end state must survive |
+| Delivery | Aspect ratio, duration, or resolution changes the success criterion or API route |
+| Shot structure | The request could be one continuous shot or an explicit sequence |
+| Camera | Framing, movement, or focus changes the action or feasibility |
+| Audio | Speech, ambience, effects, music, or silence is part of the request |
+| Text | Text is spoken, physical in-scene, generated, absent, or reserved for post |
 
 Use [templates/brief.md](templates/brief.md) when the answers need to become a reusable handoff.
 
@@ -46,7 +47,7 @@ Use [templates/brief.md](templates/brief.md) when the answers need to become a r
 
 Separate explicit requirements from decorative preferences and assumptions. Preserve the user's product names, exact copy, source roles, timings, and hard constraints verbatim.
 
-Complete when every supplied requirement appears once in the brief and assumptions are labeled.
+Complete when every supplied requirement appears once in the brief, blocking choices are resolved, and assumptions are labeled.
 
 ### 2. Route by what must survive
 
@@ -120,7 +121,7 @@ Call out incompatible requirements such as:
 
 Offer the smallest concrete revision that preserves the user's outcome.
 
-Complete when framing, motion, timing, source roles, audio, and text describe one feasible production method.
+Complete when the required framing, motion, timing, source roles, audio, and text describe one feasible production method. Leave irrelevant fields at their documented defaults.
 
 ### 6. Assign deterministic finishing
 
@@ -151,9 +152,9 @@ Complete when the plan maps to one request carrying one intent.
 
 ## Output Contract
 
-Return exactly one state with a reason and next action:
+Return exactly one state with a reason and next action. Include a compact handoff; do not fill irrelevant fields just to complete the checklist:
 
-- **READY** — all consequential decisions are explicit. Include the route and compact handoff. Recommend a draft first when the concept is unproven: a full render takes several minutes, and a cheap low-step preview answers whether the idea works before anyone pays for finish.
+- **READY** — all decisions that affect the next action are explicit. Include the route, assumptions/defaults, and compact handoff. Recommend a draft first when the concept is unproven: a full render takes several minutes, and a cheap low-step preview tests the concept before anyone pays for finish.
 - **NEEDS INFO** — a missing human choice changes the route, payload, or production method. Ask only the blocking questions.
 - **REVISE** — requirements conflict, exceed the action budget, or create an invalid payload. Name the conflict and propose the minimum repair.
 
@@ -175,7 +176,7 @@ Warnings that do not block generation belong under **Production risks**, not in 
 - [ ] One required action fits the duration
 - [ ] Shot structure is stated, and any sequence contrasts enough to read as cuts
 - [ ] Camera and shot structure are internally consistent
-- [ ] Audio and text strategies are explicit
+- [ ] Audio and text strategies are explicit when relevant
 - [ ] Deterministic finishing is assigned where exactness matters
 - [ ] Output is `READY`, `NEEDS INFO`, or `REVISE` with a concrete reason
 

@@ -87,7 +87,7 @@ Pre-generation diagnosis and readiness gate:
 Shot craft for standalone text-to-video generations:
 
 - **Creative Contracts** - Build one shot around a single motivated event with a readable payoff
-- **Concept Field Guide** - Proven, experimental, and parked lanes, with the prompt levers for each
+- **Concept Field Guide** - Reliable, experimental, and parked patterns, with the prompt levers for each
 - **Camera and Continuity** - One physically consistent camera setup; no cuts, resets, or frozen frames
 - **Draft-First Iteration** - Settle the concept on cheap previews, then replay the winner at full quality
 - **Variation Ladder** - Change one consequential dimension per trial

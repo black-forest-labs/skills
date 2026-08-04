@@ -1,8 +1,8 @@
 # Concept field guide
 
-Which concepts render well as a standalone FLUX 3 text-to-video shot, and which ones fight the model. Use this before settling on an idea — reframing a concept costs nothing, while rerolling a bad one costs every generation.
+Which concepts tend to work as a standalone FLUX 3 text-to-video shot, and which ones are risky. Use this before settling on an idea: reframing a concept is cheaper than repeatedly rerunning a poor fit.
 
-## Proven lanes
+## Reliable patterns
 
 ### Atmospheric light in a medium
 
@@ -82,11 +82,11 @@ Boundary: good sound does not mean synchronized sound. Ignition audio can pre-la
 
 ### Noir and restrained environments
 
-Near-monochrome, rain, fog, darkness, practical lights, and deliberate compositions reliably produce premium shots. Add one motivated event so the result is not merely plain but pretty.
+Near-monochrome, rain, fog, darkness, practical lights, and deliberate compositions are useful starting points. Add one motivated event so the result is not merely attractive but usable.
 
 ## Experimental lanes
 
-Use these as probes with explicit review, not as promised production assets:
+Use these as tests with explicit review, not as promised production assets:
 
 - fine material behavior — ice skitter, egg crisping, quench bubbles, ferrofluid;
 - restrained swarms — motion is plausible but rarely exceptional;

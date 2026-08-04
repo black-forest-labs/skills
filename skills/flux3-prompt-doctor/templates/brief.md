@@ -67,4 +67,4 @@
 - **Reason:**
 - **Next action:**
 
-The brief is ready when the next skill can act without inventing the attached input, action, source roles, invariants, delivery, camera, audio, text strategy, or production boundaries.
+The brief is ready when the next skill can act without inventing a consequential choice. Fill only the sections relevant to the request; use documented defaults or label assumptions for the rest.

@@ -39,15 +39,15 @@ List only layers that serve the scene:
 
 Complete when every requested sound has a physical source or narrative role.
 
-### 2. Own every voice, and put a speaker on camera
+### 2. Assign every voice to a source
 
-A quoted line needs a visible speaker, or the model renders it as burned-in on-screen text instead of a voice. This is the most common way audio direction fails.
+For on-camera speech, name the visible speaker and describe how they deliver the line. For off-screen speech, label it `voiceover` or `narration` and name its owner. If on-screen text is unwanted, add `no on-screen text, no subtitles`.
 
-Three things together turn a quoted line into speech:
+These details reduce ambiguity around quoted lines:
 
 1. quote the exact line;
-2. describe a speaker visibly on camera, delivering it to frame or to another character;
-3. add `no on-screen text, no subtitles`.
+2. identify the visible speaker or explicitly label the line as voiceover/narration;
+3. add `no on-screen text, no subtitles` when text is unwanted.
 
 ```text
 A weather presenter on camera in front of a stylized storm map, speaking directly to the lens: "Storm season is here — and this time, we're ready." Confident delivery, clean studio lighting. No on-screen text, no subtitles.
@@ -143,7 +143,7 @@ Return:
 
 ## Common Pitfalls
 
-1. **Quoting a line with nobody on camera.** Without a visible speaker the line tends to render as on-screen text, not a voice.
+1. **Leaving a quoted line's source unclear.** Identify the visible speaker or label the line as voiceover/narration; add a no-text instruction when needed.
 2. **Blurring the layers together.** Name ambience, music, and speech separately.
 3. **Listing sounds without sources.** Tie each layer to a place, object, person, or action.
 4. **Writing more dialogue than the clip can hold.** Shorten before speeding up.

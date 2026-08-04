@@ -134,7 +134,7 @@ The subject from the reference images walks through a sunlit greenhouse, camera 
 
 For clips longer than one generation:
 
-1. preserve a clean final frame and stable motion vector;
+1. preserve a clean ending and record the subject's direction, speed, and camera relationship;
 2. continue from the actual ending artifact;
 3. restate only the invariants and next action;
 4. review the seam before extending again;

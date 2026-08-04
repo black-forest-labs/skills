@@ -9,7 +9,7 @@ metadata:
 
 # FLUX 3 Video Router
 
-Route a FLUX 3 video request to the smallest set of specialist skills that can complete it. This skill is an index and handoff contract, not an all-in-one prompting guide.
+Route a FLUX 3 video request to the smallest set of specialist skills that can complete it. This skill defines routing and the handoff between specialists.
 
 ## When to Use
 
