@@ -17,30 +17,26 @@ never put keys in prompts, logs, or saved request bodies.
 
 ## Request shape
 
-There is no generation `mode`. A request is a prompt plus **at most one** input field,
-and the field is the instruction:
+Every request names its `mode` (required, exact strings) and carries the matching media
+field:
 
-| Input | What the model does |
-| --- | --- |
-| *(none)* | Generates the clip from your text alone |
-| `keyframes` | Puts your images on screen, pixel for pixel, at frame positions you choose |
-| `reference_images` | Keeps the subject recognizable in a new scene; the images never appear on screen |
-| `reference_video` | Builds a new clip with the subjects from yours |
-| `start_video` | Continues from the final frames of your clip |
+| `mode` | Media field | What the model does |
+| --- | --- | --- |
+| `t2v` | none | Generates the clip from your text alone |
+| `i2v` | `keyframes` (required) | Puts your images on screen, pixel for pixel, as pinned frames |
+| `v2v` | `start_video` (required) | Continues from the final frames of your clip |
+| `draft_enhance` | `draft_cache` (required) | Replays a cached draft at full quality; accepts no other fields, not even `prompt` |
 
-- Two input fields, or any field the API does not know: `422`. `prompt` is the only
-  required field; everything else has a working default.
-- Error messages label behaviors with short codes (`t2v`, `i2v`, `k2v`, `ir2v`, `vr2v`,
-  `f2v`): diagnostics, not request parameters.
-- `draft_enhance` is the one real mode: it replays a cached draft at full quality and
-  takes no other generation fields.
-- The faster text-only endpoint rejects input fields; pick the endpoint by whether
-  media is attached.
+- The schema is strict: any field it does not know returns a `422` naming it
+  (`Extra inputs are not permitted`). A missing required field 422s the same way.
+- Settings on the generating modes: `aspect_ratio` (`auto`, `21:9`, `2:1`, `16:9`,
+  `4:3`, `1:1`, `3:4`, `9:16`), `duration` (integer 5-20 or `"auto"`), `resolution`
+  (`hd` or `fhd`), `generate_audio` (bool), `draft` (bool), `version`.
 - Constraints couple (a video input at higher resolution may cap duration): read the
-  constraints section rather than assuming fields are independent.
-- A two-image morph needs an explicit whole-number `duration`, or the frames read as a
-  storyboard. Media travels as a public URL or inline base64. Record `seed` when the
-  run must be reproducible.
+  reference rather than assuming fields are independent.
+- Three or more bare keyframes, and all `[seconds, image]` timestamped keyframes, need
+  an integer `duration`. Media travels as a public URL or inline base64; keyframe
+  images are at least 256x256.
 
 ## Run a job
 
@@ -63,9 +59,8 @@ and the field is the instruction:
 Add `draft: true` while a concept is unproven: a fast low-step preview plus a
 `draft_cache` costs far less than a full render. Judge a draft on event legibility,
 composition, and continuity; softness is the low-step trade and resolves at full
-quality. Enhance only the chosen cache (it replays the same prompt, seed, and settings,
-so preserve draft-to-cache identity when several are in play). Draft coverage varies by
-input field; the reference says which, and a `422` will tell you otherwise.
+quality. Enhance only the chosen cache (it replays the same generation, so preserve
+draft-to-cache identity when several are in play).
 
 Between reruns change one consequential dimension. After two structurally similar
 misses, return to the creative skill instead of accumulating adjectives.

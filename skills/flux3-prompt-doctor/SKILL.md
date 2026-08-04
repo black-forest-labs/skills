@@ -17,24 +17,22 @@ call the API.
 
 ## Route by what must survive
 
-A request carries a prompt plus **at most one** input field; the field is the
-instruction, and there is no generation `mode`:
+Every request names its `mode` and carries the matching media field:
 
-| Requirement | Attach |
+| Requirement | Route |
 | --- | --- |
-| Generate the whole clip from words | nothing |
-| An image must appear on screen exactly as shot | `keyframes` |
-| Bridge an exact opening and closing frame | `keyframes`, two images plus an explicit duration |
-| Pass through visual waypoints | `keyframes`, as a storyboard |
-| Only the subject carries into a new scene | `reference_images` |
-| Keep the cast from a clip, build a new shot | `reference_video` |
-| Continue from an existing ending | `start_video` |
-| Render an approved draft without replanning | `draft_cache` with `mode: "draft_enhance"` |
+| Generate the whole clip from words | `mode: "t2v"`, no media |
+| An image must appear on screen exactly as shot | `mode: "i2v"`, `keyframes` |
+| Bridge an exact opening and closing frame | `mode: "i2v"`, two keyframes |
+| Pass through visual waypoints | `mode: "i2v"`, keyframes as a storyboard |
+| Continue from an existing ending | `mode: "v2v"`, `start_video` |
+| Render an approved draft without replanning | `mode: "draft_enhance"`, `draft_cache` |
 
-Three questions separate the image routes: must these exact pixels be on screen
-(`keyframes`)? Must the subject stay recognizable in a scene you have not shot
-(`reference_images`)? Can the source simply be described (attach nothing)? A brief that
-wants both exact frames and carried-over identity needs a decision, not both.
+Two questions separate the image routes: must these exact pixels be on screen
+(`keyframes`)? Can the source simply be described (then attach nothing)? There is no
+field that carries a subject's identity without putting the source on screen; a brief
+that needs one either opens each shot from a keyframe containing the subject, or is a
+`REVISE`.
 
 ## Feasibility
 

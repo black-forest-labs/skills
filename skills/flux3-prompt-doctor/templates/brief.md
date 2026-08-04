@@ -8,7 +8,7 @@
 
 ## Route
 
-- **Attached input:** none / `keyframes` / `reference_images` / `reference_video` / `start_video`
+- **Route:** `t2v` / `i2v` + `keyframes` / `v2v` + `start_video` / `draft_enhance` + `draft_cache`
 - **Why this input (what must survive):**
 - **Source media:**
 - **Role of each source:**

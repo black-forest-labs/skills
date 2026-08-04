@@ -33,11 +33,11 @@ Prompt Doctor (until READY; owns the shot-structure decision)
 Draft before committing anything unproven: a full render takes minutes, and the chosen
 draft replays at full quality.
 
-A handoff between skills carries: outcome, the attached input (at most one of
-`keyframes` / `reference_images` / `reference_video` / `start_video`), the one required
-action, source roles, invariants, delivery (duration, aspect, resolution, shot
-structure), camera, audio, text strategy, and risks. It is complete when the receiving
-skill can act without inventing a consequential choice.
+A handoff between skills carries: outcome, the route (`mode` plus its media field:
+`t2v`, `i2v`/`keyframes`, `v2v`/`start_video`, or `draft_enhance`/`draft_cache`), the
+one required action, source roles, invariants, delivery (duration, aspect, resolution,
+shot structure), camera, audio, text strategy, and risks. It is complete when the
+receiving skill can act without inventing a consequential choice.
 
 Deterministic requirements (exact typography, frame-accurate sync, final mixing) need an
 explicit post-production plan, not a generation attempt.

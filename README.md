@@ -89,17 +89,16 @@ Six skills that hand off to each other; install only what you need:
 | Submit, poll, enhance, download, or technically validate | `flux3-generate` |
 | Route a general FLUX 3 video request | `flux3-video` |
 
-### FLUX 3 Inputs
+### FLUX 3 Modes
 
-A request is a prompt plus **at most one** input field. The field you attach is the instruction; there is no generation `mode`.
+Every request names its `mode` and carries the matching media field:
 
-| Attach | What the model does |
-| --- | --- |
-| *(nothing)* | Generates the clip from your text alone |
-| `keyframes` | Puts your images on screen at frame positions you choose |
-| `reference_images` | Keeps the subject recognizable in a new scene; the images never appear on screen |
-| `reference_video` | Builds a new clip with the subjects from yours |
-| `start_video` | Continues from the final frames of your clip |
+| `mode` | Media field | What the model does |
+| --- | --- | --- |
+| `t2v` | none | Generates the clip from your text alone |
+| `i2v` | `keyframes` | Puts your images on screen, pixel-exact, as pinned frames |
+| `v2v` | `start_video` | Continues from the final frames of your clip |
+| `draft_enhance` | `draft_cache` | Replays a chosen draft at full quality |
 
 ### Draft, then commit
 

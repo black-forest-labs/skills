@@ -1,50 +1,44 @@
 ---
 name: flux3-keyframes-continuation
-description: Use when a FLUX 3 video must be built from supplied images or video. Covers keyframes, reference images, reference video, and continuation.
+description: Use when a FLUX 3 video must be built from supplied images or video. Covers keyframes (i2v) and continuation (v2v).
 metadata:
   author: Black Forest Labs
   version: "1.0.0"
-  tags: flux, flux-3, bfl, keyframes, reference-images, reference-video, continuation
+  tags: flux, flux-3, bfl, keyframes, continuation
 ---
 
 # FLUX 3 Keyframes and Continuation
 
-Every supplied source gets one declared job, or is dropped. There is no generation
-`mode`: a request carries a prompt plus **at most one** input field, and sending two is
-an error.
+Every supplied source gets one declared job, or is dropped. Two modes condition on
+media, and each carries exactly one media field:
 
-| Required relationship | Attach |
+| Required relationship | Request |
 | --- | --- |
-| These exact pixels appear on screen | `keyframes` |
-| Exact opening and closing frames, filled in between | `keyframes`: two images plus an explicit whole-number duration |
-| An ordered storyboard the model connects | `keyframes`: several images |
-| This subject stays recognizable in a scene you have not shot | `reference_images` |
-| Keep the cast from this clip, build a new shot | `reference_video` |
-| Keep going from where this clip ends | `start_video` |
+| These exact pixels open the clip (the stable path) | `mode: "i2v"`, `keyframes`: one image |
+| Exact opening and closing frames, filled in between | `mode: "i2v"`, `keyframes`: two images |
+| An ordered storyboard the model connects | `mode: "i2v"`, `keyframes`: 3-10 images plus an integer `duration` |
+| Frames pinned at exact moments | `mode: "i2v"`, `keyframes`: `[seconds, image]` pairs, ascending, integer `duration` |
+| Keep going from where this clip ends | `mode: "v2v"`, `start_video` (input max 15 s / 50 MB; output max 15 s) |
 
-The distinction that matters most: **`keyframes` put your image on screen;
-`reference_images` never appear on screen.** A source used only as inspiration needs no
-field at all. Media is a public URL or inline base64; counts, formats, and size limits:
-[API reference](https://docs.bfl.ai).
+Keyframes appear **on screen, pixel-exact**. There is no field that carries a subject
+without showing the source image; a source used only as inspiration is described in the
+prompt instead. Media is a public URL or inline base64; keyframe images are at least
+256x256.
 
 ## Prompting each shape
 
 - **One keyframe:** the image opens the clip. Prompt what moves; redescribing visible
   pixels invites re-imagination.
-- **Two keyframes as a morph:** requires an explicit whole-number `duration`, or the
-  images read as a storyboard (the most common surprise). Keep the two ends related
-  enough for a plausible path; large jumps invite drift.
+- **Two keyframes:** opening and closing are pinned, so describe the stages of the
+  change in order and hold the camera still. Keep the two ends related enough for a
+  plausible path; large jumps invite drift.
 - **Storyboard:** frames become ordered waypoints. Keep identity, palette, and
   viewpoint coherent unless a change is intentional.
-- **Reference images:** the subject carries, the pictures do not. Describe the new
-  scene fully (camera, action, environment, light); do not redescribe the subject.
-- **Reference video:** the cast carries. Write the new shot, not a recap.
+- **Timestamped pins:** a mid-clip pin is a deadline; say what the remaining seconds
+  are for, or they trail off. Pin only what matters; extra anchors stiffen motion.
 - **Continuation:** write from the ending. Say what happens next and which momentum,
-  framing, subjects, and sound carry across the boundary.
-
-Keyframes address **frames, not seconds**, on a 24 fps timebase: a beat two seconds in
-sits at index 48; the final frame of a five-second clip is index 119. Indices are
-unique and inside the clip. Anchor only what matters; extra anchors stiffen motion.
+  framing, subjects, and sound carry across the boundary; do not recap completed
+  action.
 
 ```text
 The camera continues a slow push-in as the closed flower opens naturally into the final
@@ -58,11 +52,6 @@ trailing angle as the horse crests the hill and enters dense fog; hoofbeats and 
 carry across the boundary without a reset.
 ```
 
-```text
-The subject from the reference images walks through a sunlit greenhouse, camera
-tracking alongside, shallow depth of field, birdsong and soft footsteps on gravel.
-```
-
 ## Chains
 
 For clips longer than one generation: preserve a clean ending and record the subject's
@@ -71,5 +60,7 @@ restate only invariants and the next action; review each seam before extending; 
 one continuity variable at a time when repairing drift. A video input at higher
 resolution may cap duration below the general maximum, which changes segment planning.
 
-Return the conditioning plan (which field and why), the invariants that must survive,
-the final prompt, and any frame map or transition risks.
+Return the conditioning plan (which mode and shape, and why), the invariants that must
+survive, the final prompt, and any pin map or transition risks.
+
+Field limits and current constraints: [API reference](https://docs.bfl.ai)
