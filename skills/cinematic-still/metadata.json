@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "abstract": "Focused workflow for creating and reviewing cinematic still images with FLUX using a locked frame brief, motivated lighting, deliberate depth, controlled iteration, and an editorial quality gate.",
+  "references": [
+    "https://docs.bfl.ai/guides",
+    "https://docs.bfl.ai/api"
+  ]
+}

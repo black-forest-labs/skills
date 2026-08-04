@@ -276,7 +276,7 @@ Decision guide for selecting the optimal FLUX model based on your requirements.
 
 | FLUX.2 [max]      | 7c     | 3c   | $0.07   | $0.10   | Hero images, premium        |
 
-| FLUX.2 [flex]     | 6c     | 6c   | $0.06   | $0.12   | Typography                  |
+| FLUX.2 [flex]     | 5c     | 5c   | $0.05   | $0.10   | Typography                  |
 
 | FLUX.2 [dev]      | -      | -    | Free    | Free    | Local dev (non-commercial)  |
 

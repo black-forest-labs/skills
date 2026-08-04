@@ -12,12 +12,13 @@
   "plugins": [
     {
       "name": "flux-best-practices",
-      "description": "BFL skills for image generation including best practices for prompting, T2I, I2I, structured JSON, and API integration patterns",
+      "description": "BFL skills for image generation including best practices for prompting, cinematic stills, T2I, I2I, structured JSON, and API integration patterns",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/bfl-api",
-        "./skills/flux-best-practices"
+        "./skills/flux-best-practices",
+        "./skills/cinematic-still"
       ],
       "author": {
         "name": "Kerem Nalbant"

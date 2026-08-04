@@ -16,6 +16,9 @@ npx skills add black-forest-labs/skills --skill flux-best-practices
 
 # API integration only
 npx skills add black-forest-labs/skills --skill bfl-api
+
+# Cinematic still workflow only
+npx skills add black-forest-labs/skills --skill cinematic-still
 ```
 
 ### Claude Code Plugin
@@ -54,6 +57,17 @@ API integration guide covering:
 - **Error Handling** - Error codes and recovery strategies
 - **Webhook Integration** - Production webhook setup and verification
 - **Code Examples** - Python and TypeScript clients
+
+### 3. cinematic-still
+
+Focused workflow for building and reviewing one intentional cinematic frame:
+
+- **Frame Brief** - Lock subject, moment, composition, light, palette, and delivery shape
+- **Route Selection** - Choose text-to-image or reference-based generation
+- **Depth and Lighting** - Build three readable planes around a motivated light source
+- **Prompt Order** - Write the frame in visual-priority order
+- **Controlled Iteration** - Change one consequential variable per generation
+- **Frame Review** - Judge hierarchy, physical coherence, light, crop, and editorial utility
 
 ## Quick Reference
 
