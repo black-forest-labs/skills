@@ -42,9 +42,11 @@ Look up the current values and defaults rather than hard-coding them. Also check
 
 ## Draft and enhance
 
-`draft: true` returns a fast low-step preview plus a `draft_cache` — an encrypted bundle pinning that generation's final prompt, seed, and settings.
+`draft: true` returns a fast low-step preview plus a `draft_cache` — an encrypted bundle pinning that generation's final prompt, seed, and settings. Draft is supported for text-only generation and across the keyframe shapes; check the reference before assuming it covers a given input field.
 
 To render the same generation at full quality, send the cache back with `mode: "draft_enhance"`. That request takes no prompt and no conditioning media, because the bundle already carries them; any other field returns `422`. The cache is accepted as base64 or as an http(s) URL while its download link is still valid.
+
+Because the replay reuses the pinned prompt, seed, and settings, the full render is the same generation rather than a fresh attempt. It is not pixel-identical to the preview — the draft is low-step by design, so fine detail and texture improve. Composition, motion, and continuity carry over.
 
 Draft cache URLs expire on the same clock as result videos. Download the bundle immediately if you may enhance it later.
 

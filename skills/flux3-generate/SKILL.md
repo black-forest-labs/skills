@@ -117,6 +117,8 @@ Complete when the expected files exist locally and are non-empty.
 
 Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`: an encrypted bundle pinning the final prompt, seed, and settings for that generation.
 
+Draft is supported for text-only generation and across the keyframe shapes. Confirm in the API reference before assuming it covers a particular input field, and expect a `422` to say so if it does not.
+
 Drafting is the default for anything unproven. A full render takes several minutes and costs more; a draft answers the question you actually have — does this work? — sooner and cheaper. The trade is render quality, not correctness: composition, motion, event legibility, and continuity all read from a draft.
 
 Choose by the question:
