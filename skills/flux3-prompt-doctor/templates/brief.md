@@ -8,8 +8,8 @@
 
 ## Route
 
-- **Mode:** `t2v` / `i2v` / `v2v` / `draft_enhance`
-- **Why this mode:**
+- **Attached input:** none / `keyframes` / `reference_images` / `reference_video` / `start_video`
+- **Why this input (what must survive):**
 - **Source media:**
 - **Role of each source:**
 
@@ -33,14 +33,16 @@
 
 ## Timing and Delivery
 
-- **Duration:** 5–20 seconds / auto
+- **Duration:** explicit whole seconds / auto
 - **Aspect ratio:**
-- **Resolution:** `hd` / `fhd`
+- **Resolution:**
 - **Beat allocation:**
+- **Seed (when reproducibility matters):**
 
 ## Audio
 
 - **Speech / exact line:**
+- **Visible speaker on camera (or labeled voiceover):**
 - **Voice direction:**
 - **Ambience:**
 - **Effects tied to visible actions:**
@@ -65,4 +67,4 @@
 - **Reason:**
 - **Next action:**
 
-The brief is ready when the next skill can act without inventing mode, action, source roles, invariants, delivery, camera, audio, text strategy, or production boundaries.
+The brief is ready when the next skill can act without inventing the attached input, action, source roles, invariants, delivery, camera, audio, text strategy, or production boundaries.

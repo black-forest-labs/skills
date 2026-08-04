@@ -1,12 +1,9 @@
 {
-  "name": "flux3-video",
   "version": "1.0.0",
-  "description": "Route FLUX 3 video requests across prompt diagnosis, cinematic direction, source-conditioned control, audio, and API execution.",
-  "author": "Black Forest Labs",
   "organization": "Black Forest Labs",
   "date": "August 2026",
+  "abstract": "Router for FLUX 3 video requests. Directs work across prompt diagnosis, cinematic direction, source-conditioned control, audio direction, and API execution, and defines the handoff contract passed between those specialist skills.",
   "references": [
-    "https://docs.bfl.ai/flux_3/flux3_video",
-    "https://docs.bfl.ai/guides/prompting_video_overview"
+    "https://docs.bfl.ai"
   ]
 }

@@ -29,7 +29,7 @@ A brief is ready only when it answers:
 | Outcome | Where will the clip be used, and what visible fact makes it successful? |
 | Subject | Who or what must appear? |
 | Action | What single movement, event, or state change is non-negotiable? |
-| Input intent | Generate from text, animate frame(s), continue video, or enhance a draft? |
+| Input intent | Generate from text alone, or attach one input — exact frames, subject references, a cast video, or a clip to continue? |
 | Source roles | What must each image, video, or draft cache contribute? |
 | Invariants | What identity, geometry, wardrobe, framing, motion, environment, or end state must survive? |
 | Delivery | Which aspect ratio, duration, and resolution are intentional? |
@@ -50,18 +50,28 @@ Complete when every supplied requirement appears once in the brief and assumptio
 
 ### 2. Route by what must survive
 
-| Requirement | Route | Required input |
-| --- | --- | --- |
-| Generate the whole clip from words | `t2v` | `prompt` |
-| Begin on one exact image | `i2v` | one keyframe image |
-| Control opening and closing frames | `i2v` | two keyframe images |
-| Pass through visual waypoints | `i2v` | 3–10 untimed keyframes or 1–10 timestamped pairs |
-| Continue from an existing ending | `v2v` | `start_video` |
-| Render an approved draft without replanning | `draft_enhance` | `draft_cache` |
+A request carries a prompt plus **at most one** attached input, and that field is the instruction. There is no `mode` to choose for generation — routing means picking which field, if any, the media belongs in.
 
-Ask about the relationship to a source, not merely whether a source exists. Inspiration that can be described does not require conditioning; a frame that must literally appear does.
+| Requirement | Attach |
+| --- | --- |
+| Generate the whole clip from words | nothing |
+| An image must appear on screen exactly as shot | `keyframes` |
+| Bridge an exact opening and closing frame | `keyframes`, two images plus an explicit duration |
+| Pass through visual waypoints | `keyframes`, as a storyboard |
+| Only the subject needs to carry over into a new scene | `reference_images` |
+| Keep the cast from a clip, build a new shot | `reference_video` |
+| Continue from an existing ending | `start_video` |
+| Render an approved draft without replanning | `draft_cache` with `mode: "draft_enhance"` |
 
-Complete when every source has one declared job and the route directly supports it.
+Ask about the relationship to a source, not merely whether a source exists. Three questions separate the image routes:
+
+- Must these exact pixels be on screen? → `keyframes`
+- Must this person or object stay recognizable in a scene you have not shot? → `reference_images`
+- Can the source simply be described? → attach nothing
+
+Inspiration that can be described does not require conditioning. Sending two input fields is a request error, so a brief that wants both exact frames and carried-over identity needs a decision, not both.
+
+Complete when every source has one declared job and one home, or is dropped.
 
 ### 3. Check the action budget
 
@@ -98,26 +108,20 @@ Reserve these for post when exactness is a success condition:
 
 Generation can create source footage and causal timing intent; it is not a deterministic compositor, edit timeline, or final mix.
 
-### 6. Validate payload intent
+### 6. Validate request intent
 
-Before calling `flux3-generate`, normalize accepted aliases (`text-to-video`, `image-continuation`, `video-continuation`, and `draft-enhance`) to `t2v`, `i2v`, `v2v`, or `draft_enhance`, then branch validation by mode.
+Check intent, not schema. `flux3-generate` validates fields against the live reference; this step confirms the plan produces a coherent request at all:
 
-For `draft_enhance`, verify that `draft_cache` is the only generation input. Do not require or resend prompt, duration, keyframes, resolution, audio, `draft`, or `batch`; the cache carries the original generation settings.
+- the brief names exactly one attached input, or a deliberate text-only request;
+- that input matches what must survive — on-screen pixels, subject identity, cast, or a continuing ending;
+- a start-and-end morph carries an explicit whole-number duration, otherwise the frames read as a storyboard;
+- duration, aspect ratio, and resolution are either chosen or knowingly left on `auto`;
+- a draft replay carries only its cache, with no prompt or media resent;
+- reproducibility needs are stated, so a seed gets recorded.
 
-For `t2v`, `i2v`, and `v2v`, verify:
+Field names, enum values, and numeric limits belong to the [API reference](https://docs.bfl.ai), not to this brief. Flag intent conflicts and leave schema validation to execution.
 
-- `prompt` is present;
-- only the selected mode's input field is present;
-- `keyframes` appears only for `i2v`;
-- `start_video` appears only for `v2v`;
-- duration is `auto` or a whole number from 5 through 20 when supplied;
-- 3–10 untimed keyframes have an explicit duration;
-- timestamped keyframes are non-negative, increase, and are at least 1/24 second apart;
-- timestamped keyframes fall within an explicitly supplied duration;
-- draft requests use HD;
-- `batch` is 1–4 and appears only with `draft: true`.
-
-Complete when the intended payload has no unknown or mode-incompatible fields.
+Complete when the plan maps to one request carrying one intent.
 
 ## Output Contract
 
@@ -140,15 +144,14 @@ Warnings that do not block generation belong under **Production risks**, not in 
 ## Verification Checklist
 
 - [ ] Explicit facts, assumptions, and missing choices are separated
-- [ ] Every source has one role
-- [ ] Mode and payload intent match
+- [ ] Every source has one role, and at most one input is attached
+- [ ] The attached field matches what must survive
 - [ ] One required action fits the duration
 - [ ] Camera and shot structure are internally consistent
 - [ ] Audio and text strategies are explicit
 - [ ] Deterministic finishing is assigned where exactness matters
 - [ ] Output is `READY`, `NEEDS INFO`, or `REVISE` with a concrete reason
 
-## Public References
+## References
 
-- [FLUX 3 video prompting overview](https://docs.bfl.ai/guides/prompting_video_overview)
-- [FLUX 3 API reference](https://docs.bfl.ai/api-reference/flux3)
+- [BFL documentation](https://docs.bfl.ai) — authoritative for input fields, settings, limits, and prompting guidance

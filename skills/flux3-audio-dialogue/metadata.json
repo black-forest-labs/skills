@@ -1,12 +1,9 @@
 {
-  "name": "flux3-audio-dialogue",
   "version": "1.0.0",
-  "description": "Direct FLUX 3 dialogue, voiceover, ambience, effects, music, silence, and audiovisual timing.",
-  "author": "Black Forest Labs",
   "organization": "Black Forest Labs",
   "date": "August 2026",
+  "abstract": "Audio direction for FLUX 3 video. Covers layered sound ledgers, speaker ownership and the visible-speaker requirement for spoken lines, speakable dialogue within clip duration, cause-linked effects, mix hierarchy, generated audio versus silence, and deterministic finishing.",
   "references": [
-    "https://docs.bfl.ai/guides/prompting_video_audio",
-    "https://docs.bfl.ai/api-reference/flux3"
+    "https://docs.bfl.ai"
   ]
 }

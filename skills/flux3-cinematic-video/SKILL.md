@@ -11,6 +11,8 @@ metadata:
 
 Direct one strong FLUX 3 shot by default from an idea, script, or treatment. Use a multi-shot structure only when explicitly requested. Build the prompt around observable motion, camera intent, physical response, and a readable payoff.
 
+Your prompt is interpreted and expanded before generation, so plain language works — write as you would brief a colleague. The rewriting preserves what you specify, so precision buys control: every choice you state explicitly stays yours, and everything you leave out becomes the model's call.
+
 ## When to Use
 
 - Writing or repairing a text-to-video prompt
@@ -41,12 +43,11 @@ Complete when the shot can be described in one sentence without relying on mood 
 For a short clip, favor one subject action and one camera move. Give motion a beginning, development, and payoff.
 
 ```text
-0.0–1.5s — locked wide shot of a still harbor at dawn
-1.5–3.0s — a slow push-in begins as gulls lift off the water
-3.0–5.0s — sunlight breaks the horizon and the camera settles
+Opens on a locked wide shot of a still harbor at dawn. A slow push-in begins as gulls
+lift off the water, and the shot settles as sunlight breaks the horizon.
 ```
 
-A timeline directs emphasis; it is not a frame-accurate contract. Move exact sync and production-critical lettering to deterministic post.
+Write beats as a described progression rather than a timecode list. A prompt timeline directs emphasis; it is not a frame-accurate contract, and numeric timings in prose do not bind the generator. Exact placement belongs to keyframes, which address frames rather than seconds — see `flux3-keyframes-continuation`. Move exact sync and production-critical lettering to deterministic post.
 
 Complete when every beat can plausibly finish within the chosen duration.
 
@@ -103,9 +104,18 @@ Natural-language default:
 [Environmental motion and physical response]. [Lighting and palette]. [Audio handoff].
 ```
 
-Use timestep prompting when timing has two or three meaningful beats. Use labeled fields when a long brief needs traceability. Use explicit `SHOT ONE`, transition, and `SHOT TWO` blocks only when the user truly wants multiple shots in one clip.
+Use a described beat progression when timing has two or three meaningful moments. Use labeled fields when a long brief needs traceability.
 
-Consecutive shots need strong contrast in scale, angle, location, or palette so they read as a cut rather than an accidental morph.
+For multiple shots inside one generation, name them explicitly and mark the transition:
+
+```text
+SHOT ONE: wide aerial of a desert highway at dawn, a single red car speeding through.
+HARD CUT. SHOT TWO: interior close-up, the driver's hands drumming the wheel to the radio.
+HARD CUT. SHOT THREE: from the roadside, the car shrinking into the heat haze.
+Warm engine hum under one continuous music bed across all three shots.
+```
+
+This produces real cuts. Consecutive shots need strong contrast in scale, location, or color so they register as cuts — near-identical coverage blends into a continuous take instead. For an uncut take, ask for `one continuous unbroken shot`.
 
 ### 7. Produce controlled variants
 
@@ -125,7 +135,7 @@ Complete when each variant tests one named hypothesis.
 Return:
 
 1. **Shot contract** — action, camera, duration, and invariants;
-2. **Final prompt** — ready for `t2v` or creative review;
+2. **Final prompt** — ready for a text-only request or creative review;
 3. **Timing notes** — only when beats matter;
 4. **Audio/text handoff** — what another skill or post must own;
 5. **Risks** — likely failure modes or deterministic finishing needs;
@@ -138,7 +148,9 @@ Return:
 3. **Using incompatible camera terms.** Write one physical camera contract.
 4. **Spending words on invisible mood labels.** Convert style into visible evidence.
 5. **Changing several variables between trials.** Preserve causal learning with controlled variants.
-6. **Promising exact typography or edit timing.** Plan deterministic post.
+6. **Writing timecodes and expecting them to bind.** Prose timings guide emphasis; frame-exact placement needs keyframes.
+7. **Cutting between near-identical shots.** Without strong contrast the cut reads as one continuous take.
+8. **Promising exact typography or edit timing.** Plan deterministic post.
 
 ## Verification Checklist
 
@@ -150,8 +162,6 @@ Return:
 - [ ] Audio and text have clear owners
 - [ ] Each variant changes one named dimension
 
-## Public References
+## References
 
-- [Text-to-video prompting](https://docs.bfl.ai/guides/prompting_video_text_to_video)
-- [Camera terms](https://docs.bfl.ai/guides/prompting_video_camera_terms)
-- [FLUX 3 video prompting overview](https://docs.bfl.ai/guides/prompting_video_overview)
+- [BFL documentation](https://docs.bfl.ai) — authoritative for prompting guidance, camera terms, and generation settings

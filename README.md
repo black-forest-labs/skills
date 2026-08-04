@@ -70,7 +70,7 @@ API integration guide covering:
 Thin router for general FLUX 3 video requests:
 
 - **Intent Routing** - Select only the specialist skills required for the request
-- **Handoff Contract** - Preserve mode, action, sources, invariants, delivery, audio, text, and risks
+- **Handoff Contract** - Preserve attached input, action, sources, invariants, delivery, audio, text, and risks
 - **Minimal Context** - Avoid loading unrelated video guidance
 
 ### 4. flux3-prompt-doctor
@@ -78,7 +78,7 @@ Thin router for general FLUX 3 video requests:
 Pre-generation diagnosis and readiness gate:
 
 - **Requirements Triage** - Separate explicit facts, assumptions, and blocking questions
-- **Mode Selection** - Route text, images, video, and draft caches by what must survive
+- **Input Routing** - Decide which single input, if any, the media belongs in based on what must survive
 - **Feasibility Review** - Resolve contradictory camera, timing, source, audio, and text requirements
 - **Verdicts** - Return `READY`, `NEEDS INFO`, or `REVISE` with a concrete next action
 
@@ -95,8 +95,8 @@ Shot direction and motion-first prompting:
 
 Source-conditioned video control:
 
-- **Opening and Closing Frames** - Animate one frame or bridge two exact endpoints
-- **Keyframe Timelines** - Use ordered or timestamped visual waypoints
+- **Keyframes** - Put images on screen at chosen frame positions, or bridge two exact endpoints
+- **Reference Images and Video** - Carry a subject or cast into a new scene without showing the source
 - **Video Continuation** - Continue from the observed ending of an existing clip
 - **Invariant Ledgers** - Preserve identity, geometry, environment, camera, and momentum
 
@@ -104,16 +104,16 @@ Source-conditioned video control:
 
 Synchronized sound direction:
 
-- **Dialogue and Voiceover** - Assign exact lines, speakers, and delivery anchors
+- **Dialogue and Voiceover** - Assign exact lines, visible speakers, and delivery anchors
 - **Ambience and Effects** - Tie sound to locations, objects, and visible actions
 - **Mix Hierarchy** - Protect foreground speech from competing layers
 - **Finishing Plan** - Reserve exact sync and final mixing for deterministic post
 
 ### 8. flux3-generate
 
-Public API execution and result validation:
+API execution and result validation:
 
-- **Payload Construction** - Build strict `t2v`, `i2v`, `v2v`, and `draft_enhance` requests
+- **Request Construction** - Build a strict request around a single attached input, validated against the live reference
 - **Submission and Polling** - Track real task IDs through documented terminal states
 - **Draft Enhancement** - Preserve and enhance the selected draft cache
 - **Download and Validation** - Save expiring artifacts, inspect media streams, and package review evidence
@@ -126,19 +126,24 @@ Public API execution and result validation:
 | --- | --- |
 | Diagnose or repair a brief | `flux3-prompt-doctor` |
 | Direct a new shot from an idea | `flux3-cinematic-video` |
-| Animate frames or continue video | `flux3-keyframes-continuation` |
+| Build from supplied images or video | `flux3-keyframes-continuation` |
 | Direct speech, ambience, effects, or music | `flux3-audio-dialogue` |
 | Submit, poll, enhance, download, or technically validate | `flux3-generate` |
 | Route a general FLUX 3 video request | `flux3-video` |
 
-### FLUX 3 API Modes
+### FLUX 3 Inputs
 
-| Mode | Input | Best for |
-| --- | --- | --- |
-| `t2v` | Prompt | Generate a new clip from scratch |
-| `i2v` | Prompt + 1–10 keyframes | Animate a still or interpolate through frames |
-| `v2v` | Prompt + source video | Continue from an existing clip's ending |
-| `draft_enhance` | Draft cache | Render an approved draft at full quality |
+A request is a prompt plus **at most one** input field. The field you attach is the instruction — there is no generation `mode`.
+
+| Attach | What the model does |
+| --- | --- |
+| *(nothing)* | Generates the clip from your text alone |
+| `keyframes` | Puts your images on screen at frame positions you choose |
+| `reference_images` | Keeps the subject recognizable in a new scene; the images never appear on screen |
+| `reference_video` | Builds a new clip with the subjects from yours |
+| `start_video` | Continues from the final frames of your clip |
+
+`draft_enhance` is a separate mode that replays a cached draft at full quality. See [docs.bfl.ai](https://docs.bfl.ai) for current fields, limits, and endpoints.
 
 ### Model Selection
 

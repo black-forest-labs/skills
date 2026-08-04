@@ -1,126 +1,54 @@
-# FLUX 3 Video API Quick Reference
+# FLUX 3 Video API — Durable Shape
 
-## Endpoint
+This file covers the parts of the integration that hold steady. It is deliberately not a copy of the schema.
 
-```text
-POST https://api.bfl.ai/v1/flux-3-video
-```
+**Read [the FLUX 3 API reference](https://docs.bfl.ai) for current endpoint paths, field names, enum values, numeric limits, concurrency limits, and status strings.** Where that reference disagrees with anything here, it wins.
 
-Authenticate with the `x-key` header. The endpoint is asynchronous and returns an `id` and `polling_url`.
+## The request
 
-## Modes
+One JSON body. `prompt` is the only required field; everything else has a working default, so a bare prompt is a valid request. The schema is strict — an unknown field returns `422`.
 
-| Mode | Required input | Purpose |
-| --- | --- | --- |
-| `t2v` | `prompt` | Generate from text |
-| `i2v` | `prompt`, `keyframes` | Animate one frame or interpolate through frames |
-| `v2v` | `prompt`, `start_video` | Continue an existing clip |
-| `draft_enhance` | `draft_cache` | Render an approved draft at full quality |
+Authenticate with the `x-key` header. The endpoint is asynchronous: it returns an `id` and a `polling_url` immediately.
 
-The aliases `text-to-video`, `image-continuation`, `video-continuation`, and `draft-enhance` are also accepted. Normalize them to the canonical mode tokens above for validation and recordkeeping.
+There is more than one endpoint, and they differ in what they accept — the faster checkpoint is text-only and rejects media. Pick by whether the request attaches an input.
 
-The schema is strict. A field outside its mode or an unknown field returns `422`.
+## Intent comes from the attached field
 
-## Common Settings
+There is no generation `mode`. Send a prompt plus **at most one** input field:
 
-- `aspect_ratio`: `auto`, `21:9`, `2:1`, `16:9`, `4:3`, `1:1`, `3:4`, or `9:16`
-- `resolution`: `hd` or `fhd`
-- `duration`: `auto` or a whole number from 5 to 20 seconds
-- `generate_audio`: boolean, defaults to `true`
-- `version`: `latest` or a documented release tag
-- `draft`: boolean; drafts render at HD
-- `batch`: 1–4, only with `draft: true`
+| Input | What the model does |
+| --- | --- |
+| *(none)* | Generates from your text alone |
+| `keyframes` | Puts your images on screen, pixel for pixel, at frame positions you choose |
+| `reference_images` | Keeps the subject recognizable in a new scene; the images never appear on screen |
+| `reference_video` | Builds a new clip with the subjects from yours |
+| `start_video` | Continues from the final frames of your clip |
 
-## Text-to-Video
+Two input fields return a `422` listing the alternatives. An empty list counts as not set.
 
-```json
-{
-  "mode": "t2v",
-  "prompt": "A low tracking shot of a fox sprinting through wet pine undergrowth at dawn. Mist drifts between the trees as the camera keeps pace beside it. Cool morning light and grounded motion.",
-  "aspect_ratio": "16:9",
-  "duration": 5,
-  "resolution": "hd",
-  "generate_audio": true
-}
-```
+Short codes in error messages (`t2v`, `i2v`, `ii2v`, `k2v`, `ir2v`, `vr2v`, `f2v`) name these behaviors for diagnostics. They are not request parameters.
 
-## Image-to-Video
+Media is passed as a public URL or inline base64 — there is no upload service.
 
-One opening frame:
+### Keyframes address frames, not seconds
 
-```json
-{
-  "mode": "i2v",
-  "prompt": "The camera pushes forward as wind begins moving the trees.",
-  "keyframes": "https://example.com/opening-frame.png",
-  "duration": 5
-}
-```
+Each keyframe pairs an image with a frame index, and the timebase is 24 fps. Indices must be unique and fall inside the clip. Two keyframes intended as a start-and-end morph need an explicit whole-number duration; without one, the images are read as a storyboard instead.
 
-Timestamped keyframes:
+## Settings
 
-```json
-{
-  "mode": "i2v",
-  "prompt": "A seed grows into a tree through the seasons.",
-  "keyframes": [
-    [0, "https://example.com/seed.png"],
-    [4.5, "https://example.com/sapling.png"],
-    [10, "https://example.com/tree.png"]
-  ],
-  "duration": 10
-}
-```
+Beyond the input field, requests carry generation settings: aspect ratio, resolution, duration, whether audio is generated, a research pass before generation, seed, version pinning, and an optional webhook URL. Defaults are chosen so that `auto` means "you decide for me" rather than a cap — anything set explicitly is honored.
 
-Keyframe rules:
+Look up the current values and defaults rather than hard-coding them. Also check the constraints section: some fields couple, so a video input at a higher resolution can cap duration below the general maximum.
 
-- 1 image pins the opening frame.
-- 2 images pin opening and closing frames.
-- 3–10 images become ordered waypoints and require explicit duration when untimed.
-- Timestamped pairs use seconds followed by image.
-- Times must be non-negative, increasing, and at least 1/24 second apart. With an explicit duration, each timestamp must fall within it; with `duration: "auto"`, the clip runs to the final timestamp and rounds up to a whole second.
-- Images may be public HTTP(S) URLs or inline base64 PNG/JPEG/WebP, up to 20 MB each.
+## Draft and enhance
 
-## Video Continuation
+`draft: true` returns a fast low-step preview plus a `draft_cache` — an encrypted bundle pinning that generation's final prompt, seed, and settings.
 
-```json
-{
-  "mode": "v2v",
-  "prompt": "The rider crests the hill and continues into the fog.",
-  "start_video": "https://example.com/part-one.mp4",
-  "duration": 10
-}
-```
+To render the same generation at full quality, send the cache back with `mode: "draft_enhance"`. That request takes no prompt and no conditioning media, because the bundle already carries them; any other field returns `422`. The cache is accepted as base64 or as an http(s) URL while its download link is still valid.
 
-The input is one MP4 supplied by public URL or inline base64, up to 50 MB.
+Draft cache URLs expire on the same clock as result videos. Download the bundle immediately if you may enhance it later.
 
-## Draft and Enhance
-
-Explore:
-
-```json
-{
-  "mode": "t2v",
-  "prompt": "A storm rolls over a quiet harbor at dawn.",
-  "duration": 5,
-  "resolution": "hd",
-  "draft": true,
-  "batch": 4
-}
-```
-
-Commit the selected draft:
-
-```json
-{
-  "mode": "draft_enhance",
-  "draft_cache": "BASE64_OR_SIGNED_DRAFT_CACHE_URL"
-}
-```
-
-`draft_enhance` takes no other generation fields. `draft_cache` may be a signed URL or inline base64 up to 128 MB. Download the chosen cache before its signed URL expires.
-
-## Polling
+## Submit, poll, download
 
 ```python
 import os
@@ -128,42 +56,46 @@ import time
 import requests
 
 key = os.environ["BFL_API_KEY"]
+endpoint = "https://api.bfl.ai/v1/..."  # resolve from the API reference
+
 submit = requests.post(
-    "https://api.bfl.ai/v1/flux-3-video",
+    endpoint,
     headers={"x-key": key},
-    json={
-        "mode": "t2v",
-        "prompt": "A fox running through dawn mist.",
-        "aspect_ratio": "16:9",
-        "duration": 5,
-    },
+    json={"prompt": "A fox running through dawn mist."},
 )
 submit.raise_for_status()
 task = submit.json()
+
+TERMINAL_FAILURES = {"Error", "Request Moderated", "Content Moderated", "Task not found"}
 
 while True:
     response = requests.get(task["polling_url"], headers={"x-key": key})
     response.raise_for_status()
     result = response.json()
     status = result["status"]
+
     if status == "Ready":
-        video_url = result["result"]["sample"]
-        video = requests.get(video_url)
+        video = requests.get(result["result"]["sample"])
         video.raise_for_status()
         with open("output.mp4", "wb") as output:
             output.write(video.content)
         break
-    if status in {"Error", "Request Moderated", "Content Moderated", "Task not found"}:
+
+    if status in TERMINAL_FAILURES:
         raise RuntimeError(f"Task ended: {status}")
+
     time.sleep(5)
 ```
 
-## Operational Constraints
+Status passes through a planning stage before generation begins; extra time there on a complex brief is normal, not a stall. Generations take several minutes — poll, or set a `webhook_url`, rather than blocking.
 
-- Result MP4 and draft-cache URLs are signed and expire after roughly two hours. Download them immediately.
-- The organization concurrency limit is 5 active generations.
-- `429` means wait for an active task to finish before submitting another.
-- `503` means temporary service capacity; retry with backoff.
-- Follow redirects from polling and download hosts.
+## Operational behavior
 
-Source of truth: [FLUX 3 API reference](https://docs.bfl.ai/api-reference/flux3).
+- **Results expire.** Signed MP4 and draft-cache URLs are valid for a couple of hours. Results are not long-term storage; download immediately and keep your own copy.
+- **Follow redirects.** Polling and download hosts may redirect to regional endpoints (`curl -L`).
+- **Limits are on concurrency, not request rate.** They are scoped per organization and differ per endpoint.
+- **`429` means too many active generations.** Wait for one to finish, then submit. Retrying in a loop only burns quota. The workable pattern is to keep your limit in flight, poll, and top up as tasks complete.
+- **`503` means the service is briefly at capacity**, independent of your quota. Retry with exponential backoff.
+- **`422` means the request is invalid** — unknown field, bad enum, oversized input, or malformed base64. Fix the request rather than retrying it.
+- **`403` means the key was not recognized.** Check the `x-key` header.
+- **Moderation and failure arrive as task status, not HTTP errors.** Stop polling; these are final.

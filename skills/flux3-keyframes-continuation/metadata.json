@@ -1,12 +1,9 @@
 {
-  "name": "flux3-keyframes-continuation",
   "version": "1.0.0",
-  "description": "Animate source images, bridge keyframes, and continue existing videos with FLUX 3 while preserving temporal and visual invariants.",
-  "author": "Black Forest Labs",
   "organization": "Black Forest Labs",
   "date": "August 2026",
+  "abstract": "Source-conditioned control for FLUX 3 video. Covers choosing among keyframes, reference images, reference video, and continuation; frame-indexed keyframe placement; invariant ledgers protecting identity and continuity; and chaining segments across generations.",
   "references": [
-    "https://docs.bfl.ai/guides/prompting_video_image_to_video",
-    "https://docs.bfl.ai/api-reference/flux3"
+    "https://docs.bfl.ai"
   ]
 }

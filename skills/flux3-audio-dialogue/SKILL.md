@@ -26,6 +26,8 @@ When available, use `flux3-cinematic-video` or `flux3-keyframes-continuation` fo
 
 ### 1. Build an audio ledger
 
+Name each layer separately in the prompt. Ambient sound, music, and speech are read as distinct layers, and describing them as one blur gives up control of all three.
+
 List only layers that serve the scene:
 
 - **Speech:** visible speaker, exact words, and delivery
@@ -37,19 +39,31 @@ List only layers that serve the scene:
 
 Complete when every requested sound has a physical source or narrative role.
 
-### 2. Own every voice
+### 2. Own every voice, and put a speaker on camera
 
-For visible dialogue, identify the speaker and quote the exact line. For off-screen speech, label it `voiceover` or `narration`.
+A quoted line needs a visible speaker, or the model renders it as burned-in on-screen text instead of a voice. This is the most common way audio direction fails.
 
-Use a compact voice anchor:
+Three things together turn a quoted line into speech:
+
+1. quote the exact line;
+2. describe a speaker visibly on camera, delivering it to frame or to another character;
+3. add `no on-screen text, no subtitles`.
 
 ```text
-A woman in her thirties speaks close to the camera in a warm, low register, conversational and slightly breathless: “We made it.”
+A weather presenter on camera in front of a stylized storm map, speaking directly to the lens: "Storm season is here — and this time, we're ready." Confident delivery, clean studio lighting. No on-screen text, no subtitles.
 ```
 
-Useful anchors include age range, accent when relevant, register, energy, recording distance, and social delivery. Reusing the same direction can preserve a kind of voice, but does not guarantee the same performer across separate generations.
+For off-screen speech, label it `voiceover` or `narration` so the line is not searching for a mouth to belong to.
 
-Complete when each line has one unambiguous owner.
+Useful anchors include age range, accent when relevant, register, energy, recording distance, and social delivery:
+
+```text
+A woman in her thirties speaks close to the camera in a warm, low register, conversational and slightly breathless: "We made it."
+```
+
+Reusing the same direction can preserve a kind of voice, but does not guarantee the same performer across separate generations.
+
+Complete when each line has one unambiguous owner and a visible or explicitly off-screen source.
 
 ### 3. Make dialogue speakable
 
@@ -92,7 +106,7 @@ Complete when the listener's priority is obvious.
 
 ### 6. Choose generated audio or silence
 
-FLUX 3 generates audio by default. Set `generate_audio: false` when the desired source clip should be silent or all sound will be finished later.
+FLUX 3 generates synchronized audio by default. Set `generate_audio: false` when the desired source clip should be silent or all sound will be finished later.
 
 Reserve deterministic post for:
 
@@ -129,17 +143,22 @@ Return:
 
 ## Common Pitfalls
 
-1. **Listing sounds without sources.** Tie each layer to a place, object, person, or action.
-2. **Writing more dialogue than the clip can hold.** Shorten before speeding up.
-3. **Leaving the speaker ambiguous.** Name the visible speaker or label voiceover.
-4. **Letting background voices compete.** Protect the primary line.
-5. **Treating repeated voice direction as identity lock.** Audition and finish continuity deliberately.
-6. **Treating generated audio as the final mix.** Plan deterministic finishing.
+1. **Quoting a line with nobody on camera.** Without a visible speaker the line tends to render as on-screen text, not a voice.
+2. **Blurring the layers together.** Name ambience, music, and speech separately.
+3. **Listing sounds without sources.** Tie each layer to a place, object, person, or action.
+4. **Writing more dialogue than the clip can hold.** Shorten before speeding up.
+5. **Leaving the speaker ambiguous.** Name the visible speaker or label voiceover.
+6. **Letting background voices compete.** Protect the primary line.
+7. **Treating repeated voice direction as identity lock.** Audition and finish continuity deliberately.
+8. **Treating generated audio as the final mix.** Plan deterministic finishing.
 
 ## Verification Checklist
 
 - [ ] Every requested sound has a source or role
+- [ ] Ambience, music, and speech are named as separate layers
 - [ ] Every line has one owner
+- [ ] Every quoted line has a visible speaker, or is labeled voiceover
+- [ ] Spoken lines carry `no on-screen text, no subtitles` when text is unwanted
 - [ ] Dialogue fits the clip duration
 - [ ] Effects map to visible or implied causes
 - [ ] Foreground and background priorities are explicit
@@ -147,8 +166,6 @@ Return:
 - [ ] Production-critical sound has a post plan
 - [ ] Each audio rerun changes one named dimension
 
-## Public References
+## References
 
-- [Audio and speech prompting](https://docs.bfl.ai/guides/prompting_video_audio)
-- [Text-to-video prompting](https://docs.bfl.ai/guides/prompting_video_text_to_video)
-- [FLUX 3 API reference](https://docs.bfl.ai/api-reference/flux3)
+- [BFL documentation](https://docs.bfl.ai) — authoritative for audio prompting guidance and the `generate_audio` setting

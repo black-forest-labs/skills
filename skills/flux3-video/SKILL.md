@@ -25,14 +25,14 @@ Use a specialist directly when the request already names one narrow job.
 | --- | --- |
 | Diagnose or repair a brief before generation | `flux3-prompt-doctor` |
 | Turn an idea, script, or treatment into a shot | `flux3-cinematic-video` |
-| Animate image(s), bridge keyframes, or continue video | `flux3-keyframes-continuation` |
+| Build from supplied images or video — frames, references, or continuation | `flux3-keyframes-continuation` |
 | Direct dialogue, voiceover, ambience, effects, or music | `flux3-audio-dialogue` |
 | Submit, poll, enhance, download, or technically review a job | `flux3-generate` |
 
 ## Composition Rules
 
 1. **Start with diagnosis when consequential choices are missing.** Use `flux3-prompt-doctor` until the brief is `READY`.
-2. **Choose one visual-direction skill.** Use `flux3-cinematic-video` for generation from an idea; use `flux3-keyframes-continuation` when supplied media must appear or continue.
+2. **Choose one visual-direction skill.** Use `flux3-cinematic-video` for generation from an idea; use `flux3-keyframes-continuation` when supplied media must appear, carry a subject, or continue.
 3. **Add audio only when sound matters.** Load `flux3-audio-dialogue` for speech, voice, ambience, effects, music, or deliberate silence.
 4. **Generate only when execution is requested.** Use `flux3-generate` after the prompt and payload intent are ready.
 
@@ -43,7 +43,7 @@ Do not load every specialist by default. Each additional skill must own a decisi
 Pass these fields between skills:
 
 - **Outcome:** use, audience, and visible success condition
-- **Mode:** `t2v`, `i2v`, `v2v`, or `draft_enhance`
+- **Attached input:** none, `keyframes`, `reference_images`, `reference_video`, or `start_video` — at most one
 - **Subject and action:** the one required movement, event, or state change
 - **Source roles:** what each image, video, or draft cache must contribute
 - **Invariants:** identity, geometry, wardrobe, framing, environment, motion, or end state that must survive
@@ -76,6 +76,10 @@ Skip completed stages. A validated prompt that only needs submission goes straig
 
 - [ ] Every requested deliverable has one owning skill
 - [ ] Only relevant specialists are selected
-- [ ] The handoff includes mode, action, source roles, invariants, delivery, audio, text, and risks
+- [ ] The handoff includes attached input, action, source roles, invariants, delivery, audio, text, and risks
 - [ ] API execution occurs only when requested
 - [ ] No consequential choice is silently invented
+
+## References
+
+- [BFL documentation](https://docs.bfl.ai) — authoritative for FLUX 3 endpoints, inputs, and prompting guidance
