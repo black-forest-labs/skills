@@ -1,6 +1,6 @@
 # BFL Skills
 
-Official skills from Black Forest Labs for FLUX image generation models. These skills provide prompting guidelines and API integration patterns following the [agentskills.io](https://agentskills.io) specification.
+Official skills from Black Forest Labs for FLUX image and video generation models. These skills provide prompting guidelines and API integration patterns following the [agentskills.io](https://agentskills.io) specification.
 
 ## Installation
 
@@ -17,8 +17,8 @@ npx skills add black-forest-labs/skills --skill flux-best-practices
 # API integration only
 npx skills add black-forest-labs/skills --skill bfl-api
 
-# Cinematic still workflow only
-npx skills add black-forest-labs/skills --skill cinematic-still
+# FLUX 3 video workflow only
+npx skills add black-forest-labs/skills --skill flux3-video
 ```
 
 ### Claude Code Plugin
@@ -58,18 +58,28 @@ API integration guide covering:
 - **Webhook Integration** - Production webhook setup and verification
 - **Code Examples** - Python and TypeScript clients
 
-### 3. cinematic-still
+### 3. flux3-video
 
-Focused workflow for building and reviewing one intentional cinematic frame:
+End-to-end FLUX 3 video workflow covering:
 
-- **Frame Brief** - Lock subject, moment, composition, light, palette, and delivery shape
-- **Route Selection** - Choose text-to-image or reference-based generation
-- **Depth and Lighting** - Build three readable planes around a motivated light source
-- **Prompt Order** - Write the frame in visual-priority order
-- **Controlled Iteration** - Change one consequential variable per generation
-- **Frame Review** - Judge hierarchy, physical coherence, light, crop, and editorial utility
+- **Prompt Doctor** - Resolve mode, action, invariants, timing, camera, audio, and text before generation
+- **Mode Routing** - Choose text-to-video, image-to-video, video continuation, or draft enhancement
+- **Motion-First Prompting** - Direct subject action, camera behavior, environmental response, and continuity
+- **Keyframes** - Animate one frame, bridge start/end frames, or choreograph timestamped waypoints
+- **Synchronized Audio** - Direct dialogue, voiceover, ambience, effects, and music
+- **Draft Iteration** - Compare draft variants and enhance the selected generation without replanning
+- **Video Review** - Check action, continuity, physics, typography, audio, and edit points
 
 ## Quick Reference
+
+### FLUX 3 Video Workflows
+
+| Mode | Input | Best for |
+| --- | --- | --- |
+| `t2v` | Prompt | Generate a new clip from scratch |
+| `i2v` | Prompt + 1–10 keyframes | Animate a still or interpolate through frames |
+| `v2v` | Prompt + source video | Continue from an existing clip's ending |
+| `draft_enhance` | Draft cache | Render an approved draft at full quality |
 
 ### Model Selection
 
