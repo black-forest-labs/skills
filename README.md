@@ -72,7 +72,7 @@ Six skills that hand off to each other; install only what you need:
 - `flux3-video` - thin router across the five specialists
 - `flux3-prompt-doctor` - readiness verdicts (`READY` / `NEEDS INFO` / `REVISE`) before generation
 - `flux3-cinematic-inserts` - shot craft for text-only generation, with a field guide of proven concepts
-- `flux3-keyframes-continuation` - keyframes, reference images and video, continuation
+- `flux3-keyframes-continuation` - keyframes (`i2v`) and video continuation (`v2v`)
 - `flux3-audio-dialogue` - dialogue, voiceover, ambience, effects, music
 - `flux3-generate` - request construction, polling, drafts, downloads, validation
 
@@ -102,7 +102,7 @@ Every request names its `mode` and carries the matching media field:
 
 ### Draft, then commit
 
-A full render takes several minutes. Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`, so you can settle concept and composition cheaply before paying for finish. `draft_enhance` then replays that cache at full quality (same prompt, seed, and settings), so the final render is the shot you approved rather than a fresh attempt.
+A full render takes several minutes. Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`, so you can settle concept and composition cheaply before paying for finish. `draft_enhance` then replays that cache at full quality (same prompt and settings), so the final render is the shot you approved rather than a fresh attempt.
 
 Judge a draft on event legibility, composition, and continuity. Softness and coarse texture are artifacts of low-step rendering and resolve at full quality.
 

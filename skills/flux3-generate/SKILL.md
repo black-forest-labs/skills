@@ -49,7 +49,7 @@ field:
    retry-loop. `503`: bounded backoff.
 3. **Download immediately.** Signed result and `draft_cache` URLs expire a couple of
    hours after the result is ready. Save the MP4 (and the cache when enhancement may
-   follow), plus task ID, seed, and status.
+   follow), plus task ID and status.
 4. **Validate**: container decodes, duration/resolution/aspect match intent, audio
    present exactly when requested. Technical validity is not creative approval; hand
    review to the specialist that owns it.

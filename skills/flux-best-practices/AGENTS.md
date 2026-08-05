@@ -300,6 +300,26 @@ Decision guide for selecting the optimal FLUX model based on your requirements.
 
 | FLUX.1 [pro]         | $0.05       | Original pro model      |
 
+Video is priced per second of output, not per megapixel. Rates depend on whether the generation is conditioned on video, and on the output resolution band.
+
+| Model               | T/I→V HD | T/I→V FHD | V→V HD  | V→V FHD | Best For                            |
+
+| ------------------- | -------- | --------- | ------- | ------- | ----------------------------------- |
+
+| FLUX 3 Video Draft  | $0.06/s  | -         | $0.12/s | -       | Rapid, cost-effective exploration   |
+
+| FLUX 3 Video        | $0.17/s  | $0.29/s   | $0.41/s | $0.53/s | Balances quality, cost, and latency |
+
+- **Text/Image-to-Video (T/I→V)** covers any generation conditioned solely on text and/or still images, including keyframes.
+
+- **Video-to-Video (V→V)** covers any generation conditioned in whole or in part on video input, including continuing, extending, editing, or restyling video.
+
+- **Resolution bands** are set by total pixels per frame, where 1 MP = 1,048,576 px. HD is above 0.5 up to 1.0 MP/frame (e.g. 1280x704, 960x960). Full HD is above 1.0 up to 2.0 MP/frame (e.g. 1920x1088, 1440x1440).
+
+- Draft is HD-only. Use it to settle a concept, then render the approved draft at full quality.
+
+> **Video cost formula:** `rate x duration in seconds`. A 5s HD text-to-video clip at $0.17/s costs $0.85; the same clip as a draft costs $0.30.
+
 > Use [bfl.ai/pricing](https://bfl.ai/pricing) calculator for exact costs at different resolutions.
 
 **Creative Exploration / Ideation:**
