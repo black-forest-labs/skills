@@ -37,7 +37,6 @@
 - **Aspect ratio:**
 - **Resolution:**
 - **Beat allocation:**
-- **Seed (when reproducibility matters):**
 
 ## Audio
 
