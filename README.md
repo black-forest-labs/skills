@@ -1,6 +1,6 @@
 # BFL Skills
 
-Official skills from Black Forest Labs for FLUX image generation models. These skills provide prompting guidelines and API integration patterns following the [agentskills.io](https://agentskills.io) specification.
+Official skills from Black Forest Labs for FLUX image and video generation models. These skills provide prompting guidelines and API integration patterns following the [agentskills.io](https://agentskills.io) specification.
 
 ## Installation
 
@@ -16,6 +16,16 @@ npx skills add black-forest-labs/skills --skill flux-best-practices
 
 # API integration only
 npx skills add black-forest-labs/skills --skill bfl-api
+
+# FLUX 3 video router
+npx skills add black-forest-labs/skills --skill flux-3-video
+
+# FLUX 3 specialist skills
+npx skills add black-forest-labs/skills --skill flux-3-prompt-doctor
+npx skills add black-forest-labs/skills --skill flux-3-cinematic-inserts
+npx skills add black-forest-labs/skills --skill flux-3-keyframes-continuation
+npx skills add black-forest-labs/skills --skill flux-3-audio-dialogue
+npx skills add black-forest-labs/skills --skill flux-3-generate
 ```
 
 ### Claude Code Plugin
@@ -24,7 +34,10 @@ You can also add this as a plugin marketplace in Claude Code:
 
 ```bash
 /plugin marketplace add black-forest-labs/skills
+# Image skills: bfl-api and flux-best-practices
 /plugin install flux-best-practices@black-forest-labs
+# FLUX 3 video skills
+/plugin install flux-3-video@black-forest-labs
 ```
 
 ## Skills Included
@@ -55,7 +68,48 @@ API integration guide covering:
 - **Webhook Integration** - Production webhook setup and verification
 - **Code Examples** - Python and TypeScript clients
 
+### 3. The FLUX 3 video suite
+
+Six skills that hand off to each other; install only what you need:
+
+- `flux-3-video` - thin router across the five specialists
+- `flux-3-prompt-doctor` - readiness verdicts (`READY` / `NEEDS INFO` / `REVISE`) before generation
+- `flux-3-cinematic-inserts` - shot craft for text-only generation, with a field guide of proven concepts
+- `flux-3-keyframes-continuation` - keyframes (`i2v`) and video continuation (`v2v`)
+- `flux-3-audio-dialogue` - dialogue, voiceover, ambience, effects, music
+- `flux-3-generate` - request construction, polling, drafts, downloads, validation
+
 ## Quick Reference
+
+### FLUX 3 Skill Routing
+
+| Request | Skill |
+| --- | --- |
+| Diagnose or repair a brief | `flux-3-prompt-doctor` |
+| Write a text-to-video prompt for a new shot | `flux-3-cinematic-inserts` |
+| Build from supplied images or video | `flux-3-keyframes-continuation` |
+| Direct speech, ambience, effects, or music | `flux-3-audio-dialogue` |
+| Submit, poll, enhance, download, or technically validate | `flux-3-generate` |
+| Route a general FLUX 3 video request | `flux-3-video` |
+
+### FLUX 3 Modes
+
+Every request names its `mode` and carries the matching media field:
+
+| `mode` | Media field | What the model does |
+| --- | --- | --- |
+| `t2v` | none | Generates the clip from your text alone |
+| `i2v` | `keyframes` | Puts your images on screen, pixel-exact, as pinned frames |
+| `v2v` | `start_video` | Continues from the final frames of your clip |
+| `draft_enhance` | `draft_cache` | Replays a chosen draft at full quality |
+
+### Draft, then commit
+
+A full render takes several minutes. Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`, so you can settle concept and composition cheaply before paying for finish. `draft_enhance` then replays that cache at full quality (same prompt and settings), so the final render is the shot you approved rather than a fresh attempt.
+
+Judge a draft on event legibility, composition, and continuity. Softness and coarse texture are artifacts of low-step rendering and resolve at full quality.
+
+See [docs.bfl.ai](https://docs.bfl.ai) for current fields, limits, and endpoints.
 
 ### Model Selection
 
@@ -67,7 +121,7 @@ API integration guide covering:
 | FLUX.2 [max]   | Highest quality, grounding search | from $0.07/MP         |
 | FLUX.2 [dev]   | Local development                 | Free (non-commercial) |
 
-_All FLUX.2 models support both text-to-image and image editing natively—no need for separate models. FLUX.1 models are also available._
+_All FLUX.2 models support both text-to-image and image editing natively, no need for separate models. FLUX.1 models are also available._
 
 ### Prompt Structure
 

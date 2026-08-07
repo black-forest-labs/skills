@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "abstract": "Execution path for FLUX 3 video jobs. Covers building a request around a single attached input, submitting and polling to a terminal state, draft exploration and full-quality replay, downloading expiring artifacts, technical validation of the returned MP4, and packaging evidence for creative review.",
+  "references": [
+    "https://docs.bfl.ai",
+    "https://api.bfl.ai/openapi.json"
+  ]
+}

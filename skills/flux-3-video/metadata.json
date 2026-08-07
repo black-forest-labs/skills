@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "abstract": "Router for FLUX 3 video requests. Directs work across prompt diagnosis, cinematic direction, source-conditioned control, audio direction, and API execution, and defines the handoff contract passed between those specialist skills.",
+  "references": [
+    "https://docs.bfl.ai"
+  ]
+}

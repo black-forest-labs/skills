@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "abstract": "Diagnostic gate for FLUX 3 video briefs. Separates explicit requirements from assumptions, routes by which single input must be attached, checks the action budget against duration, resolves contradictory camera and timing requirements, assigns deterministic finishing, and returns a READY, NEEDS INFO, or REVISE verdict.",
+  "references": [
+    "https://docs.bfl.ai"
+  ]
+}

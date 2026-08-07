@@ -101,6 +101,18 @@ What's your primary need?
 | FLUX.1 Fill [pro]    | $0.05       | Inpainting              |
 | FLUX.1 [pro]         | $0.05       | Original pro model      |
 
+#### FLUX 3 Video
+
+> **Video pricing:** per second of output. Text/image input is cheaper than video input; drafts are HD-only.
+
+| Model              | Text/Image → Video | Video → Video | Use Case                  |
+| ------------------ | ------------------ | ------------- | ------------------------- |
+| FLUX 3 Video Draft | $0.06/s            | $0.12/s       | Concept exploration       |
+| FLUX 3 Video (HD)  | $0.17/s            | $0.41/s       | Standard delivery         |
+| FLUX 3 Video (FHD) | $0.29/s            | $0.53/s       | High-resolution delivery  |
+
+> **Cost:** `rate x seconds`. A 5s HD text-to-video clip is $0.85; as a draft, $0.30.
+
 > Use [bfl.ai/pricing](https://bfl.ai/pricing) calculator for exact costs at different resolutions.
 
 ## Use Case Recommendations

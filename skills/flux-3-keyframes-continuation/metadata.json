@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "abstract": "Source-conditioned control for FLUX 3 video. Covers the keyframe shapes (opening frame, endpoints, storyboard, timestamped pins), continuation from a clip's ending, invariants protecting identity and continuity, and chaining segments across generations.",
+  "references": [
+    "https://docs.bfl.ai"
+  ]
+}
