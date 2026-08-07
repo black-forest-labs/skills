@@ -42,14 +42,27 @@ field:
 
 1. **Submit once.** Persist the returned task `id` and `polling_url` with the
    secret-free request.
-2. **Poll to a terminal state**, every few seconds, `x-key` header, following
-   redirects. Planning time on a complex brief is normal, not a stall. Moderated,
-   failed, and unknown tasks never later become ready; stop on any terminal state.
-   `429` means your org's concurrency is full: wait for an active task, don't
-   retry-loop. `503`: bounded backoff.
-3. **Download immediately.** Signed result and `draft_cache` URLs expire a couple of
-   hours after the result is ready. Save the MP4 (and the cache when enhancement may
-   follow), plus task ID and status.
+2. **Poll every 6 seconds** to a terminal state with the `x-key` header, following
+   redirects. Planning time on a complex brief is normal, not a stall. The API status
+   strings are exact. KEEP POLLING on `Pending`, `Reasoning`, `Generating`. STOP on
+   `Ready` (success) and on `Error`, `Request Moderated`, `Content Moderated`, or
+   `Task not found` (failures). None of these terminal statuses ever later becomes
+   `Ready`.
+   - `429` on submit means your org's concurrency ceiling is full and **no task was
+     created**. There is nothing to poll. Wait for a slot, then resubmit the same body.
+   - `429` on poll means the task exists and is unaffected. Back off and keep polling
+     the same `polling_url`. Never resubmit, or you pay for a second render.
+   - `503`: bounded backoff.
+3. **Download immediately.** Observed signed sample and draft cache URLs expire roughly
+   one hour after the result is ready. The `se=` query parameter on the URL itself is
+   the authoritative expiry. Read it rather than assuming a fixed window. Video
+   outputs arrive in `result.samples`, which is a list. Draft bundles arrive in
+   `result.draft_caches`, which is also a list. The singular `result.draft_cache` is
+   the first element of that list, not the complete set. Iterate every element of both
+   lists and download all of them before doing anything else, recording the local path
+   and task ID per element. A client reading only the singular `result.draft_cache` key
+   silently drops paid artifacts that cannot be recovered once the signed URLs expire.
+   Save the downloaded files, plus task ID and status.
 4. **Validate**: container decodes, duration/resolution/aspect match intent, audio
    present exactly when requested. Technical validity is not creative approval; hand
    review to the specialist that owns it.
