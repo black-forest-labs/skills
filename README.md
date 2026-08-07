@@ -18,14 +18,14 @@ npx skills add black-forest-labs/skills --skill flux-best-practices
 npx skills add black-forest-labs/skills --skill bfl-api
 
 # FLUX 3 video router
-npx skills add black-forest-labs/skills --skill flux3-video
+npx skills add black-forest-labs/skills --skill flux-3-video
 
 # FLUX 3 specialist skills
-npx skills add black-forest-labs/skills --skill flux3-prompt-doctor
-npx skills add black-forest-labs/skills --skill flux3-cinematic-inserts
-npx skills add black-forest-labs/skills --skill flux3-keyframes-continuation
-npx skills add black-forest-labs/skills --skill flux3-audio-dialogue
-npx skills add black-forest-labs/skills --skill flux3-generate
+npx skills add black-forest-labs/skills --skill flux-3-prompt-doctor
+npx skills add black-forest-labs/skills --skill flux-3-cinematic-inserts
+npx skills add black-forest-labs/skills --skill flux-3-keyframes-continuation
+npx skills add black-forest-labs/skills --skill flux-3-audio-dialogue
+npx skills add black-forest-labs/skills --skill flux-3-generate
 ```
 
 ### Claude Code Plugin
@@ -72,12 +72,12 @@ API integration guide covering:
 
 Six skills that hand off to each other; install only what you need:
 
-- `flux3-video` - thin router across the five specialists
-- `flux3-prompt-doctor` - readiness verdicts (`READY` / `NEEDS INFO` / `REVISE`) before generation
-- `flux3-cinematic-inserts` - shot craft for text-only generation, with a field guide of proven concepts
-- `flux3-keyframes-continuation` - keyframes (`i2v`) and video continuation (`v2v`)
-- `flux3-audio-dialogue` - dialogue, voiceover, ambience, effects, music
-- `flux3-generate` - request construction, polling, drafts, downloads, validation
+- `flux-3-video` - thin router across the five specialists
+- `flux-3-prompt-doctor` - readiness verdicts (`READY` / `NEEDS INFO` / `REVISE`) before generation
+- `flux-3-cinematic-inserts` - shot craft for text-only generation, with a field guide of proven concepts
+- `flux-3-keyframes-continuation` - keyframes (`i2v`) and video continuation (`v2v`)
+- `flux-3-audio-dialogue` - dialogue, voiceover, ambience, effects, music
+- `flux-3-generate` - request construction, polling, drafts, downloads, validation
 
 ## Quick Reference
 
@@ -85,12 +85,12 @@ Six skills that hand off to each other; install only what you need:
 
 | Request | Skill |
 | --- | --- |
-| Diagnose or repair a brief | `flux3-prompt-doctor` |
-| Write a text-to-video prompt for a new shot | `flux3-cinematic-inserts` |
-| Build from supplied images or video | `flux3-keyframes-continuation` |
-| Direct speech, ambience, effects, or music | `flux3-audio-dialogue` |
-| Submit, poll, enhance, download, or technically validate | `flux3-generate` |
-| Route a general FLUX 3 video request | `flux3-video` |
+| Diagnose or repair a brief | `flux-3-prompt-doctor` |
+| Write a text-to-video prompt for a new shot | `flux-3-cinematic-inserts` |
+| Build from supplied images or video | `flux-3-keyframes-continuation` |
+| Direct speech, ambience, effects, or music | `flux-3-audio-dialogue` |
+| Submit, poll, enhance, download, or technically validate | `flux-3-generate` |
+| Route a general FLUX 3 video request | `flux-3-video` |
 
 ### FLUX 3 Modes
 

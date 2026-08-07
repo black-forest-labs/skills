@@ -1,5 +1,5 @@
 ---
-name: flux3-video
+name: flux-3-video
 description: Use when routing a general FLUX 3 video request. Select only the specialists needed for diagnosis, direction, audio, or execution.
 metadata:
   author: Black Forest Labs
@@ -14,11 +14,11 @@ already names one narrow job, use that specialist directly.
 
 | User intent | Skill |
 | --- | --- |
-| Diagnose or repair a brief before generation | `flux3-prompt-doctor` |
-| Write a text-to-video prompt for a new shot | `flux3-cinematic-inserts` |
-| Build from supplied images or video | `flux3-keyframes-continuation` |
-| Direct dialogue, voiceover, ambience, effects, or music | `flux3-audio-dialogue` |
-| Submit, poll, enhance, download, or technically review | `flux3-generate` |
+| Diagnose or repair a brief before generation | `flux-3-prompt-doctor` |
+| Write a text-to-video prompt for a new shot | `flux-3-cinematic-inserts` |
+| Build from supplied images or video | `flux-3-keyframes-continuation` |
+| Direct dialogue, voiceover, ambience, effects, or music | `flux-3-audio-dialogue` |
+| Submit, poll, enhance, download, or technically review | `flux-3-generate` |
 
 Default sequence, skipping completed stages:
 

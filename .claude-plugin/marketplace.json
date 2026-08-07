@@ -29,12 +29,12 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/flux3-video",
-        "./skills/flux3-prompt-doctor",
-        "./skills/flux3-cinematic-inserts",
-        "./skills/flux3-keyframes-continuation",
-        "./skills/flux3-audio-dialogue",
-        "./skills/flux3-generate"
+        "./skills/flux-3-video",
+        "./skills/flux-3-prompt-doctor",
+        "./skills/flux-3-cinematic-inserts",
+        "./skills/flux-3-keyframes-continuation",
+        "./skills/flux-3-audio-dialogue",
+        "./skills/flux-3-generate"
       ],
       "author": {
         "name": "Black Forest Labs"

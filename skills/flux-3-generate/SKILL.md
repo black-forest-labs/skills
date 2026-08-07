@@ -1,5 +1,5 @@
 ---
-name: flux3-generate
+name: flux-3-generate
 description: Use when submitting or polling a FLUX 3 video API job. Also covers drafts, downloads, and technical validation.
 metadata:
   author: Black Forest Labs

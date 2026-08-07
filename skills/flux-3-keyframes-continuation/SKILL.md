@@ -1,5 +1,5 @@
 ---
-name: flux3-keyframes-continuation
+name: flux-3-keyframes-continuation
 description: Use when a FLUX 3 video must be built from supplied images or video. Covers keyframes (i2v) and continuation (v2v).
 metadata:
   author: Black Forest Labs

@@ -1,5 +1,5 @@
 ---
-name: flux3-cinematic-inserts
+name: flux-3-cinematic-inserts
 description: Use when writing a FLUX 3 text-to-video prompt for a standalone shot. Covers shot craft, reliable concept patterns, camera, continuity, and review.
 metadata:
   author: Black Forest Labs
@@ -11,7 +11,7 @@ metadata:
 
 Build one standalone shot around **one motivated physical or atmospheric event**: B-roll,
 a bridge, a material detail, a capability test. Reroute when success requires supplied
-media (`flux3-keyframes-continuation`), exact typography, frame-accurate sync, a
+media (`flux-3-keyframes-continuation`), exact typography, frame-accurate sync, a
 multi-step mechanism, close human performance, or finished ad copy; those need
 conditioning or post, not a text-only generation.
 
@@ -48,5 +48,5 @@ adjectives. Review the result with
 [references/review-scorecard.md](references/review-scorecard.md): a technically valid
 clip still has to be useful, physically legible, deliberate, and interesting.
 
-Hand the finished prompt to `flux3-generate` as a text-only request, with the risks and
+Hand the finished prompt to `flux-3-generate` as a text-only request, with the risks and
 anything post must own.

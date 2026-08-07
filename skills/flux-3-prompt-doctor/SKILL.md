@@ -1,5 +1,5 @@
 ---
-name: flux3-prompt-doctor
+name: flux-3-prompt-doctor
 description: Use when diagnosing a FLUX 3 brief before generation. Resolve missing, conflicting, or schema-changing requirements.
 metadata:
   author: Black Forest Labs
@@ -71,4 +71,4 @@ Return exactly one state, with a reason, next action, and a compact handoff
 
 Non-blocking warnings go under **Production risks**, not a fourth state. Field names
 and limits belong to the [API reference](https://docs.bfl.ai); flag intent conflicts
-and leave schema validation to `flux3-generate`.
+and leave schema validation to `flux-3-generate`.

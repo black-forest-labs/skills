@@ -1,5 +1,5 @@
 ---
-name: flux3-audio-dialogue
+name: flux-3-audio-dialogue
 description: Use when directing FLUX 3 audio, dialogue, or voiceover. Covers ambience, effects, music, silence, and timing.
 metadata:
   author: Black Forest Labs
