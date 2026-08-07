@@ -11,13 +11,13 @@
   },
   "plugins": [
     {
-      "name": "flux-best-practices",
+      "name": "flux-image-best-practices",
       "description": "BFL skills for image generation including best practices for prompting, T2I, I2I, structured JSON, and API integration patterns",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/bfl-api",
-        "./skills/flux-best-practices"
+        "./skills/flux-image-best-practices"
       ],
       "author": {
         "name": "Kerem Nalbant"

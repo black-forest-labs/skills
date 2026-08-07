@@ -122,7 +122,7 @@ FLUX.2 models support multiple input images for combining elements, style transf
 - "Apply the style of image 2 to the scene in image 1"
 - "The person from image 1 wearing the outfit from image 2, in the pose from image 3"
 
-> For detailed multi-reference patterns (character consistency, style transfer, pose guidance), see `flux-best-practices/rules/multi-reference-editing.md`
+> For detailed multi-reference patterns (character consistency, style transfer, pose guidance), see `flux-image-best-practices/rules/multi-reference-editing.md`
 
 ### Rate Limits
 
@@ -187,8 +187,8 @@ x-key: YOUR_API_KEY
 
 ## Related
 
-- **Prompting best practices** (T2I, I2I, typography, colors): see the **flux-best-practices** skill
-- **Multi-reference patterns** (character consistency, style transfer, pose guidance): see `flux-best-practices/rules/multi-reference-editing.md`
+- **Prompting best practices** (T2I, I2I, typography, colors): see the **flux-image-best-practices** skill
+- **Multi-reference patterns** (character consistency, style transfer, pose guidance): see `flux-image-best-practices/rules/multi-reference-editing.md`
 
 ## References
 
