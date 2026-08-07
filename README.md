@@ -34,7 +34,10 @@ You can also add this as a plugin marketplace in Claude Code:
 
 ```bash
 /plugin marketplace add black-forest-labs/skills
+# Image skills: bfl-api and flux-best-practices
 /plugin install flux-best-practices@black-forest-labs
+# FLUX 3 video skills
+/plugin install flux-3-video@black-forest-labs
 ```
 
 ## Skills Included

@@ -7,17 +7,28 @@
   },
   "metadata": {
     "description": "Official skills from Black Forest Labs for FLUX image and video generation - prompting guidelines and API integration patterns",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "flux-best-practices",
-      "description": "BFL skills for FLUX image and video generation including FLUX 3 prompt diagnosis, cinematic direction, keyframes, continuation, synchronized audio, generation, T2I, I2I, and API integration",
+      "description": "BFL skills for image generation including best practices for prompting, T2I, I2I, structured JSON, and API integration patterns",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/bfl-api",
-        "./skills/flux-best-practices",
+        "./skills/flux-best-practices"
+      ],
+      "author": {
+        "name": "Kerem Nalbant"
+      }
+    },
+    {
+      "name": "flux-3-video",
+      "description": "BFL skills for FLUX 3 video generation including prompt readiness checks, cinematic shot craft for text-to-video, keyframes and video continuation, synchronized audio and dialogue, and request construction with async polling and downloads",
+      "source": "./",
+      "strict": false,
+      "skills": [
         "./skills/flux3-video",
         "./skills/flux3-prompt-doctor",
         "./skills/flux3-cinematic-inserts",
@@ -26,7 +37,7 @@
         "./skills/flux3-generate"
       ],
       "author": {
-        "name": "Kerem Nalbant"
+        "name": "Black Forest Labs"
       }
     }
   ]
