@@ -20,14 +20,14 @@ export interface SkillConfig {
 }
 
 export const SKILLS: Record<string, SkillConfig> = {
-  "flux-best-practices": {
-    name: "flux-best-practices",
+  "flux-image-best-practices": {
+    name: "flux-image-best-practices",
     title: "FLUX Best Practices",
     description: "FLUX image generation prompting and workflows",
-    skillDir: join(SKILLS_DIR, "flux-best-practices"),
-    rulesDir: join(SKILLS_DIR, "flux-best-practices/rules"),
-    metadataFile: join(SKILLS_DIR, "flux-best-practices/metadata.json"),
-    outputFile: join(SKILLS_DIR, "flux-best-practices/AGENTS.md"),
+    skillDir: join(SKILLS_DIR, "flux-image-best-practices"),
+    rulesDir: join(SKILLS_DIR, "flux-image-best-practices/rules"),
+    metadataFile: join(SKILLS_DIR, "flux-image-best-practices/metadata.json"),
+    outputFile: join(SKILLS_DIR, "flux-image-best-practices/AGENTS.md"),
     sectionMap: {
       core: 1,
       model: 2,
@@ -62,4 +62,4 @@ export const SKILLS: Record<string, SkillConfig> = {
 };
 
 // Default skill
-export const DEFAULT_SKILL = "flux-best-practices";
+export const DEFAULT_SKILL = "flux-image-best-practices";

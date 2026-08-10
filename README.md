@@ -12,7 +12,7 @@ Or install individual skills:
 
 ```bash
 # FLUX best practices only
-npx skills add black-forest-labs/skills --skill flux-best-practices
+npx skills add black-forest-labs/skills --skill flux-image-best-practices
 
 # API integration only
 npx skills add black-forest-labs/skills --skill bfl-api
@@ -34,15 +34,15 @@ You can also add this as a plugin marketplace in Claude Code:
 
 ```bash
 /plugin marketplace add black-forest-labs/skills
-# Image skills: bfl-api and flux-best-practices
-/plugin install flux-best-practices@black-forest-labs
+# Image skills: bfl-api and flux-image-best-practices
+/plugin install flux-image-best-practices@black-forest-labs
 # FLUX 3 video skills
 /plugin install flux-3-video@black-forest-labs
 ```
 
 ## Skills Included
 
-### 1. flux-best-practices
+### 1. flux-image-best-practices
 
 Comprehensive guide for all FLUX models including:
 

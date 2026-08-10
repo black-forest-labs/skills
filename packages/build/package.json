@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsx src/build.ts --all",
-    "build-flux": "tsx src/build.ts --skill=flux-best-practices",
+    "build-flux": "tsx src/build.ts --skill=flux-image-best-practices",
     "build-api": "tsx src/build.ts --skill=bfl-api",
     "validate": "tsx src/validate.ts",
     "dev": "pnpm build && pnpm validate"
