@@ -1,0 +1,11 @@
+{
+  "version": "1.1.0",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "abstract": "End-to-end path for a finished product ad built on FLUX 3. Covers endpoint-anchored shot design that survives generation, budgeting voiceover in the first generation round, phonetic screening of invented brand names, deriving cut points and spot length from measured speech rather than transcript timestamps, slipping each plate so its action lands on the spoken word that names it, requiring declared evidence for every line of on-screen copy, a cut and camera vocabulary that treats each shot relationship differently, deterministic manifest-driven assembly across ffmpeg and Remotion, and QC gates for the failures that pass every ordinary check: clipped audio tails, black frames in the body, products that hold identity while appearing to float, and claims that are on screen too briefly to read.",
+  "references": [
+    "https://docs.bfl.ai",
+    "https://api.bfl.ai/openapi.json",
+    "https://www.remotion.dev/docs/license"
+  ]
+}
