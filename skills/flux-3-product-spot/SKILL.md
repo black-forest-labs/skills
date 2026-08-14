@@ -3,7 +3,7 @@ name: flux-3-product-spot
 description: Use when building a finished product ad from FLUX 3 - shot design, voiceover, action-to-word sync, evidence-gated copy, deterministic assembly, and QC gates that catch clipped audio and floating products.
 metadata:
   author: Black Forest Labs
-  version: "1.1.0"
+  version: "1.2.0"
   tags: flux, flux-3, bfl, product-ad, commercial, voiceover, assembly, copy, editing, qc
 ---
 
@@ -15,7 +15,14 @@ sharp: the model handles what only a model can, and everything a computer can
 compute exactly stays out of the model's hands.
 
 Route facts this skill depends on live in `flux-3-generate`. Read it first for
-`/v1/flux-3-video`, polling and download behaviour.
+`/v1/flux-3-video`, polling and download behaviour. Continuation behaviour, including
+what a `v2v` link actually returns, lives in `flux-3-keyframes-continuation`.
+
+Everything here has been run at 12, 30 and 60 seconds. Where a rule only holds at one
+length, it says so. **Assume nothing written for a three-shot ten-second spot
+generalises without being re-tested at length**: on the run that produced this
+revision, two pieces of timing logic that were correct at 10 seconds turned out to
+have a silent correctness bug and a complexity bug that only appear in a longer read.
 
 ## Shape of the work
 
@@ -28,31 +35,86 @@ Route facts this skill depends on live in `flux-3-generate`. Read it first for
 
 ## 1. Shot design
 
-Three cuts carry a 10-second spot: **reveal, proof, payoff**. Reveal
-establishes the object, proof shows it doing the one thing the copy claims,
-payoff lands the brand.
+Three cuts carry a 10-second spot: **reveal, proof, payoff**. Reveal establishes the
+object, proof shows it doing the one thing the copy claims, payoff lands the brand.
 
-**Anchor motion at its endpoints.** A generated clip is trustworthy at its
-first and last frame and inventive in between. Motion whose midpoint is implied
-by its endpoints survives; motion that requires the model to invent geometry
-does not.
+Longer spots need more beats and more plates. A plate yields roughly 4 to 5 seconds
+of usable middle once a dissolve is allowed for, so **shot count is length divided by
+about 4.5, rounded up**, and a shortfall does not degrade gracefully: it fails the
+build outright with no legal cut placement. Measured: 12s took 3 plates, 30s took 6,
+60s took 11. A 60-second spot planned with 9 plates could not be cut at all.
 
-Works: a highlight travelling across a surface, a collar rotating through a
-short arc and stopping, a handle rising and stopping, a lid parting slightly.
+At 30 seconds and beyond, reveal/proof/payoff no longer fills the time. What worked:
+hook on the material, the object whole, a detail, the mechanism, a state change, what
+the product does for you, brand. The structure that matters is that each beat earns
+its own shot, not that it has three parts.
 
-Fails: multiple revolutions, travel combined with rotation, and anything that
-passes behind the product. A crank asked for 2 to 3 full revolutions rotated
-correctly to about 180 degrees, then deformed and vanished as the arm occluded
-itself. The same product's collar rotation succeeded because it stayed in plane.
+**Anchor motion at its endpoints.** A generated clip is trustworthy at its first and
+last frame and inventive in between. Motion whose midpoint is implied by its endpoints
+survives; motion that requires the model to invent geometry does not.
 
-**Name the grounding in every prompt.** Say the product's contact shadow and
-its reflection explicitly. A product can hold identity and motion perfectly and
-still look pasted onto the frame because nothing defended its shadow. This
-passes identity checks and reads as fake instantly to a human.
+Works: a highlight travelling across a surface, a collar rotating through a short arc
+and stopping, a handle rising and stopping, a lid parting slightly.
 
-**Camera lock is advisory.** "Locked camera, no push-in, no pan, no zoom" still
-permits parallax and drift. Design shots that tolerate a little movement rather
-than expecting the prompt to forbid it.
+Also works, against expectation: **a hand drawing an ink line across paper**, and **a
+phone descending into frame and landing on a product**. Both were predicted to fail as
+"travel" and "an object entering the frame", and both came back clean, with the ink
+persisting correctly behind the tip and the phone arriving without disturbing the pad.
+They were the two strongest plates in a three-product run.
+
+Fails: multiple revolutions, and rotation of two bodies at once. A crank asked for 2
+to 3 full revolutions rotated to about 180 degrees, then deformed and vanished as the
+arm occluded itself. A knurled collar asked to spin two revolutions *while* the head
+it sits on tilted produced no motion at all: an inert clip where neither action
+happened.
+
+The predictor is not travel and not occlusion. It is **whether the model must invent
+geometry it has never seen**. A hand crossing frame is a rigid body with a known
+silhouette. A descending phone is a rigid body. A crank going around 720 degrees has
+to render its own far side, and that is where it dies. Design against invented
+geometry, not against movement.
+
+**A quarter-turn is not a safe fallback for a rotation shot, it is an invisible one.**
+The safe version of the failed collar shot technically succeeded and was still
+unusable, because a small rotation of a knurled ring at macro reads as nothing
+happening. When a rotation shot fails, the shot that replaces it should be **light
+moving across a static object**, which is the most reliable motion in the system and
+the one that consistently looks alive.
+
+**Test the prediction rather than trusting it.** Give a risky shot two prompts in the
+same brief, a `hard_prompt` and a safe `prompt`, generate both, keep both. One extra
+job per risky shot is what keeps this section honest as the model improves, and it is
+how the two "impossible" shots above were found.
+
+**Name the grounding in every prompt.** Say the product's contact shadow and its
+reflection explicitly. A product can hold identity and motion perfectly and still look
+pasted onto the frame because nothing defended its shadow. This passes identity checks
+and reads as fake instantly to a human.
+
+**Camera lock is advisory.** "Locked camera, no push-in, no pan, no zoom" still permits
+parallax and drift. Design shots that tolerate a little movement rather than expecting
+the prompt to forbid it.
+
+## 1b. Reference stills come first, and the model gets a vote
+
+Every plate inherits its still, because `i2v` treats the keyframe as literal. A still
+that is wrong in a way you can live with poisons every clip generated from it, so the
+reference pack has to be right before any video job runs.
+
+Expect the model to overrule the spec, and read it as information. On a three-product
+run, two products came back with the model quietly substituting its own design: a
+light channel specified as unlit rendered lit in every frame, and a lamp specified
+with a two-segment elbow arm rendered as a single post with a yoke-mounted head in all
+seven angles.
+
+Both refusals were **coherent**: one alternative design, held consistently across every
+angle. That is the signal. A model that disagrees at random gives you noise; a model
+that disagrees identically seven times is telling you the invariant paragraph
+describes something it cannot build. **Rewrite the spec to match what it reliably
+builds, then regenerate.** Fighting a coherent refusal costs jobs and loses.
+
+Regenerate a still when the error is one the video stage will amplify: stray text on a
+prop, a wordmark in the wrong place, an object overhanging its base.
 
 ## 2. Generate picture and VO together
 
@@ -65,6 +127,35 @@ whose audio is harvested. Generate at least two scripts against two speaker
 profiles, because takes are not interchangeable and you want a real choice.
 
 Do not use native picture audio in a finished spot. Generate picture silent.
+
+**`duration` is a tempo control, not a length estimate.** The clip comes back at
+exactly the length you ask for and the read stretches to fill it. The same 27-word
+script, same speaker, asked for three lengths:
+
+| asked | returned | words/sec |
+| --- | --- | --- |
+| 11s | 11.01s | 2.45 |
+| 14s | 14.00s | 2.11 |
+| 18s | 18.02s | 1.50 |
+
+The script was delivered completely and correctly every time. Only the pace changed,
+and at 18s it does not pad with silence, it drags. So pick the speaking rate you want
+and derive the length: `duration = words / rate`, with roughly 2.1 to 2.5 words per
+second reading unhurried and confident. Do not pad the estimate for "room to breathe";
+that slows the delivery instead of adding a pause.
+
+**One audio job caps at 20 seconds, about 45 words at a good pace.** A 30-second spot
+needs around 75 words and a 60-second spot around 150, so any longer read is generated
+**one paragraph per job** and joined in post at a designed pause. This is also better
+writing, because ads pause. Trim each paragraph to its own speech before joining;
+stacking booth room tone produces an audible seam.
+
+**Generate a music bed the same way** whenever the spot runs past about 20 seconds.
+Silence between paragraphs that is fine at 10 seconds sounds broken at 60. A bed is an
+audio-only job with no speech in the prompt, looped with a crossfade to length, and
+ducked under the voice with a sidechain compressor keyed off the VO. Attenuate the bed
+first and let the duck shape an already-quiet bed: a bed loud enough to need heavy
+ducking pumps audibly on every phrase.
 
 ## 3. Screen VO by machine, then listen
 
@@ -80,6 +171,21 @@ sliding window and treat a close match as evidence the name was spoken.
 Machine screening cannot approve a take. Pronunciation, cadence and synthetic
 artefacts need a human ear. Mark every invented name unverified until someone
 listens.
+
+**Derive the brand tokens from the brief, not from a table.** A screening step with
+the product names hardcoded works for exactly the products it was written against,
+which is not a reusable skill. Derive them: first word of the product name is the
+brand, and a letter-plus-digits token is the model code.
+
+Model codes need digit-word folding in both directions. "P2" transcribes as "P two"
+about half the time, and an unfolded comparison charges a correct take a word error it
+did not earn.
+
+**Watch for a tail at true digital silence.** One take in six ended at -91 dB in its
+final 0.35 seconds: not room tone, an empty buffer, where the other five sat between
+-30 and -40 dB. The clipped-tail gate looks for speech that is still loud at the end,
+which is the opposite failure and passes this happily. A booth take with no room tone
+at its tail will not match its neighbours' noise floor across a paragraph join.
 
 ## 4. Derive timing from the audio
 
@@ -105,6 +211,26 @@ plate, another shot or a shorter read, not a cut inside a word.
 Score placements on gap quality **minus** pacing imbalance. Gap quality alone
 picks the single best-hidden cut in the read and cheerfully produces a 1.6
 second opening shot against a 4.9 second middle.
+
+**Search by dynamic programming, not by scanning combinations.** Both inputs to the
+combinatorial blow-up scale with spot length: a longer read offers more candidate
+pauses and needs more cuts.
+
+| spot | candidates | cuts | combinations |
+| --- | --- | --- | --- |
+| 12s, 3 shots | 29 | 2 | 406 |
+| 30s, 6 shots | 69 | 5 | 11,238,513 |
+| 60s, 9 shots | 90 | 8 | 77,515,521,435 |
+
+A brute-force scan is fine at 10 seconds, slow at 30 and does not return at 60, where
+it fails by hanging: the worst failure mode, because it looks like slowness. Every
+term in the score is a sum over segments or over chosen cuts divided by a constant, so
+the score decomposes per segment and the optimum builds left to right in
+O(shots x candidates squared).
+
+A faster search that picks different cuts is a regression, not an optimisation. Assert
+the fast search returns what the brute force returns on cases small enough to scan,
+comparing ties by score rather than by list identity.
 
 Every segment must fit the plate it comes from. Check it. A hand-measured cut
 once demanded a 5.72s segment from a 5.04s plate.
@@ -132,6 +258,28 @@ Gate the result. If an action lands more than ~0.6s from its word, fail. When
 the plate physically cannot reach the word, say so with the reachable window:
 the fix is regenerating with the action earlier or re-anchoring to a word the
 plate can actually hit, and both are honest. Silently absorbing the miss is not.
+
+**Choose the anchor word after measuring the plate, not while writing the script.**
+Picking an evocative noun and hoping the plate can reach it missed on three shots out
+of nine across two spots. Generated plates put their action early far more often than
+a writer expects: one peaked 0.21s in, against an anchor word at 0.84s, so the
+reachable window had closed before the word was spoken. The reachable window is
+computable before you commit to a word, so compute it.
+
+Re-anchoring is often the better edit on merit anyway. A macro of an engraved wordmark
+re-anchored from "looked" to the brand name is both reachable and truer to what the
+shot shows.
+
+**Resolve anchors monotonically.** Take each anchor's earliest occurrence *after* the
+previous anchor's, because shots advance through the read and so must their words. A
+first-match lookup is correct only while no word repeats, which is an accident of short
+scripts: a 30-second read said "light" twice, ten seconds apart, and the closing shot
+anchored to the first one and reported a 10.18s miss no slip could satisfy.
+
+**Not every shot has an anchor, and inventing one is worse than omitting it.** When a
+shot's motion is a light drift rather than a discrete event, there is no word it is
+*about*. Long spots have more of these. Leave the anchor null and take the segment from
+the plate's middle.
 
 Take a segment from the middle of its plate only when no anchor applies.
 Generated clips are weakest in their first frames, where the image settles, and
