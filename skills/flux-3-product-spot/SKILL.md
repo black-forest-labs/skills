@@ -1,9 +1,9 @@
 ---
 name: flux-3-product-spot
-description: Use when building a finished product ad from FLUX 3 - shot design, voiceover, action-to-word sync, evidence-gated copy, deterministic assembly, and QC gates that catch clipped audio and floating products.
+description: Use when building a finished product ad from FLUX 3 - shot design, voiceover, action-to-word sync, evidence-gated copy, deterministic assembly, and QC gates that catch clipped audio, floating products, off-model plates, and reports that claim a pass the build did not give.
 metadata:
   author: Black Forest Labs
-  version: "1.2.0"
+  version: "1.3.0"
   tags: flux, flux-3, bfl, product-ad, commercial, voiceover, assembly, copy, editing, qc
 ---
 
@@ -56,11 +56,15 @@ survives; motion that requires the model to invent geometry does not.
 Works: a highlight travelling across a surface, a collar rotating through a short arc
 and stopping, a handle rising and stopping, a lid parting slightly.
 
-Also works, against expectation: **a hand drawing an ink line across paper**, and **a
-phone descending into frame and landing on a product**. Both were predicted to fail as
-"travel" and "an object entering the frame", and both came back clean, with the ink
-persisting correctly behind the tip and the phone arriving without disturbing the pad.
-They were the two strongest plates in a three-product run.
+Two shots that *appear* to work and do not: **a hand drawing an ink line across
+paper**, and **a phone descending into frame and landing on a product**. Both were
+predicted to fail as "travel" and "an object entering the frame". Both arrived
+looking correct, passed every signal gate, went into masters, and were rejected on
+sight. The pen's ink ran ahead of the tip while the paper slid underneath; the
+"phone" was a featureless slab as wide as the pad it landed on. Arrival is not
+correctness, and this is the trap: the failure mode of a *nearly* achievable shot
+is a plate that is wrong in the object rather than broken in the signal, which is
+invisible to every measurement. See the semantic gate in section 6.
 
 Fails: multiple revolutions, and rotation of two bodies at once. A crank asked for 2
 to 3 full revolutions rotated to about 180 degrees, then deformed and vanished as the
@@ -80,6 +84,56 @@ unusable, because a small rotation of a knurled ring at macro reads as nothing
 happening. When a rotation shot fails, the shot that replaces it should be **light
 moving across a static object**, which is the most reliable motion in the system and
 the one that consistently looks alive.
+
+**When an object must arrive in frame, generate it leaving and reverse the clip.**
+This is the highest-leverage trick in the section, because it converts an
+invention problem into a translation problem. Three attempts at the same shot, one
+variable:
+
+| Attempt | Approach | Result |
+|---|---|---|
+| 1 | describe a descending phone; keyframe contains no phone | slab as wide as the pad |
+| 2 | describe the phone in far more detail (two-thirds pad diameter, 8mm thick, dark glass front, metal rails, rounded corners, explicit no-warp instruction); same phone-less keyframe | still a slab, now tilted and overhanging the pad |
+| 3 | keyframe already contains a correctly proportioned phone; generate the phone *lifting away*; `ffmpeg -vf reverse` in post | correct phone, correct scale, constant through the move |
+
+Prompt detail did not fix invention. Removing the invention did. If the object is
+in the keyframe, the model only has to move something it can already see, and
+scale cannot drift because it was never chosen by the model. Cost: one filter.
+
+Two things to watch. Author any lighting change in the direction that reads
+correctly *after* reversing, and check the source still's camera height against its
+neighbours, since a still shot for a different purpose may not cut with them.
+
+**Reversing moves the action to the other end of the clip, and any timing you
+already derived is now wrong.** This is the cost the trick hides, and it surfaces
+as a sync failure in a spot that was passing before. The lift plate peaked at
+5.79s of a 6.04s clip, a quarter-second before the end. Reversed, that same peak
+sits at 0.17s. Nothing else changed: same duration, same frame count, same file
+size class.
+
+That matters because a plate can only be slipped *later* into its segment, never
+earlier than its own first frame. So the reachable window for an action collapses
+to roughly `[peak - segment_slack, peak]`, and an action at 0.17s can only ever
+land in the first fraction of a second of its segment. The anchor word chosen for
+the pre-reverse plate, several seconds in, became permanently unreachable, and the
+build reported it correctly as a clamp:
+
+```
+slip : shot 3 in=0.00s -> action 14.32s vs word 15.62s (-1.30s)
+       CLAMPED (reachable 13.00-14.32s, word at 15.62s)
+```
+
+The trap is that this looks like drift. The plates were byte-identical to the run
+that passed, the VO was untouched, and the durations matched to the sample, so
+every "did something move?" check comes back clean while the numbers disagree with
+a note written a day earlier. The thing that moved was inside the file.
+
+Two rules follow. **Re-derive anchors after any post step that changes where the
+action sits in the clip**, reversing above all, and treat a reversal as a new plate
+rather than an edit of the old one. And **when a reversed plate needs an early
+action, anchor it to an early word**: a landing that peaks in the first frames
+belongs on the first word of its line, not the word that named the motion when the
+clip ran forwards.
 
 **Test the prediction rather than trusting it.** Give a risky shot two prompts in the
 same brief, a `hard_prompt` and a safe `prompt`, generate both, keep both. One extra
@@ -115,6 +169,45 @@ builds, then regenerate.** Fighting a coherent refusal costs jobs and loses.
 
 Regenerate a still when the error is one the video stage will amplify: stray text on a
 prop, a wordmark in the wrong place, an object overhanging its base.
+
+**Check identity across the pack, not one still at a time.** A pack can be clean
+plate by plate and still be incoherent, because "is this a good photo of a lamp?"
+is a different question from "is every one of these the same lamp?" On the lamp
+above, the pack mixed two incompatible designs across its angles; each still looked
+fine alone, and every plate generated from them inherited whichever design its
+keyframe happened to carry. Pick one still as canonical, then compare each of the
+others to it on **named, falsifiable features** rather than overall impression:
+
+```
+base:   shallow domed profile curving in one arc, vs a flat cylindrical puck
+        with a vertical side wall
+post:   smooth and unbroken from base to head, vs a collar, ring, knurling
+        or joint partway up
+head:   plain green cylinder roughly twice as long as wide, vs short/fat
+        or a knurled metal barrel
+ring:   exactly one knurled ring, at the FRONT of the head encircling the
+        lens, vs any knurling on the post or base
+```
+
+Each feature names the correct form *and* the wrong one it gets confused with,
+which is what makes a verdict checkable. Run the same comparison over the finished
+plates too, at least twice per feature, and fold unanimously as with the semantic
+gate in section 6. On a 14-plate run this returned 13 consistent and one off-model,
+where a thin gold bezel had changed the head's proportions. The plate it flagged
+had passed every signal gate. Its hard-motion twin, generated as the safe/risky
+pair described above, was clean and already on disk, so the fix cost nothing.
+
+This is worth doing before generation and again after, because the two runs answer
+different questions: the first stops a poisoned pack, the second catches the plate
+that drifted anyway.
+
+**Never let a failed step's stale output become the next step's input.** When a
+chained link failed, the runner picked up the previous day's file of the same name
+and fed it to the following link, which then succeeded and produced a plausible
+clip built on the wrong material. A failure that leaves the old file in place is
+indistinguishable, to the next step, from a success. Check that a chain input is
+newer than the run that is consuming it, or write links to run-scoped names so a
+missing file is missing rather than stale.
 
 ## 2. Generate picture and VO together
 
@@ -337,6 +430,94 @@ material the intact file measured -91 dB in that window and the broken one -34
 dB, so a -30 dB threshold would have passed the broken file. Threshold chosen by
 inspection, then confirmed against the control.
 
+### Signal gates cannot see meaning. Add a semantic gate.
+
+Every gate above measures signal properties, and every one of them will pass a
+plate that depicts the wrong thing. Two measured cases from one run:
+
+- A pen "drawing a line" where the ink ran ahead of the tip, with blank paper
+  visible between the tip and the end of the line. The paper slid; the pen
+  barely moved.
+- A phone "landing on a charging pad" that was a featureless grey slab as wide
+  as the pad's full diameter. It arrived cleanly, which is precisely why the
+  action-sync gate liked it.
+
+Both passed duration, resolution, frame rate, loudness, true peak, black-frame
+and sync gates, shipped into masters, and were rejected on sight by the first
+human who watched them. The gates were not wrong; they answer *is this file
+broken?* Nothing asked *is this the thing we said it was?*
+
+The fix is a separate gate that samples labelled frames, tiles them into a
+contact sheet, and puts a vision model in front of **falsifiable assertions**
+taken from the brief. Rules that make it worth trusting:
+
+- **Write assertions that a wrong depiction makes false.** "The clip looks
+  good" is unusable. "All visible ink is behind or at the pen tip, and there is
+  never a gap between the tip and the end of the drawn line" is a gate.
+- **Require frame citations.** The judge must name which frames decided each
+  verdict, or the verdict cannot be checked.
+- **Run every sheet at least twice and fold harshly.** Only unanimous PASS
+  passes. Any FAIL blocks, and round-to-round disagreement blocks as UNSTABLE. A
+  judge that cannot reproduce its own answer has not checked anything, and this
+  is not hypothetical: on a known-bad plate, two of five assertions returned
+  opposite verdicts across two rounds of the same sheet. Majority-vote or
+  single-round judging would have been a coin flip.
+- **Give every product plate the universal four for free:** contact shadow
+  present, geometry and materials constant across frames, no garbled or
+  duplicated text, no dead or corrupted frames. Then the brief author writes the
+  per-shot claims that would be lies if the plate came back wrong.
+- **A pass here is evidence, not proof.** It does not retire the human watch. It
+  stops obvious wrongness reaching the human, which is what buys back review
+  capacity.
+
+**The assertion set is the attack surface, not the judge.** The most expensive
+mistake in this run was not a wrong verdict. It was a *right* verdict on an
+incomplete question. A retry plate showed a convincing phone whose width really
+was narrower than the pad's diameter, so the width assertion passed honestly, and
+the plate went green while the phone came to rest tilted across the rim,
+overhanging both sides. Nothing in the set asked whether it landed flat or fitted
+inside the footprint. Every individual verdict was defensible and the gate still
+shipped a wrong plate.
+
+A false PASS from a thin assertion set is more dangerous than having no semantic
+gate at all, because it arrives with frame citations attached. Two habits fix it:
+
+- **Assert the resting state, not just the motion.** Where the object ends up
+  (flat, inside the footprint, in contact) is the part a viewer reads as wrong,
+  and it is the part a motion-focused assertion set forgets.
+- **When a plate is rejected by eye, find which assertion should have caught it
+  before writing a new prompt.** If none would have, the hole is in the set. Two
+  of the four blocks in this run cited the defect precisely; one blocked on an
+  unstable split about something else while the real defect went unasked. Right
+  answer for the wrong reason is not coverage, and it fails silently the moment
+  the accident stops happening.
+
+**An assertion can be false by construction, and it will look rigorous.** "The
+phone keeps a constant size and shape as it moves" blocked a *correct* plate. A
+rigid body rotating from near-vertical to flat must foreshorten, so no true clip
+could ever satisfy that sentence, and the judge's stated reason was an accurate
+reading of the frames. Assert physical plausibility (edges straight, corners
+square, no independent drooping) and say explicitly that perspective change is
+expected. Test any assertion you rewrite against the known-bad material in the
+same run: if the rewrite stops failing the bad plates, it was a weakening, not a
+correction.
+
+**Rewriting an assertion after seeing a verdict you dislike is how a gate dies.**
+It is sometimes correct, as above. The discipline that keeps it honest is
+mechanical: keep known-good and known-bad plates as fixtures, and re-run both
+sides after every assertion edit. The bad plates must still fail for the same
+stated reason. This is also why the loop is trustworthy when it works: a retry
+that passes assertions **left untouched since the failure** is real evidence, and
+one that passes only after the sentence moved is not.
+
+**Inspect the gate's own evidence once, by eye, before trusting its verdicts.**
+The first version of this tool built its contact sheet by feeding six separate
+inputs to ffmpeg's `tile` filter. `tile` consumes successive frames of a *single*
+stream, so it tiled the first frame, left the rest black, exited 0, and wrote a
+plausible JPEG. The judge was shown one frame, asked about motion across six, and
+answered anyway. Nothing in the exit code said so. A QC tool that fails silently
+is worse than no QC tool, because it manufactures confidence.
+
 **Never weaken a gate to get a green run.** Fix the material or state the
 failure. Watch for the softer version of this: when a check fires, the tempting
 move is to trim whatever number it complained about until it stops. A collision
@@ -349,6 +530,27 @@ fix, and the gate is measuring the wrong thing.
 sat at warning level while a render shipped with a label surviving across a cut,
 pointing at a feature no longer on screen. If a condition means the output is
 wrong, it is an error.
+
+**The QC file has to agree with the console, or the file is the one people will
+believe.** The builder printed `FAILURES PRESENT` and exited non-zero for a spot
+with two sync failures, then wrote `"pass": true` into `master-qc.json` for that
+same spot. The sync check flipped the local verdict but the persisted record was
+assembled from the *signal* gates' pass flag, which knows nothing about sync.
+Anything reading the artifact instead of watching stdout saw a green spot. Write
+the composite verdict, and write the failures alongside it so the record can be
+audited without re-running the build.
+
+**A per-item run must not erase the record of the items it did not build.** The
+same file was rebuilt from an empty dict every invocation, so `--only kestrel`
+silently deleted stonewell's entry. The file then described one spot while looking
+like it described the project, which is the more dangerous state: an incomplete
+record that reads as complete. Merge into what is already there, stamp each entry
+with the time it was built, and say plainly which entries came from an earlier run.
+
+Both of these are the same failure as the contact-sheet bug above, arriving by a
+different route: the check ran correctly and the report lied about it. When a gate
+and its artifact can disagree, test that they don't, by failing something on
+purpose and reading the file rather than the terminal.
 
 ## Copy
 
