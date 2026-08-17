@@ -155,6 +155,21 @@ Every plate inherits its still, because `i2v` treats the keyframe as literal. A 
 that is wrong in a way you can live with poisons every clip generated from it, so the
 reference pack has to be right before any video job runs.
 
+**When the product is real, the pack is derived from the photograph, not written from
+scratch.** This is the easier path and it skips the entire failure class below, because
+no invariant paragraph has to describe the object well enough for a model to build it.
+Take the supplied photo as the canonical still, then generate each remaining angle from
+it with FLUX 2 `input_image` identity carry, seeded so the pack is reproducible. Write
+the invariants anyway, by reading them off the photograph: they are what the identity
+and semantic gates check against later. On a run built this way from one real product
+photo, three generated angles held every named feature and no still needed regenerating.
+
+Two things this does not buy you. The still is faithful and the *video* still drifts,
+so the interior-frame and identity checks below apply unchanged. And a real photo is
+usually a catalogue shot on seamless white, which gives you no set to cut to: every
+plate looks like the same photo unless the shots differ in framing and scale, so design
+the pack for genuinely different crops.
+
 Expect the model to overrule the spec, and read it as information. On a three-product
 run, two products came back with the model quietly substituting its own design: a
 light channel specified as unlit rendered lit in every frame, and a lamp specified
@@ -296,6 +311,15 @@ runs to end of file**. Taking the last silence region is a second, subtler bug:
 on that same stem the final gap sat *before* the last word, so trusting it cut
 the master even shorter than the timestamp did.
 
+**Measure the noise floor per take; a fixed threshold finds nothing.** These
+booth takes do not share a floor. One measured -33.2 dB, so a -45 dB
+`silencedetect` threshold returned zero silence regions on a read with four
+audible pauses in it, and every pause-based cut placement had nothing to work
+with. Read the floor with `astats` and set the threshold a few dB above it: at
+floor+6 dB that same take resolved four clean sentence pauses, while floor+4 dB
+fragmented them into six and floor+8 dB began eating quiet consonants. Derive
+the number, and record which floor produced the cuts you shipped.
+
 **Place cuts in measured gaps.** Candidates are pause centres, best first:
 sentence pauses at a deep floor, then word gaps at a shallower one. Never cut
 mid-word. If no placement fits, fail loudly and say why: the fix is a longer
@@ -363,6 +387,18 @@ Re-anchoring is often the better edit on merit anyway. A macro of an engraved wo
 re-anchored from "looked" to the brand name is both reachable and truer to what the
 shot shows.
 
+**Regenerating to move an action is a new plate, and it needs the semantic gate
+again.** Faced with a clamp, the obvious fix is to re-prompt the shot with the
+action early. It worked on the timing and broke the depiction: asked for a lever
+that pivots down in the first half second and then holds, the regenerated clip
+had the lever start horizontal, rise, and settle back down, so its measured peak
+at 0.92s was the *raise* rather than the close. Every number improved and the
+clip showed the wrong thing. The plate that shipped was the original, re-anchored
+from "switch" to "water", which landed the close 0.05s off its word and reads
+truer besides, since the lever closing is what holds the water. Try the
+re-anchor before the regeneration: it costs no jobs, and a plate already through
+the gate is worth more than a fresh one that has not been looked at.
+
 **Resolve anchors monotonically.** Take each anchor's earliest occurrence *after* the
 previous anchor's, because shots advance through the read and so must their words. A
 first-match lookup is correct only while no word repeats, which is an accident of short
@@ -373,6 +409,14 @@ anchored to the first one and reported a 10.18s miss no slip could satisfy.
 shot's motion is a light drift rather than a discrete event, there is no word it is
 *about*. Long spots have more of these. Leave the anchor null and take the segment from
 the plate's middle.
+
+**Order the shots to follow the script, and treat shot order as a timing lever.**
+A shot can only be anchored to a word inside its own segment, so a plate whose
+action names a word late in the read cannot sit early in the cut. A macro of the
+lever was clamped 1.8s from "switch" in segment two and reachable in segment
+three, and swapping it with the wide payoff shot fixed the anchor without
+regenerating anything. Reordering is free, so try it before re-prompting: the
+constraint is which segment a word falls in, not the plate.
 
 Take a segment from the middle of its plate only when no anchor applies.
 Generated clips are weakest in their first frames, where the image settles, and
@@ -429,6 +473,15 @@ guess. Hard-cut a master mid-word and confirm the gate fails it: on real
 material the intact file measured -91 dB in that window and the broken one -34
 dB, so a -30 dB threshold would have passed the broken file. Threshold chosen by
 inspection, then confirmed against the control.
+
+**A master with no ending cannot be gated for a clipped one.** Where the read
+finishes flush against end of file, the intact master measured -15.3 dB in its
+final quarter-second and a deliberately hard-cut copy measured -13.8 dB. Those
+are 1.4 dB apart, so no threshold separates them and the gate is decorative. The
+fix is not a cleverer threshold, it is giving the spot a real ending: pad the
+tail and fade, after which the same measurement read -inf against -13.8 dB for
+the control. A finished ad wants that fade anyway, which is why this hid: the
+missing ending was a creative defect and it disabled a gate on the way past.
 
 ### Signal gates cannot see meaning. Add a semantic gate.
 
