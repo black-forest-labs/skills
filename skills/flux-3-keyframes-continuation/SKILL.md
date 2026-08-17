@@ -3,7 +3,7 @@ name: flux-3-keyframes-continuation
 description: Use when a FLUX 3 video must be built from supplied images or video. Covers keyframes (i2v) and continuation (v2v).
 metadata:
   author: Black Forest Labs
-  version: "1.1.0"
+  version: "1.0.0"
   tags: flux, flux-3, bfl, keyframes, continuation
 ---
 
@@ -59,29 +59,6 @@ direction, speed, and camera relationship; continue from the actual ending artif
 restate only invariants and the next action; review each seam before extending; change
 one continuity variable at a time when repairing drift. A video input at higher
 resolution may cap duration below the general maximum, which changes segment planning.
-
-**A continuation returns less footage than you request.** Measured across six links,
-every `i2v` and `t2v` job returned its requested duration to within a frame and every
-`v2v` job came back short: 5.00s against a 6s request three times, and once 2.00s,
-which is too little to cut from at all. Two controls asking for 10s returned 8.00s
-from a 6.04s input and 9.00s from a 2.50s input, so a short input is not the cause.
-Ask for more than you need, measure every returned link, and check the yield after
-each one rather than planning a length budget from requested durations.
-
-**Chains hold geometry and lose grade.** A three-link chain measured against link 1:
-
-| link | luma drift | warmth drift | seam vs. within-link frame step |
-| --- | --- | --- | --- |
-| 2 | +2.0 | -3.7 | 16.9x |
-| 3 | -1.8 | -7.3 | 9.7x |
-
-Subject identity survived intact across all three links: same object, same materials,
-same engraved wordmark. Luma did not drift. Colour temperature drifted hard, cooling
-monotonically and visibly, and each seam measured several times an ordinary
-frame-to-frame step, so the join is not invisible. Budget a colour-temperature match
-per link, cut on the seam rather than through it, and stop trusting "locked camera"
-past the first link: framing and subject pose creep slightly even when nothing in the
-prompt asks them to.
 
 Return the conditioning plan (which mode and shape, and why), the invariants that must
 survive, the final prompt, and any pin map or transition risks.
