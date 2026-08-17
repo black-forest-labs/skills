@@ -19,6 +19,7 @@ already names one narrow job, use that specialist directly.
 | Build from supplied images or video | `flux-3-keyframes-continuation` |
 | Direct dialogue, voiceover, ambience, effects, or music | `flux-3-audio-dialogue` |
 | Submit, poll, enhance, download, or technically review | `flux-3-generate` |
+| Build a finished product ad with voiceover | `flux-3-product-spot` |
 
 Default sequence, skipping completed stages:
 
