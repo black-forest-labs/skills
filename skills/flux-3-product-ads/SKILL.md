@@ -1,5 +1,5 @@
 ---
-name: flux-3-product-spot
+name: flux-3-product-ads
 description: Use when building a finished product ad from FLUX 3 - shot design, voiceover, action-to-word sync, evidence-gated copy, deterministic assembly, and QC gates that catch clipped audio, floating products, off-model plates, and reports that claim a pass the build did not give.
 metadata:
   author: Black Forest Labs
@@ -7,7 +7,7 @@ metadata:
   tags: flux, flux-3, bfl, product-ad, commercial, voiceover, assembly, copy, editing, qc
 ---
 
-# FLUX 3 product spots
+# FLUX 3 product ads
 
 A finished spot is two jobs, not one. FLUX 3 generates picture and voice. A
 deterministic pass cuts, times, captions and masters them. Keep the boundary
