@@ -1,9 +1,15 @@
-# Reference implementation
+# Reference design: assembly pipeline
 
-A working pipeline for the process in `SKILL.md`. Two fictional products, three
-cuts each, generated picture and voice, deterministic finish, two renderers.
+This document is a **reference design and implementation blueprint** for the
+process in `SKILL.md`. It is not runnable code shipped by this repo. The paths,
+module names, and commands below are **proposed interfaces**; the
+implementation pieces are not present in this checkout.
 
-## Layout
+The measured findings, schemas, and gate thresholds were observed on real spot
+builds during skill development. They are recorded here as contracts and
+calibration data, not as output from code in this repository.
+
+## Proposed layout
 
 ```
 pipeline/spotkit.py          measurement + ffmpeg assembly + QC gates
@@ -17,6 +23,25 @@ spots.manifest.json          content only
 spots.graphics.json          graphics layer: callouts, cuts, camera
 remotion/                    React renderer consuming the same timing
 ```
+
+## What this repo does not ship
+
+This skills repo documents the ad workflow; it does **not** include the core
+assembly modules. An agent implementing a spot builder from this blueprint would
+need to write:
+
+- **DP cut scorer** — dynamic-programming search over pause candidates (see
+  section 4 in `SKILL.md`)
+- **Action measurement** — per-frame luma delta to locate when each plate's
+  motion peaks
+- **Word alignment** — VO transcription to word-level caption timings
+- **Deterministic assembly** — manifest-driven ffmpeg `filter_complex` build
+- **Remotion renderer** — React compositions consuming exported `timing.json`
+- **QC gates** — duration, loudness, tail, action sync, copy evidence, graphics
+  layout (thresholds below)
+
+The contracts in the sections that follow are the spec those modules should
+implement against.
 
 ## Manifest
 
@@ -46,14 +71,16 @@ Content only. Every number is derived at build time.
 ```
 
 `anchors` is one spoken word per shot: the word that shot's action is *about*.
-`script` is the VO text, which `check_copy.py` uses to decide whether a line
+`script` is the VO text; the copy gate would use it to decide whether a line
 claiming evidence `said` is telling the truth.
 
 Any shot count of two or more works; the transition chain is built to length.
 Slugs, paths and copy are validated before reaching a shell command, because
 `filter_complex` strings are assembled as text.
 
-## Build
+## Build (illustrative interface)
+
+Once implemented, a spot builder would expose something like:
 
 ```bash
 python3 pipeline/build_spot.py spots.manifest.json            # base + QC
@@ -62,13 +89,16 @@ python3 pipeline/build_spot.py spots.manifest.json --dry-run  # timing only
 python3 pipeline/build_spot.py spots.manifest.json --only tenrove
 ```
 
-`--dry-run` reports derived cuts without rendering, which is the fast way to see
+These commands are **not runnable in this checkout**. They describe the intended
+CLI for a local implementation.
+
+`--dry-run` would report derived cuts without rendering: the fast way to see
 whether a read and a set of plates can produce a spot at all.
 
-`--rich` exports the derived timing, runs the copy and graphics gates, renders
-the Remotion compositions, and puts them through the same QC as the base
-masters. It is one command because the alternative, a hand-typed render plus a
-scratch script to measure it, is the manual step this pipeline exists to remove.
+`--rich` would export the derived timing, run the copy and graphics gates,
+render the Remotion compositions, and put them through the same QC as the base
+masters. One command, because the alternative (a hand-typed render plus a
+scratch script to measure it) is the manual step this pipeline exists to remove.
 The base master is the intermediate; the rich render is the deliverable.
 
 ## What gets derived
@@ -84,18 +114,18 @@ The base master is the intermediate; the rich render is the deliverable.
 | End-card scrim | mean luminance of the text region against a threshold of 95 |
 | Loudness target | the normaliser's first-pass report of what it can deliver under a -1.5 dBTP ceiling |
 
-Observed on the reference material: both spots at 10.708s. Cuts derived at
-3.30s/7.65s and 4.12s/7.56s. Scrim on for the light product (luma 136), off for
-the dark one (luma 39). Loudness targets -16.6 and -17.7 LUFS, both stems
-peak-limited well below a nominal -16.
+Observed on the reference material during skill development: both spots at
+10.708s. Cuts derived at 3.30s/7.65s and 4.12s/7.56s. Scrim on for the light
+product (luma 136), off for the dark one (luma 39). Loudness targets -16.6 and
+-17.7 LUFS, both stems peak-limited well below a nominal -16.
 
 The first product's derived cuts reproduced values that had been measured by
-hand, which is the check worth running when you replace judgement with
+hand. That match is the check worth running when you replace judgement with
 measurement.
 
 ## QC gates
 
-`spotkit.qc` reports every gate and fails on any.
+A `spotkit.qc` module would report every gate and fail on any.
 
 | Gate | Threshold |
 |---|---|
@@ -148,13 +178,13 @@ two views of the same object, `dissolve` for a change of scale or subject,
 `flash` for the arrival into the payoff. `evidence` is what makes the line
 sayable at all.
 
-`export_timing.py` merges this with the derived timing into
-`remotion/src/timing.json` and links the plate tree into `public/`. Remotion
-re-derives nothing.
+`export_timing.py` would merge this with the derived timing into
+`remotion/src/timing.json` and link the plate tree into `public/`. Remotion
+would re-derive nothing.
 
 Because `timing.json` is the merged artifact, editing `spots.graphics.json`
-alone leaves the checkers validating data nobody renders. `check_graphics.py`
-refuses to run when the graphics file is newer than the export, rather than
+alone leaves the checkers validating data nobody renders. The graphics checker
+would refuse to run when the graphics file is newer than the export, rather than
 reporting green on stale numbers.
 
 ```bash
@@ -162,7 +192,9 @@ cd remotion && npm ci
 npx remotion studio            # scrubbable preview
 ```
 
-Both renderers pass identical gates on the reference material: 960x960, 24 fps,
+(Remotion setup is part of the proposed implementation, not present here.)
+
+Both renderers passed identical gates on the reference material: 960x960, 24 fps,
 matching loudness, tail intact, no body black. Remotion files are roughly 25 to
 30 percent larger at the same CRF.
 

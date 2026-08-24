@@ -230,6 +230,11 @@ Finished product ads carry voiceover. Budget it in the first generation round,
 never bolt it on after picture lock: the VO determines the length of the spot,
 so generating it last means re-cutting everything.
 
+For voiceover generation, music beds, audio layering, speakability checks, and
+deterministic audio finishing, use `flux-3-audio-dialogue`. This skill covers
+ad-specific timing and assembly: how the VO sets spot length, how paragraphs
+join at designed pauses, and how the mastered stem feeds the cut pipeline.
+
 Get VO from audio-only jobs: a voice-booth scene whose picture is discarded and
 whose audio is harvested. Generate at least two scripts against two speaker
 profiles, because takes are not interchangeable and you want a real choice.
@@ -675,6 +680,7 @@ must start *at* the cut rather than finish there.
 
 ## Reference
 
-`references/pipeline.md` documents a working implementation: manifest schema,
-derived-timing export, both renderers, and the QC gate list with the measured
-thresholds and negative control.
+`references/pipeline.md` is a reference design and implementation blueprint:
+manifest schema, derived-timing export, both renderers, and the QC gate list
+with the measured thresholds and negative control. The modules it describes are
+not shipped in this repo; an agent builds them from the contracts there.
