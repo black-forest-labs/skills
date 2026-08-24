@@ -20,6 +20,7 @@ already names one narrow job, use that specialist directly.
 | Direct dialogue, voiceover, ambience, effects, or music | `flux-3-audio-dialogue` |
 | Give a shot a period or archival look | `flux-3-archival-formats` |
 | Submit, poll, enhance, download, or technically review | `flux-3-generate` |
+| Build a finished product ad with voiceover | `flux-3-product-ads` |
 
 Default sequence, skipping completed stages:
 

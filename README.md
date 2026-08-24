@@ -27,6 +27,7 @@ npx skills add black-forest-labs/skills --skill flux-3-keyframes-continuation
 npx skills add black-forest-labs/skills --skill flux-3-audio-dialogue
 npx skills add black-forest-labs/skills --skill flux-3-generate
 npx skills add black-forest-labs/skills --skill flux-3-archival-formats
+npx skills add black-forest-labs/skills --skill flux-3-product-ads
 ```
 
 ### Claude Code Plugin
@@ -71,15 +72,22 @@ API integration guide covering:
 
 ### 3. The FLUX 3 video suite
 
-Seven skills that hand off to each other; install only what you need:
+Eight skills that hand off to each other; install only what you need:
 
-- `flux-3-video` - thin router across the six specialists
+- `flux-3-video` - thin router across the seven specialists
 - `flux-3-prompt-doctor` - readiness verdicts (`READY` / `NEEDS INFO` / `REVISE`) before generation
 - `flux-3-cinematic-inserts` - shot craft for text-only generation, with a field guide of proven concepts
 - `flux-3-keyframes-continuation` - keyframes (`i2v`) and video continuation (`v2v`)
 - `flux-3-audio-dialogue` - dialogue, voiceover, ambience, effects, music
 - `flux-3-generate` - request construction, polling, drafts, downloads, validation
 - `flux-3-archival-formats` - period looks by naming a recording format (Super 8, VHS, 16mm, Hi8)
+- `flux-3-product-ads` - finished product ads: voiceover, action-to-word sync, deterministic assembly, QC gates
+
+Built with `flux-3-product-ads`: a 13.6s spot for an invented pen brand, three
+plates, generated voiceover, action slipped to land on the word that names it.
+Click to play with sound.
+
+[![Kestrel P2, a product ad built with the flux-3-product-ads skill](https://cdn.sanity.io/images/2gpum2i6/production/22ee835d9f2a1f093cecf79eb4642c2786bb473e-960x960.jpg?w=600)](https://cdn.sanity.io/files/2gpum2i6/production/ed0cf8aee1479cf096b839b66e8f9202592e25d7.mp4)
 
 ## Quick Reference
 
@@ -92,6 +100,7 @@ Seven skills that hand off to each other; install only what you need:
 | Build from supplied images or video | `flux-3-keyframes-continuation` |
 | Direct speech, ambience, effects, or music | `flux-3-audio-dialogue` |
 | Submit, poll, enhance, download, or technically validate | `flux-3-generate` |
+| Build a finished product ad with voiceover | `flux-3-product-ads` |
 | Give a shot a period or archival look | `flux-3-archival-formats` |
 | Route a general FLUX 3 video request | `flux-3-video` |
 

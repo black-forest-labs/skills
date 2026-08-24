@@ -25,7 +25,7 @@
     },
     {
       "name": "flux-3-video",
-      "description": "BFL skills for FLUX 3 video generation including prompt readiness checks, cinematic shot craft for text-to-video, keyframes and video continuation, synchronized audio and dialogue, period and archival format looks, and request construction with async polling and downloads",
+      "description": "BFL skills for FLUX 3 video generation including prompt readiness checks, cinematic shot craft for text-to-video, keyframes and video continuation, synchronized audio and dialogue, period and archival format looks, request construction with async polling and downloads, and finished product ads with voiceover and deterministic assembly",
       "source": "./",
       "strict": false,
       "skills": [
@@ -35,7 +35,8 @@
         "./skills/flux-3-keyframes-continuation",
         "./skills/flux-3-audio-dialogue",
         "./skills/flux-3-generate",
-        "./skills/flux-3-archival-formats"
+        "./skills/flux-3-archival-formats",
+        "./skills/flux-3-product-ads"
       ],
       "author": {
         "name": "Black Forest Labs"
