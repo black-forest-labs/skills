@@ -98,22 +98,6 @@ scan lines into the next reads as an error rather than a style, and artifacts fr
 formats inside a single clip are physically contradictory. Vary subject, light, and time of
 day instead; the format is the thing tying the sequence together.
 
-## Tracking-shot direction
-
-When the camera follows a moving subject, direction reads through the background, not the
-subject. A followed subject stays centered by definition, so "the balloon moves left to
-right" while "the camera pans to follow" is self-contradictory, and per-frame measurement
-of such a clip shows near-zero or negative net travel.
-
-Request three things instead of a screen-direction adjective:
-
-1. **Parallax**: background streams past in the opposite direction at a steady rate.
-2. **Lead room**: subject sits slightly behind center with open space ahead of it.
-3. **World direction**: "past the sprinkler, then the fence," not "left to right."
-
-Verify with a per-frame tracker measuring net travel and reversals, not by eye. A subject
-that appears to move can measure as flat or reversing.
-
 ## Review
 
 A shot passes when the named artifacts for its format are present in the frame, no

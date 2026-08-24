@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "organization": "Black Forest Labs",
   "date": "August 2026",
-  "abstract": "Period and archival looks for FLUX 3 video by naming the recording format instead of a mood word. Covers per-format artifact checklists for Super 8, VHS, 16mm documentary, and Hi8, copy-paste prompt templates, requesting degradation rather than only the format name, the control-probe method for proving a style word changes the output, holding one format constant across a montage, and reading tracking-shot direction through the background.",
+  "abstract": "Period and archival looks for FLUX 3 video by naming the recording format instead of a mood word. Covers per-format artifact checklists for Super 8, VHS, 16mm documentary, and Hi8, copy-paste prompt templates, requesting degradation rather than only the format name, the control-probe method for proving a style word changes the output, and holding one format constant across a montage.",
   "references": [
     "https://docs.bfl.ai"
   ]
