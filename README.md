@@ -26,6 +26,7 @@ npx skills add black-forest-labs/skills --skill flux-3-cinematic-inserts
 npx skills add black-forest-labs/skills --skill flux-3-keyframes-continuation
 npx skills add black-forest-labs/skills --skill flux-3-audio-dialogue
 npx skills add black-forest-labs/skills --skill flux-3-generate
+npx skills add black-forest-labs/skills --skill flux-3-archival-formats
 ```
 
 ### Claude Code Plugin
@@ -70,14 +71,15 @@ API integration guide covering:
 
 ### 3. The FLUX 3 video suite
 
-Six skills that hand off to each other; install only what you need:
+Seven skills that hand off to each other; install only what you need:
 
-- `flux-3-video` - thin router across the five specialists
+- `flux-3-video` - thin router across the six specialists
 - `flux-3-prompt-doctor` - readiness verdicts (`READY` / `NEEDS INFO` / `REVISE`) before generation
 - `flux-3-cinematic-inserts` - shot craft for text-only generation, with a field guide of proven concepts
 - `flux-3-keyframes-continuation` - keyframes (`i2v`) and video continuation (`v2v`)
 - `flux-3-audio-dialogue` - dialogue, voiceover, ambience, effects, music
 - `flux-3-generate` - request construction, polling, drafts, downloads, validation
+- `flux-3-archival-formats` - period looks by naming a recording format (Super 8, VHS, 16mm, Hi8)
 
 ## Quick Reference
 
@@ -90,6 +92,7 @@ Six skills that hand off to each other; install only what you need:
 | Build from supplied images or video | `flux-3-keyframes-continuation` |
 | Direct speech, ambience, effects, or music | `flux-3-audio-dialogue` |
 | Submit, poll, enhance, download, or technically validate | `flux-3-generate` |
+| Give a shot a period or archival look | `flux-3-archival-formats` |
 | Route a general FLUX 3 video request | `flux-3-video` |
 
 ### FLUX 3 Modes
