@@ -96,6 +96,19 @@ Judge a draft on event legibility, composition, and continuity. Softness and coa
 
 ## FLUX image quick reference
 
+Four FLUX.2 [max] generations, one prompt each, no retries. Clockwise from top left: exact quoted typography, hex-specified colors (`#2F5D50`, `#E8A13D`, `#F2EDE4`), flat-vector illustration, photoreal macro detail.
+
+<table>
+  <tr>
+    <td><img src="https://cdn.sanity.io/images/2gpum2i6/production/00787272007afd69df1dd1098ea898639e8d7171-1920x1088.jpg?w=800" alt="Letterpress storefront with exact quoted lettering: INK & QUARREL, EST. 1962 - FINE PRINTING"></td>
+    <td><img src="https://cdn.sanity.io/images/2gpum2i6/production/4a4555f9ff1a03fea72d57b51ff0173554060a39-1920x1088.jpg?w=800" alt="Ceramic pour-over set with hex-specified green, amber, and off-white palette"></td>
+  </tr>
+  <tr>
+    <td><img src="https://cdn.sanity.io/images/2gpum2i6/production/a642526cd6e434a09a014efafeb5e9e515057807-1920x1088.jpg?w=800" alt="Photoreal beekeeper close-up with bees in flight at golden hour"></td>
+    <td><img src="https://cdn.sanity.io/images/2gpum2i6/production/921b94de38e77ef516f71442c1ccd245db9fb6a9-1920x1088.jpg?w=800" alt="Isometric flat-vector cutaway of a lighthouse interior"></td>
+  </tr>
+</table>
+
 ### Model selection
 
 | Model          | Best for                          | Pricing               |
