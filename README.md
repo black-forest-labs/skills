@@ -72,6 +72,12 @@ API integration guide covering:
 
 ### 3. The FLUX 3 video suite
 
+Five shots, five styles, one model: macro photoreal, dialogue in Thai, paper
+stop-motion, Super 8, and noir. Every clip is a single FLUX 3 generation with
+its audio generated in the same pass. Click to play with sound.
+
+[![FLUX 3 style reel: five styles, one model, audio on every shot](https://cdn.sanity.io/images/2gpum2i6/production/d128251205d6eab623ea0e2ff1bc50722e5fd735-1920x1088.jpg?w=600)](https://cdn.sanity.io/files/2gpum2i6/production/cce39a2e070cb34f22803a8dc629567c48930714.mp4)
+
 Eight skills that hand off to each other; install only what you need:
 
 - `flux-3-video` - thin router across the seven specialists
@@ -82,12 +88,6 @@ Eight skills that hand off to each other; install only what you need:
 - `flux-3-generate` - request construction, polling, drafts, downloads, validation
 - `flux-3-archival-formats` - period looks by naming a recording format (Super 8, VHS, 16mm, Hi8)
 - `flux-3-product-ads` - finished product ads: voiceover, action-to-word sync, deterministic assembly, QC gates
-
-Built with `flux-3-product-ads`: a 13.6s spot for an invented pen brand, three
-plates, generated voiceover, action slipped to land on the word that names it.
-Click to play with sound.
-
-[![Kestrel P2, a product ad built with the flux-3-product-ads skill](https://cdn.sanity.io/images/2gpum2i6/production/22ee835d9f2a1f093cecf79eb4642c2786bb473e-960x960.jpg?w=600)](https://cdn.sanity.io/files/2gpum2i6/production/ed0cf8aee1479cf096b839b66e8f9202592e25d7.mp4)
 
 ## Quick Reference
 
