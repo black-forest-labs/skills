@@ -1,10 +1,26 @@
-# BFL Skills
+<h1 align="center">BFL Skills</h1>
 
-Official skills from [Black Forest Labs](https://blackforestlabs.ai) for FLUX image and video generation. Each skill teaches your coding agent how to prompt a FLUX model well and drive the [BFL API](https://docs.bfl.ai) correctly, following the [agentskills.io](https://agentskills.io) specification.
+<h4 align="center">Official <a href="https://blackforestlabs.ai">Black Forest Labs</a> skills for FLUX image and video generation.</h4>
+
+<p align="center">
+  <a href="#installation">Installation</a> •
+  <a href="#whats-inside">What's inside</a> •
+  <a href="#the-flux-3-video-suite">Video suite</a> •
+  <a href="#flux-3-quick-reference">FLUX 3 reference</a> •
+  <a href="#flux-image-quick-reference">Image reference</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#license">License</a>
+</p>
+
+---
+
+Each skill teaches your coding agent how to prompt a FLUX model well and drive the [BFL API](https://docs.bfl.ai) correctly, following the [agentskills.io](https://agentskills.io) specification.
 
 Five shots, five styles, one model. Every clip below is a single FLUX 3 generation, audio included in the same pass: macro photoreal, dialogue in Thai, paper stop-motion, Super 8, noir. Click to play with sound.
 
-[![FLUX 3 style reel: five styles, one model, audio on every shot](https://cdn.sanity.io/images/2gpum2i6/production/d128251205d6eab623ea0e2ff1bc50722e5fd735-1920x1088.jpg?w=600)](https://cdn.sanity.io/files/2gpum2i6/production/ce30f27016c63c155b97f290dae507e223257a90.mp4)
+<p align="center">
+  <a href="https://cdn.sanity.io/files/2gpum2i6/production/ce30f27016c63c155b97f290dae507e223257a90.mp4"><img src="https://cdn.sanity.io/images/2gpum2i6/production/d128251205d6eab623ea0e2ff1bc50722e5fd735-1920x1088.jpg?w=600" alt="FLUX 3 style reel: five styles, one model, audio on every shot"></a>
+</p>
 
 ## Installation
 
