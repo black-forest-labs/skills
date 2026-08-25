@@ -4,7 +4,7 @@ Official skills from [Black Forest Labs](https://blackforestlabs.ai) for FLUX im
 
 Five shots, five styles, one model. Every clip below is a single FLUX 3 generation, audio included in the same pass: macro photoreal, dialogue in Thai, paper stop-motion, Super 8, noir. Click to play with sound.
 
-[![FLUX 3 style reel: five styles, one model, audio on every shot](https://cdn.sanity.io/images/2gpum2i6/production/d128251205d6eab623ea0e2ff1bc50722e5fd735-1920x1088.jpg?w=600)](https://cdn.sanity.io/files/2gpum2i6/production/3f15ce9527f88c0517d9a1f7b4d8d838a5b29ab6.mp4)
+[![FLUX 3 style reel: five styles, one model, audio on every shot](https://cdn.sanity.io/images/2gpum2i6/production/d128251205d6eab623ea0e2ff1bc50722e5fd735-1920x1088.jpg?w=600)](https://cdn.sanity.io/files/2gpum2i6/production/ce30f27016c63c155b97f290dae507e223257a90.mp4)
 
 ## Installation
 
