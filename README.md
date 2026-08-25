@@ -1,26 +1,36 @@
 # BFL Skills
 
-Official skills from Black Forest Labs for FLUX image and video generation models. These skills provide prompting guidelines and API integration patterns following the [agentskills.io](https://agentskills.io) specification.
+Official skills from [Black Forest Labs](https://blackforestlabs.ai) for FLUX image and video generation. Each skill teaches your coding agent how to prompt a FLUX model well and drive the [BFL API](https://docs.bfl.ai) correctly, following the [agentskills.io](https://agentskills.io) specification.
+
+Five shots, five styles, one model. Every clip below is a single FLUX 3 generation, audio included in the same pass: macro photoreal, dialogue in Thai, paper stop-motion, Super 8, noir. Click to play with sound.
+
+[![FLUX 3 style reel: five styles, one model, audio on every shot](https://cdn.sanity.io/images/2gpum2i6/production/d128251205d6eab623ea0e2ff1bc50722e5fd735-1920x1088.jpg?w=600)](https://cdn.sanity.io/files/2gpum2i6/production/cce39a2e070cb34f22803a8dc629567c48930714.mp4)
 
 ## Installation
+
+Everything at once:
 
 ```bash
 npx skills add black-forest-labs/skills
 ```
 
-Or install individual skills:
+Or start with one skill and add specialists as you need them:
 
 ```bash
-# FLUX best practices only
+# Image prompting for every FLUX model
 npx skills add black-forest-labs/skills --skill flux-image-best-practices
 
-# API integration only
+# BFL API integration (polling, webhooks, error handling)
 npx skills add black-forest-labs/skills --skill bfl-api
 
-# FLUX 3 video router
+# FLUX 3 video: the router pulls in the right specialist per request
 npx skills add black-forest-labs/skills --skill flux-3-video
+```
 
-# FLUX 3 specialist skills
+<details>
+<summary>Install individual FLUX 3 specialists</summary>
+
+```bash
 npx skills add black-forest-labs/skills --skill flux-3-prompt-doctor
 npx skills add black-forest-labs/skills --skill flux-3-cinematic-inserts
 npx skills add black-forest-labs/skills --skill flux-3-keyframes-continuation
@@ -30,81 +40,44 @@ npx skills add black-forest-labs/skills --skill flux-3-archival-formats
 npx skills add black-forest-labs/skills --skill flux-3-product-ads
 ```
 
-### Claude Code Plugin
+</details>
 
-You can also add this as a plugin marketplace in Claude Code:
+### Claude Code plugin
 
 ```bash
 /plugin marketplace add black-forest-labs/skills
-# Image skills: bfl-api and flux-image-best-practices
+# Image skills
 /plugin install flux-image-best-practices@black-forest-labs
-# FLUX 3 video skills
+# FLUX 3 video suite
 /plugin install flux-3-video@black-forest-labs
 ```
 
-## Skills Included
+## What's inside
 
-### 1. flux-image-best-practices
-
-Comprehensive guide for all FLUX models including:
-
-- **Core Principles** - Universal prompting best practices
-- **Model-Specific Guides** - FLUX.2 ([klein], [max], [pro], [flex], [dev]) and FLUX.1
-- **T2I Prompting** - Text-to-image patterns and techniques
-- **I2I Prompting** - Image-to-image editing with FLUX.2 reference images
-- **JSON Structured Prompting** - Complex scene composition
-- **Hex Color Prompting** - Precise color specification (#RRGGBB)
-- **Typography** - Text rendering and font styles
-- **Multi-Reference Editing** - Using multiple reference images
-- **Negative Prompt Alternatives** - Positive replacements (FLUX doesn't support negatives)
-- **Model Selection Guide** - Choosing the right model for your use case
-
-### 2. bfl-api
-
-API integration guide covering:
-
-- **Endpoints** - Complete endpoint documentation for all FLUX.2 and FLUX.1 models
-- **Polling Patterns** - Async polling with exponential backoff
-- **Rate Limiting** - Handling 24 concurrent requests
-- **Error Handling** - Error codes and recovery strategies
-- **Webhook Integration** - Production webhook setup and verification
-- **Code Examples** - Python and TypeScript clients
-
-### 3. The FLUX 3 video suite
-
-Five shots, five styles, one model: macro photoreal, dialogue in Thai, paper
-stop-motion, Super 8, and noir. Every clip is a single FLUX 3 generation with
-its audio generated in the same pass. Click to play with sound.
-
-[![FLUX 3 style reel: five styles, one model, audio on every shot](https://cdn.sanity.io/images/2gpum2i6/production/d128251205d6eab623ea0e2ff1bc50722e5fd735-1920x1088.jpg?w=600)](https://cdn.sanity.io/files/2gpum2i6/production/cce39a2e070cb34f22803a8dc629567c48930714.mp4)
-
-Eight skills that hand off to each other; install only what you need:
-
-- `flux-3-video` - thin router across the seven specialists
-- `flux-3-prompt-doctor` - readiness verdicts (`READY` / `NEEDS INFO` / `REVISE`) before generation
-- `flux-3-cinematic-inserts` - shot craft for text-only generation, with a field guide of proven concepts
-- `flux-3-keyframes-continuation` - keyframes (`i2v`) and video continuation (`v2v`)
-- `flux-3-audio-dialogue` - dialogue, voiceover, ambience, effects, music
-- `flux-3-generate` - request construction, polling, drafts, downloads, validation
-- `flux-3-archival-formats` - period looks by naming a recording format (Super 8, VHS, 16mm, Hi8)
-- `flux-3-product-ads` - finished product ads: voiceover, action-to-word sync, deterministic assembly, QC gates
-
-## Quick Reference
-
-### FLUX 3 Skill Routing
-
-| Request | Skill |
+| Skill | What it teaches your agent |
 | --- | --- |
-| Diagnose or repair a brief | `flux-3-prompt-doctor` |
-| Write a text-to-video prompt for a new shot | `flux-3-cinematic-inserts` |
-| Build from supplied images or video | `flux-3-keyframes-continuation` |
-| Direct speech, ambience, effects, or music | `flux-3-audio-dialogue` |
-| Submit, poll, enhance, download, or technically validate | `flux-3-generate` |
-| Build a finished product ad with voiceover | `flux-3-product-ads` |
-| Give a shot a period or archival look | `flux-3-archival-formats` |
-| Route a general FLUX 3 video request | `flux-3-video` |
+| `flux-image-best-practices` | Prompting for every FLUX model: T2I and I2I patterns, JSON structured prompts, hex colors, typography, multi-reference editing, model selection |
+| `bfl-api` | The BFL API end to end: endpoints, async polling, rate limits, error recovery, webhooks, Python and TypeScript clients |
+| FLUX 3 video suite (below) | Video generation with native audio, from a single shot to a finished product ad |
 
-### FLUX 3 Modes
+### The FLUX 3 video suite
+
+Eight skills that hand off to each other. Install the router alone and it names the specialist a request needs; install only the specialists you use.
+
+| Skill | Use it to |
+| --- | --- |
+| `flux-3-video` | Route a general FLUX 3 request to the right specialist |
+| `flux-3-prompt-doctor` | Get a readiness verdict (`READY` / `NEEDS INFO` / `REVISE`) before spending a generation |
+| `flux-3-cinematic-inserts` | Write text-to-video prompts with real shot craft, from a field guide of proven concepts |
+| `flux-3-keyframes-continuation` | Build from your own images (`i2v`) or continue a clip (`v2v`) |
+| `flux-3-audio-dialogue` | Direct speech, voiceover, ambience, effects, and music |
+| `flux-3-generate` | Construct requests, poll, download, and validate the result |
+| `flux-3-archival-formats` | Give a shot a period look by naming the format: Super 8, VHS, 16mm, Hi8 |
+| `flux-3-product-ads` | Assemble a finished product ad: voiceover, action-to-word sync, QC gates |
+
+## FLUX 3 quick reference
+
+### Modes
 
 Every request names its `mode` and carries the matching media field:
 
@@ -117,15 +90,15 @@ Every request names its `mode` and carries the matching media field:
 
 ### Draft, then commit
 
-A full render takes several minutes. Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`, so you can settle concept and composition cheaply before paying for finish. `draft_enhance` then replays that cache at full quality (same prompt and settings), so the final render is the shot you approved rather than a fresh attempt.
+A full render takes several minutes. Adding `draft: true` returns a fast, low-step preview plus a `draft_cache`, so you can settle concept and composition cheaply before paying for finish. `draft_enhance` then replays that cache at full quality with the same prompt and settings, so the final render is the shot you approved rather than a fresh attempt.
 
 Judge a draft on event legibility, composition, and continuity. Softness and coarse texture are artifacts of low-step rendering and resolve at full quality.
 
-See [docs.bfl.ai](https://docs.bfl.ai) for current fields, limits, and endpoints.
+## FLUX image quick reference
 
-### Model Selection
+### Model selection
 
-| Model          | Best For                          | Pricing               |
+| Model          | Best for                          | Pricing               |
 | -------------- | --------------------------------- | --------------------- |
 | FLUX.2 [klein] | Fastest generation, real-time     | from $0.014/image     |
 | FLUX.2 [pro]   | Production balanced               | from $0.03/MP         |
@@ -133,24 +106,24 @@ See [docs.bfl.ai](https://docs.bfl.ai) for current fields, limits, and endpoints
 | FLUX.2 [max]   | Highest quality, grounding search | from $0.07/MP         |
 | FLUX.2 [dev]   | Local development                 | Free (non-commercial) |
 
-_All FLUX.2 models support both text-to-image and image editing natively, no need for separate models. FLUX.1 models are also available._
+All FLUX.2 models handle both text-to-image and image editing natively. FLUX.1 models are also available.
 
-### Prompt Structure
+### Prompt structure
 
 ```
 [Subject] + [Action] + [Style] + [Context] + [Lighting] + [Technical]
 ```
 
-### Core Rules
+### Core rules
 
-1. **NO negative prompts** - FLUX doesn't support them; describe what you want
-2. **Be specific** - More detail yields better results
-3. **Use natural language** - Prose style works best
-4. **Specify lighting** - Has the biggest impact on quality
-5. **Quote text** - Use "quoted text" for typography
-6. **Hex colors** - Use #RRGGBB with color names
+1. **No negative prompts.** FLUX doesn't support them; describe what you want instead.
+2. **Be specific.** More detail yields better results.
+3. **Use natural language.** Prose beats keyword lists.
+4. **Specify lighting.** It has the biggest impact on quality.
+5. **Quote text.** Use "quoted text" for typography.
+6. **Hex colors.** Use #RRGGBB alongside color names.
 
-### API Quick Start
+### API quick start
 
 ```python
 import requests
@@ -186,7 +159,3 @@ while True:
 ## License
 
 MIT
-
-## Author
-
-[Black Forest Labs](https://blackforestlabs.ai)
