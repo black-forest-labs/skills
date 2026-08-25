@@ -73,7 +73,7 @@ npx skills add black-forest-labs/skills --skill flux-3-product-ads
 | --- | --- |
 | `flux-image-best-practices` | Prompting for every FLUX model: T2I and I2I patterns, JSON structured prompts, hex colors, typography, multi-reference editing, model selection |
 | `bfl-api` | The BFL API end to end: endpoints, async polling, rate limits, error recovery, webhooks, Python and TypeScript clients |
-| FLUX 3 video suite (below) | Video generation with native audio, from a single shot to a finished product ad |
+| `flux-3-video` (suite, below) | Video generation with native audio, from a single shot to a finished product ad |
 
 ### The FLUX 3 video suite
 
