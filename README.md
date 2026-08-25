@@ -15,7 +15,7 @@
 
 Each skill teaches your coding agent how to prompt a FLUX model well and drive the [BFL API](https://docs.bfl.ai) correctly, following the [agentskills.io](https://agentskills.io) specification.
 
-Every clip in the reel below came out of FLUX 3 in one request, sound and all: a honey macro, a night-market conversation in Thai, a paper boat in stop motion, sparklers on Super 8, rain in a noir alley. The only edit is the cut between clips. Click to play with sound.
+Every clip in the reel below came out of FLUX 3 in one request, sound and all: a honey macro, a night-market conversation in Thai, a paper boat in stop motion, sparklers on Super 8, rain in a noir alley.
 
 <p align="center">
   <a href="https://cdn.sanity.io/files/2gpum2i6/production/ce30f27016c63c155b97f290dae507e223257a90.mp4"><img src="https://cdn.sanity.io/images/2gpum2i6/production/d128251205d6eab623ea0e2ff1bc50722e5fd735-1920x1088.jpg?w=600" alt="FLUX 3 style reel: five styles, one model, audio on every shot"></a>
@@ -32,14 +32,14 @@ npx skills add black-forest-labs/skills
 Or start with one skill and add specialists as you need them:
 
 ```bash
+# FLUX 3 video: the router pulls in the right specialist per request
+npx skills add black-forest-labs/skills --skill flux-3-video
+
 # Image prompting for every FLUX model
 npx skills add black-forest-labs/skills --skill flux-image-best-practices
 
 # BFL API integration (polling, webhooks, error handling)
 npx skills add black-forest-labs/skills --skill bfl-api
-
-# FLUX 3 video: the router pulls in the right specialist per request
-npx skills add black-forest-labs/skills --skill flux-3-video
 ```
 
 <details>
