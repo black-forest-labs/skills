@@ -15,10 +15,10 @@
 
 Each skill teaches your coding agent how to prompt a FLUX model well and drive the [BFL API](https://docs.bfl.ai) correctly, following the [agentskills.io](https://agentskills.io) specification.
 
-Every clip in the reel below came out of FLUX 3 in one request, sound and all: a honey macro, a night-market conversation in Thai, a paper boat in stop motion, sparklers on Super 8, rain in a noir alley.
+Every clip in the reel below came out of FLUX 3 in one request, sound and all: a night-market conversation in Thai, a honey macro, a paper boat in stop motion, sparklers on Super 8, rain in a noir alley.
 
 <p align="center">
-  <a href="https://cdn.sanity.io/files/2gpum2i6/production/ce30f27016c63c155b97f290dae507e223257a90.mp4"><img src="https://cdn.sanity.io/images/2gpum2i6/production/d128251205d6eab623ea0e2ff1bc50722e5fd735-1920x1088.jpg?w=600" alt="FLUX 3 style reel: five styles, one model, audio on every shot"></a>
+  <a href="https://cdn.sanity.io/files/2gpum2i6/production/1e6e576489baa4e734bbae4cb62dcd383151e030.mp4"><img src="https://cdn.sanity.io/images/2gpum2i6/production/c7ef05daf120891bdc96e5e2a9c2b9947d206d65-1920x1088.jpg?w=600" alt="FLUX 3 style reel: five styles, one model, audio on every shot"></a>
 </p>
 
 ## Installation
