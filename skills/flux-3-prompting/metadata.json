@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "abstract": "General FLUX 3 video prompting guide covering mode selection, prompt structure, concise examples, transferable craft, and practical limits.",
+  "references": [
+    "https://docs.bfl.ai/flux_3/flux3_overview",
+    "https://docs.bfl.ai/guides/prompting_video_text_to_video",
+    "https://docs.bfl.ai/guides/prompting_video_image_to_video",
+    "https://docs.bfl.ai/api-reference/utility/generate-a-video-with-flux-3",
+    "https://fal.ai/learn/devs/minimax-h3-prompting-guide",
+    "https://runware.ai/docs/models/alibaba-wan3-0/guides/prompting",
+    "https://docs.byteplus.com/en/docs/ModelArk/2607689"
+  ]
+}
