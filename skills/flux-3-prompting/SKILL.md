@@ -83,16 +83,14 @@ it is tied to visible action.
 
 ## Transferable craft
 
-Other video-model guides point to three useful habits: give every reference one
-job, use a timeline when several events must land, and direct sound as part of
-the shot. These are prompting practices, not FLUX 3 features. Do not copy
-another model's reference tags, endpoint names, or limits into a FLUX 3 request.
+Three habits work across video prompts: give each reference image one job, use a
+timeline when several events must land, and direct sound as part of the shot.
+Keep syntax, endpoint names, and limits specific to FLUX 3.
 
 ## Practical limits
 
-- FLUX 3 Video currently has output up to 20
-  seconds at FHD and 24 fps. Check the current API reference for coupled input,
-  duration, resolution, and field limits.
+- FLUX 3 Video currently supports outputs up to 20 seconds at FHD and 24 fps.
+  Account for coupled input, duration, resolution, and field limits.
 - A short clip has a limited action budget. Prefer one clear subject action and
   one motivated camera move. Split complex mechanisms, many locations, or long
   dialogue into separate shots or a post-production step.
