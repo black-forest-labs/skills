@@ -1,6 +1,6 @@
 ---
 name: flux-3-prompting
-description: Use when writing or improving a general FLUX 3 video prompt. Choose the right mode, structure motion and sound, and keep the request within practical limits.
+description: Use when writing or improving a general FLUX 3 video prompt. Choose the right mode, structure motion and sound, and keep the prompt practical.
 metadata:
   author: Black Forest Labs
   version: "1.0.0"
@@ -35,7 +35,7 @@ direction and speed, camera relationship, and any visual or audio elements that
 must carry across the seam.
 
 Use a draft while the concept is unproven. Review the fast preview, keep the
-selected `draft_cache`, then use `draft_enhance` for the full-quality replay.
+selected `draft_cache`, then if it's a winner use `draft_enhance` for the full-quality clip.
 This keeps the approved composition instead of starting a new generation.
 
 ## Build the prompt
@@ -53,7 +53,9 @@ For a single shot, use this order:
 Example:
 
 ```text
-A low tracking shot follows a red fox sprinting through wet pine undergrowth at dawn. Mist drifts between the trees as the camera keeps pace beside it. Cool blue morning light, controlled motion, cinematic naturalism. Footsteps and wet branches are close and clear.
+A low tracking shot follows a red fox sprinting through wet pine undergrowth at dawn. Mist drifts 
+between the trees as the camera keeps pace beside it. Cool blue morning light, controlled motion, 
+cinematic naturalism. Footsteps and wet branches are close and clear.
 ```
 
 When several beats need control, use a compact timeline. Keep each beat
@@ -88,7 +90,7 @@ another model's reference tags, endpoint names, or limits into a FLUX 3 request.
 
 ## Practical limits
 
-- FLUX 3 Video is a preview model. The current overview lists output up to 20
+- FLUX 3 Video currently has output up to 20
   seconds at FHD and 24 fps. Check the current API reference for coupled input,
   duration, resolution, and field limits.
 - A short clip has a limited action budget. Prefer one clear subject action and
@@ -99,8 +101,8 @@ another model's reference tags, endpoint names, or limits into a FLUX 3 request.
 - FLUX 3 can render text in a scene, but use post-production when wording,
   placement, subtitles, logos, frame-accurate sync, speaker identity across
   generations, or final mixing must be exact.
-- Prompt detail does not replace a suitable mode. Choose the mode by what must
-  survive: text alone, pinned pixels, or continuity from an existing clip.
+- Prompt detail does not replace a suitable mode. Choose the mode by priority:
+  descriptions alone (`t2v`), specific pixels (`i2v`), or continuity from an existing clip (`v2v`)
 
 ## Related skills
 
