@@ -14,6 +14,7 @@ already names one narrow job, use that specialist directly.
 
 | User intent | Skill |
 | --- | --- |
+| Write or improve a general video prompt | `flux-3-prompting` |
 | Diagnose or repair a brief before generation | `flux-3-prompt-doctor` |
 | Write a text-to-video prompt for a new shot | `flux-3-cinematic-inserts` |
 | Build from supplied images or video | `flux-3-keyframes-continuation` |

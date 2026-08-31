@@ -80,7 +80,7 @@ npx skills add black-forest-labs/skills --skill flux-3-product-ads
 
 ### The FLUX 3 video suite
 
-Nine skills make up the video suite. Install the router alone and it names the specialist a request needs; install only the skills you use.
+Nine skills that hand off to each other. Install the router alone and it names the specialist a request needs; install only the skills you use.
 
 | Skill | Use it to |
 | --- | --- |

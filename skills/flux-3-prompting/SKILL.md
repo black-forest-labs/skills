@@ -1,13 +1,13 @@
 ---
 name: flux-3-prompting
-description: Use when writing or improving a general FLUX 3 video prompt. Choose the right mode, structure motion and sound, and keep the prompt practical.
+description: Use when writing or improving a general FLUX 3 video prompt. Choose the right mode, structure motion and sound, and stay inside what one clip can do.
 metadata:
   author: Black Forest Labs
   version: "1.0.0"
   tags: flux, flux-3, bfl, video, prompting
 ---
 
-# FLUX 3 prompting
+# FLUX 3 Prompting
 
 Use the shortest prompt that controls the result. Start with a clear subject and
 visible action, then add only the camera, timing, look, and sound details that
@@ -35,8 +35,9 @@ direction and speed, camera relationship, and any visual or audio elements that
 must carry across the seam.
 
 Use a draft while the concept is unproven. Review the fast preview, keep the
-selected `draft_cache`, then if it's a winner use `draft_enhance` for the full-quality clip.
-This keeps the approved composition instead of starting a new generation.
+selected `draft_cache`, then if it's a winner use `draft_enhance` for the
+full-quality clip. This keeps the approved composition instead of starting a new
+generation.
 
 ## Build the prompt
 
@@ -53,8 +54,8 @@ For a single shot, use this order:
 Example:
 
 ```text
-A low tracking shot follows a red fox sprinting through wet pine undergrowth at dawn. Mist drifts 
-between the trees as the camera keeps pace beside it. Cool blue morning light, controlled motion, 
+A low tracking shot follows a red fox sprinting through wet pine undergrowth at dawn. Mist drifts
+between the trees as the camera keeps pace beside it. Cool blue morning light, controlled motion,
 cinematic naturalism. Footsteps and wet branches are close and clear.
 ```
 
@@ -81,26 +82,22 @@ Describe effects at their visible cause. For example: `As the cup hits the
 tile, it cracks with one sharp ceramic snap.` Sound direction works best when
 it is tied to visible action.
 
-## Transferable craft
-
-Three habits work across video prompts: give each reference image one job, use a
-timeline when several events must land, and direct sound as part of the shot.
-Keep syntax, endpoint names, and limits specific to FLUX 3.
-
 ## Practical limits
 
 - FLUX 3 Video currently supports outputs up to 20 seconds at FHD and 24 fps.
-  Account for coupled input, duration, resolution, and field limits.
+  Duration, resolution, and video input are coupled, so a longer clip at higher
+  resolution is not always available.
 - A short clip has a limited action budget. Prefer one clear subject action and
   one motivated camera move. Split complex mechanisms, many locations, or long
   dialogue into separate shots or a post-production step.
-- A pinned keyframe is visible on screen. Use an attached image for exact visual
-  conditioning; describe an inspiration-only reference in the prompt instead.
+- A pinned keyframe is visible on screen. Give each attached image one job, and
+  describe an inspiration-only reference in the prompt instead of attaching it.
 - FLUX 3 can render text in a scene, but use post-production when wording,
   placement, subtitles, logos, frame-accurate sync, speaker identity across
   generations, or final mixing must be exact.
-- Prompt detail does not replace a suitable mode. Choose the mode by priority:
-  descriptions alone (`t2v`), specific pixels (`i2v`), or continuity from an existing clip (`v2v`)
+- Prompt detail does not replace a suitable mode. Choose the mode by what has to
+  hold: a description alone (`t2v`), specific pixels (`i2v`), or continuity from
+  an existing clip (`v2v`).
 
 ## Related skills
 
@@ -108,4 +105,6 @@ Keep syntax, endpoint names, and limits specific to FLUX 3.
 - `flux-3-cinematic-inserts`: write a text-only standalone shot.
 - `flux-3-keyframes-continuation`: plan keyframes and video continuation.
 - `flux-3-audio-dialogue`: direct speech, ambience, effects, music, or silence.
+- `flux-3-archival-formats`: give a shot a period or archival look.
 - `flux-3-generate`: construct and run the request.
+- `flux-3-product-ads`: assemble a finished ad with voiceover and QC gates.
