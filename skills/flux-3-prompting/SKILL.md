@@ -12,7 +12,7 @@ metadata:
 Use the shortest prompt that controls the result. Start with a clear subject and
 visible action, then add only the camera, timing, look, and sound details that
 matter. FLUX 3 accepts short prompts, natural language, labeled fields, and
-timecoded prompts. [1]
+timecoded prompts.
 
 ## Choose the mode first
 
@@ -28,7 +28,7 @@ Every request uses one mode and its matching media field:
 Use `i2v` when an image must appear on screen. One keyframe pins the opening
 frame. Two keyframes pin the opening and ending frames. Three or more keyframes,
 or timestamped keyframes, define ordered waypoints. Describe the change between
-the pinned images and keep related frames close enough for a plausible path. [2]
+the pinned images and keep related frames close enough for a plausible path.
 
 Use `v2v` to continue from an existing ending. State the next action, subject
 direction and speed, camera relationship, and any visual or audio elements that
@@ -36,7 +36,7 @@ must carry across the seam.
 
 Use a draft while the concept is unproven. Review the fast preview, keep the
 selected `draft_cache`, then use `draft_enhance` for the full-quality replay.
-This keeps the approved composition instead of starting a new generation. [4]
+This keeps the approved composition instead of starting a new generation.
 
 ## Build the prompt
 
@@ -77,7 +77,7 @@ For dialogue, quote the exact line, name the visible speaker or label it as
 voiceover, and say `no on-screen text, no subtitles` when text is unwanted.
 Describe effects at their visible cause. For example: `As the cup hits the
 tile, it cracks with one sharp ceramic snap.` Sound direction works best when
-it is tied to visible action. [3]
+it is tied to visible action.
 
 ## Transferable craft
 
@@ -85,13 +85,12 @@ Other video-model guides point to three useful habits: give every reference one
 job, use a timeline when several events must land, and direct sound as part of
 the shot. These are prompting practices, not FLUX 3 features. Do not copy
 another model's reference tags, endpoint names, or limits into a FLUX 3 request.
-[5] [6] [7]
 
 ## Practical limits
 
 - FLUX 3 Video is a preview model. The current overview lists output up to 20
   seconds at FHD and 24 fps. Check the current API reference for coupled input,
-  duration, resolution, and field limits. [1]
+  duration, resolution, and field limits.
 - A short clip has a limited action budget. Prefer one clear subject action and
   one motivated camera move. Split complex mechanisms, many locations, or long
   dialogue into separate shots or a post-production step.
@@ -110,13 +109,3 @@ another model's reference tags, endpoint names, or limits into a FLUX 3 request.
 - `flux-3-keyframes-continuation`: plan keyframes and video continuation.
 - `flux-3-audio-dialogue`: direct speech, ambience, effects, music, or silence.
 - `flux-3-generate`: construct and run the request.
-
-## Sources
-
-1. [FLUX 3 overview](https://docs.bfl.ai/flux_3/flux3_overview)
-2. [FLUX 3 image-to-video prompting](https://docs.bfl.ai/guides/prompting_video_image_to_video)
-3. [FLUX 3 text-to-video prompting](https://docs.bfl.ai/guides/prompting_video_text_to_video)
-4. [FLUX 3 video API reference](https://docs.bfl.ai/api-reference/utility/generate-a-video-with-flux-3)
-5. [MiniMax H3 prompting guide](https://fal.ai/learn/devs/minimax-h3-prompting-guide)
-6. [Wan 3.0 prompting guide](https://runware.ai/docs/models/alibaba-wan3-0/guides/prompting)
-7. [Seedance 2.5 prompt guide](https://docs.byteplus.com/en/docs/ModelArk/2607689)
