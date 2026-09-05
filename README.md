@@ -35,6 +35,9 @@ Or start with one skill and add specialists as you need them:
 # FLUX 3 video: the router pulls in the right specialist per request
 npx skills add black-forest-labs/skills --skill flux-3-video
 
+# General FLUX 3 prompt structure and mode guidance
+npx skills add black-forest-labs/skills --skill flux-3-prompting
+
 # Image prompting for every FLUX model
 npx skills add black-forest-labs/skills --skill flux-image-best-practices
 
@@ -77,11 +80,12 @@ npx skills add black-forest-labs/skills --skill flux-3-product-ads
 
 ### The FLUX 3 video suite
 
-Eight skills that hand off to each other. Install the router alone and it names the specialist a request needs; install only the specialists you use.
+Nine skills that hand off to each other. Install the router alone and it names the specialist a request needs; install only the skills you use.
 
 | Skill | Use it to |
 | --- | --- |
 | `flux-3-video` | Route a general FLUX 3 request to the right specialist |
+| `flux-3-prompting` | Choose a mode and write a clear general video prompt |
 | `flux-3-prompt-doctor` | Get a readiness verdict (`READY` / `NEEDS INFO` / `REVISE`) before spending a generation |
 | `flux-3-cinematic-inserts` | Write text-to-video prompts with real shot craft, from a field guide of proven concepts |
 | `flux-3-keyframes-continuation` | Build from your own images (`i2v`) or continue a clip (`v2v`) |

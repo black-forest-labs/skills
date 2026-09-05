@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "August 2026",
+  "abstract": "General FLUX 3 video prompting guide covering mode selection, optional prompt formats, examples from BFL documentation, and mode-specific API limits.",
+  "references": [
+    "https://docs.bfl.ai/guides/prompting_video_text_to_video",
+    "https://docs.bfl.ai/guides/prompting_video_image_to_video",
+    "https://docs.bfl.ai/guides/prompting_video_audio",
+    "https://docs.bfl.ai/api-reference/utility/generate-a-video-with-flux-3"
+  ]
+}
