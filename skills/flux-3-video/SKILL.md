@@ -14,24 +14,23 @@ already names one narrow job, use that specialist directly.
 
 | User intent | Skill |
 | --- | --- |
-| Write or improve a general video prompt | `flux-3-prompting` |
+| Write a general scene or multi-shot prompt without running generation | `flux-3-prompting` |
 | Diagnose or repair a brief before generation | `flux-3-prompt-doctor` |
-| Write a text-to-video prompt for a new shot | `flux-3-cinematic-inserts` |
+| Develop a standalone cinematic insert or B-roll shot | `flux-3-cinematic-inserts` |
 | Build from supplied images or video | `flux-3-keyframes-continuation` |
 | Direct dialogue, voiceover, ambience, effects, or music | `flux-3-audio-dialogue` |
 | Give a shot a period or archival look | `flux-3-archival-formats` |
 | Submit, poll, enhance, download, or technically review | `flux-3-generate` |
 | Build a finished product ad with voiceover | `flux-3-product-ads` |
 
-Default sequence, skipping completed stages:
+For a prompt-only request, use Prompting and return the prompt and mode. Use
+Cinematic Inserts instead for a standalone insert or B-roll shot. If the user
+supplies images or video, use Keyframes & Continuation for the media plan.
 
-```text
-Prompt Doctor (until READY; owns the shot-structure decision)
-  → Cinematic Inserts OR Keyframes & Continuation (one, chosen by whether
-    supplied media must constrain the result)
-  → Audio & Dialogue (only when sound matters)
-  → Generate (only when execution is requested)
-```
+Use Prompt Doctor first when a conflicting requirement or missing decision
+prevents choosing a mode. Add Audio & Dialogue when the sound needs a separate
+brief. Hand off to Generate only when the user asks for execution; writing a
+prompt does not require running the full sequence.
 
 Draft before committing anything unproven: a full render takes minutes, and the chosen
 draft replays at full quality.
