@@ -14,9 +14,11 @@ should produce. "Vintage," "nostalgic," and "retro" are adjectives: nothing in t
 can confirm or refute them. A recording format is hardware with named physical artifacts,
 so a reviewer can check the frame for each one and say whether the request landed.
 
-Use this for a single standalone shot, or for a montage that must read as one era. Route
-supplied stills or clips to `flux-3-keyframes-continuation`, and shot craft that has
-nothing to do with period to `flux-3-cinematic-inserts`.
+Use this for a single standalone shot, or for a montage that must read as one era. When
+the request has nothing to do with a period look, route it: supplied stills or clips go
+to `flux-3-keyframes-continuation`; one insert built on a single motivated physical or
+atmospheric event goes to `flux-3-cinematic-inserts`; any other prompt goes to
+`flux-3-prompting`.
 
 ## Format artifacts
 

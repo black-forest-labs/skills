@@ -64,6 +64,7 @@
 
 - **State:** `READY` / `NEEDS INFO` / `REVISE`
 - **Reason:**
+- **Next skill:** `flux-3-prompting` / `flux-3-cinematic-inserts` / `flux-3-keyframes-continuation` / `flux-3-audio-dialogue` / `flux-3-archival-formats` / `flux-3-product-ads` / `flux-3-generate`
 - **Next action:**
 
 The brief is ready when the next skill can act without inventing a consequential choice. Fill only the sections relevant to the request; use documented defaults or label assumptions for the rest.
