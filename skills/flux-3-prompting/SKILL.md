@@ -9,6 +9,13 @@ metadata:
 
 # FLUX 3 Prompting
 
+This is the default writer for a FLUX 3 video prompt. Send one insert built
+around a single motivated physical or atmospheric event to
+`flux-3-cinematic-inserts`, supplied images or video to
+`flux-3-keyframes-continuation`, and a brief whose mode-changing requirements
+conflict or are missing to `flux-3-prompt-doctor`. Write the prompt here; do not
+generate.
+
 Start with the subject and action. Add details for choices the model should not
 make for you, such as the camera angle, setting, or spoken words. The
 [BFL text-to-video guide](https://docs.bfl.ai/guides/prompting_video_text_to_video)
@@ -31,13 +38,19 @@ its style. One keyframe sets the opening frame; two set the opening and ending
 frames. Timestamped keyframes specify when images appear. Describe the motion
 between them. See the [image-to-video examples](https://docs.bfl.ai/guides/prompting_video_image_to_video).
 
+`keyframes` accepts 1 to 10 images. Three or more bare keyframes need an integer
+`duration`; timestamped `[seconds, image]` pairs may use `duration: "auto"`,
+which ends the clip at the last pin, up to 20 seconds. Hand the media plan itself
+to `flux-3-keyframes-continuation`.
+
 Use `v2v` to continue after a clip's ending. Describe what happens next and any
 visual or audio details that should continue across the join. See
 [video continuation](https://docs.bfl.ai/flux_3/flux3_video#video-continuation).
 
 If the user asks to generate a test, suggest a draft so they can review its
 composition, action, and sound. To finish that draft, pass its `draft_cache` to
-`draft_enhance`. See the [draft workflow](https://docs.bfl.ai/flux_3/flux3_overview#draft-mode)
+`draft_enhance`. That mode takes no new prompt; return the mode and the
+`draft_cache` and nothing else. See the [draft workflow](https://docs.bfl.ai/flux_3/flux3_overview#draft-mode)
 for the request and comparison examples.
 
 ## Write the prompt
@@ -46,6 +59,12 @@ For one continuous shot, describe the subject's action, setting, camera, and
 sound. Add timing, style, or continuity details when the brief needs them. The
 order is optional. If the sequence needs several shots, describe each one
 separately and mark the cuts.
+
+The [text-to-video guide](https://docs.bfl.ai/guides/prompting_video_text_to_video)
+also documents an optional six-part schema: core summary, scene, subject
+description, dynamic narrative, audio, and style & color. The guide recommends
+it for longer shots; use it when a multi-shot look has to hold across cuts. No
+format is required.
 
 This short prompt appears with its result in the
 [text-to-video guide](https://docs.bfl.ai/guides/prompting_video_text_to_video#before-you-prompt):
@@ -99,9 +118,15 @@ promise that a prompt alone will meet those requirements.
 
 ## Return the prompt
 
-For a prompt-only request, return the prompt and the selected mode, including
-any supplied media it needs. State unresolved requirements that would change
-the mode. Stop there. Use `flux-3-generate` only when the user asks to run it.
+For a prompt-only request, return:
+
+- the prompt
+- the selected mode and any media it requires
+- delivery: `duration`, `aspect_ratio`, and `resolution` when they are known,
+  otherwise `auto` or unspecified
+- any unresolved requirement that would change the mode
+
+Stop there. Use `flux-3-generate` only when the user asks to run it.
 
 ## Related skills
 

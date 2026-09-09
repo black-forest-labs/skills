@@ -22,7 +22,8 @@ media, and each carries exactly one media field:
 
 Keyframes appear **on screen, pixel-exact**. There is no field that carries a subject
 without showing the source image; a source used only as inspiration is described in the
-prompt instead. Media is a public URL or inline base64; keyframe images are at least
+prompt instead. If no supplied media has to appear, this is not the skill: use
+`flux-3-prompting`, or `flux-3-cinematic-inserts` for a field-guide insert. Media is a public URL or inline base64; keyframe images are at least
 256x256.
 
 ## Prompting each shape

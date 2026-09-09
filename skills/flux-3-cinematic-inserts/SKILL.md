@@ -1,6 +1,6 @@
 ---
 name: flux-3-cinematic-inserts
-description: Use when writing a FLUX 3 text-to-video prompt for a standalone shot. Covers shot craft, reliable concept patterns, camera, continuity, and review.
+description: Use when writing one standalone insert or B-roll shot around a single motivated physical or atmospheric event. Covers shot craft, field-guide concept patterns, camera, continuity, and review.
 metadata:
   author: Black Forest Labs
   version: "1.0.0"
@@ -10,10 +10,11 @@ metadata:
 # FLUX 3 Cinematic Inserts
 
 Build one standalone shot around **one motivated physical or atmospheric event**: B-roll,
-a bridge, a material detail, a capability test. Reroute when success requires supplied
-media (`flux-3-keyframes-continuation`), exact typography, frame-accurate sync, a
-multi-step mechanism, close human performance, or finished ad copy; those need
-conditioning or post, not a text-only generation.
+a bridge, a material detail, a capability test. Reroute a general scene, a multi-shot
+prompt, or a mode choice that is not a field-guide insert to `flux-3-prompting`. Reroute
+when success requires supplied media (`flux-3-keyframes-continuation`), exact
+typography, frame-accurate sync, a multi-step mechanism, close human performance, or
+finished ad copy; those need conditioning or post, not a text-only generation.
 
 Before writing, settle the contract in one sentence: the visible cause, the physical
 response, and the payoff. Then pick a proven lane from

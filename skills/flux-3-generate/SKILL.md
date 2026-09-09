@@ -30,13 +30,17 @@ field:
 - The schema is strict: any field it does not know returns a `422` naming it
   (`Extra inputs are not permitted`). A missing required field 422s the same way.
 - Settings on the generating modes: `aspect_ratio` (`auto`, `21:9`, `2:1`, `16:9`,
-  `4:3`, `1:1`, `3:4`, `9:16`), `duration` (integer 5-20 or `"auto"`), `resolution`
-  (`hd` or `fhd`), `generate_audio` (bool), `draft` (bool), `version`.
+  `4:3`, `1:1`, `3:4`, `9:16`), `resolution` (`hd` or `fhd`), `generate_audio` (bool),
+  `draft` (bool), `version`.
+- `duration` by mode: `t2v` and `i2v` take an integer 5-20 or `"auto"`; `v2v` takes an
+  integer 5-15 or `"auto"`; `draft_enhance` takes no `duration`, because the cached
+  draft already fixed the generation.
 - Constraints couple (a video input at higher resolution may cap duration): read the
   reference rather than assuming fields are independent.
-- Three or more bare keyframes, and all `[seconds, image]` timestamped keyframes, need
-  an integer `duration`. Media travels as a public URL or inline base64; keyframe
-  images are at least 256x256.
+- Three or more **bare** keyframes need a set integer `duration`. Timestamped
+  `[seconds, image]` pairs may use `"auto"`, which runs the clip to the last pin, up to
+  20 seconds. Media travels as a public URL or inline base64; keyframe images are at
+  least 256x256.
 
 ## Run a job
 

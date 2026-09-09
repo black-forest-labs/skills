@@ -49,6 +49,7 @@ npx skills add black-forest-labs/skills --skill bfl-api
 <summary>Install individual FLUX 3 specialists</summary>
 
 ```bash
+npx skills add black-forest-labs/skills --skill flux-3-prompting
 npx skills add black-forest-labs/skills --skill flux-3-prompt-doctor
 npx skills add black-forest-labs/skills --skill flux-3-cinematic-inserts
 npx skills add black-forest-labs/skills --skill flux-3-keyframes-continuation
@@ -87,7 +88,7 @@ Nine skills that hand off to each other. Install the router alone and it names t
 | `flux-3-video` | Route a general FLUX 3 request to the right specialist |
 | `flux-3-prompting` | Choose a mode and write a clear general video prompt |
 | `flux-3-prompt-doctor` | Get a readiness verdict (`READY` / `NEEDS INFO` / `REVISE`) before spending a generation |
-| `flux-3-cinematic-inserts` | Write text-to-video prompts with real shot craft, from a field guide of proven concepts |
+| `flux-3-cinematic-inserts` | Build one insert or B-roll shot around a single motivated physical or atmospheric event, from a field guide of proven concepts |
 | `flux-3-keyframes-continuation` | Build from your own images (`i2v`) or continue a clip (`v2v`) |
 | `flux-3-audio-dialogue` | Direct speech, voiceover, ambience, effects, and music |
 | `flux-3-generate` | Construct requests, poll, download, and validate the result |

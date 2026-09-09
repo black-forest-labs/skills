@@ -1,6 +1,6 @@
 ---
 name: flux-3-video
-description: Use when routing a general FLUX 3 video request. Select only the specialists needed for diagnosis, direction, audio, or execution.
+description: Use when routing a general FLUX 3 video request. Select only the specialists needed for general prompting, diagnosis, direction, audio, or execution.
 metadata:
   author: Black Forest Labs
   version: "1.0.0"
@@ -16,7 +16,7 @@ already names one narrow job, use that specialist directly.
 | --- | --- |
 | Write a general scene or multi-shot prompt without running generation | `flux-3-prompting` |
 | Diagnose or repair a brief before generation | `flux-3-prompt-doctor` |
-| Develop a standalone cinematic insert or B-roll shot | `flux-3-cinematic-inserts` |
+| Develop one standalone insert or B-roll shot around one motivated physical or atmospheric event, using the field guide | `flux-3-cinematic-inserts` |
 | Build from supplied images or video | `flux-3-keyframes-continuation` |
 | Direct dialogue, voiceover, ambience, effects, or music | `flux-3-audio-dialogue` |
 | Give a shot a period or archival look | `flux-3-archival-formats` |
@@ -24,11 +24,13 @@ already names one narrow job, use that specialist directly.
 | Build a finished product ad with voiceover | `flux-3-product-ads` |
 
 For a prompt-only request, use Prompting and return the prompt and mode. Use
-Cinematic Inserts instead for a standalone insert or B-roll shot. If the user
+Cinematic Inserts instead when the request is one insert built around a single
+motivated physical or atmospheric event from its field guide. If the user
 supplies images or video, use Keyframes & Continuation for the media plan.
 
-Use Prompt Doctor first when a conflicting requirement or missing decision
-prevents choosing a mode. Add Audio & Dialogue when the sound needs a separate
+Use Prompt Doctor when a conflicting requirement or missing decision prevents
+choosing a mode. Prompt Doctor is not the default first hop; a clear brief goes
+straight to the writer. Add Audio & Dialogue when the sound needs a separate
 brief. Hand off to Generate only when the user asks for execution; writing a
 prompt does not require running the full sequence.
 
