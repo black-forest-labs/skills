@@ -179,7 +179,10 @@ x-key: YOUR_API_KEY
    └─> Response: { "polling_url": "..." }
 
 2. GET polling_url (repeat until complete)
-   └─> Response: { "status": "Pending" | "Ready" | "Error", ... }
+   └─> Response: { "status": "Pending" | "Reasoning" | "Generating" | "Ready" | ... }
+       Keep polling on Pending, Reasoning, Generating (FLUX 3 reports the last two).
+       Any other status (Error, Request Moderated, Content Moderated,
+       Task not found) is terminal: stop, do not poll to timeout.
 
 3. When Ready, download result URL
    └─> URL expires in 10 minutes - download immediately

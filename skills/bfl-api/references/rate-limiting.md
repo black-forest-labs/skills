@@ -178,8 +178,10 @@ class AsyncRateLimitedClient:
                         data = await response.json()
                         if data["status"] == "Ready":
                             return data["result"]
-                        elif data["status"] == "Error":
-                            raise Exception(data.get("error"))
+                        elif data["status"] not in ("Pending", "Reasoning", "Generating"):
+                            # Error, Request Moderated, Content Moderated, Task not found:
+                            # terminal and never become Ready, so stop instead of polling to timeout.
+                            raise Exception(f"{data['status']}: {data.get('error', 'generation failed')}")
                     await asyncio.sleep(2)
 
 # Usage
