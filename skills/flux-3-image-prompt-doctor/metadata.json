@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "organization": "Black Forest Labs",
+  "date": "November 2026",
+  "abstract": "Pre-generation gate for FLUX 3 Image requests that carry on-image text. Builds a text inventory, marks each element exact or open to the model, returns READY, NEEDS INFO, or REVISE so the rewrite step never fills a missing fact, and checks result.prompt for copy nobody approved.",
+  "references": [
+    "https://docs.bfl.ai"
+  ]
+}

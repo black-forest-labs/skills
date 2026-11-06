@@ -17,7 +17,8 @@
       "strict": false,
       "skills": [
         "./skills/bfl-api",
-        "./skills/flux-image-best-practices"
+        "./skills/flux-image-best-practices",
+        "./skills/flux-3-image-prompt-doctor"
       ],
       "author": {
         "name": "Kerem Nalbant"

@@ -40,6 +40,9 @@ npx skills add black-forest-labs/skills --skill flux-image-best-practices
 
 # BFL API integration (polling, webhooks, error handling)
 npx skills add black-forest-labs/skills --skill bfl-api
+
+# FLUX 3 Image: check on-image text before rendering
+npx skills add black-forest-labs/skills --skill flux-3-image-prompt-doctor
 ```
 
 <details>
@@ -73,6 +76,7 @@ npx skills add black-forest-labs/skills --skill flux-3-product-ads
 | --- | --- |
 | `flux-image-best-practices` | Prompting for every FLUX model: T2I and I2I patterns, JSON structured prompts, hex colors, typography, multi-reference editing, model selection |
 | `bfl-api` | The BFL API end to end: endpoints, async polling, rate limits, error recovery, webhooks, Python and TypeScript clients |
+| `flux-3-image-prompt-doctor` | Check a FLUX 3 Image brief's on-image text before rendering, so the rewrite step can't invent addresses, dates, or contacts |
 | `flux-3-video` (suite, below) | Video generation with native audio, from a single shot to a finished product ad |
 
 ### The FLUX 3 video suite
