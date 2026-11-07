@@ -45,6 +45,10 @@ export type Region = "global" | "eu" | "us";
 
 // --- Errors ---
 
+// Statuses that mean "not finished yet". FLUX 3 reports Reasoning, then
+// Generating, before Ready. Every other status is terminal.
+const IN_PROGRESS_STATUSES = new Set(["Pending", "Reasoning", "Generating"]);
+
 export class BFLError extends Error {
   constructor(
     message: string,
@@ -325,8 +329,13 @@ export class BFLClient {
       const status = response.status as string;
       if (status === "Ready") {
         return (response.result as Record<string, unknown>) ?? response;
-      } else if (status === "Error") {
-        throw new GenerationError((response.error as string) ?? "Generation failed");
+      } else if (!IN_PROGRESS_STATUSES.has(status)) {
+        // Error, Request Moderated, Content Moderated, Task not found:
+        // terminal and never become Ready, so fail now instead of
+        // polling until the timeout.
+        throw new GenerationError(
+          `${status}: ${(response.error as string) ?? "Generation failed"}`
+        );
       }
 
       // Exponential backoff (cap at 5 seconds)

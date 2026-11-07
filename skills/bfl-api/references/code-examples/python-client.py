@@ -62,6 +62,11 @@ class ValidationError(BFLError):
     pass
 
 
+# Statuses that mean "not finished yet". FLUX 3 reports Reasoning, then
+# Generating, before Ready. Every other status is terminal.
+IN_PROGRESS_STATUSES = {"Pending", "Reasoning", "Generating"}
+
+
 class GenerationError(BFLError):
     """Generation failed."""
     pass
@@ -336,9 +341,12 @@ class BFLClient:
             status = response.get("status")
             if status == "Ready":
                 return response.get("result", response)
-            elif status == "Error":
+            elif status not in IN_PROGRESS_STATUSES:
+                # Error, Request Moderated, Content Moderated, Task not found:
+                # terminal and never become Ready, so fail now instead of
+                # polling until the timeout.
                 error = response.get("error", "Generation failed")
-                raise GenerationError(error)
+                raise GenerationError(f"{status}: {error}")
 
             # Exponential backoff (cap at 5 seconds)
             time.sleep(delay)

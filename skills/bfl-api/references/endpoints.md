@@ -255,8 +255,10 @@ GET /v1/get_result?id={generation_id}
 ### Response States
 
 ```json
-// Pending
+// In progress: keep polling. FLUX 3 reports Reasoning, then Generating.
 { "status": "Pending" }
+{ "status": "Reasoning" }
+{ "status": "Generating" }
 
 // Ready
 {
@@ -274,6 +276,8 @@ GET /v1/get_result?id={generation_id}
   "error": "Error description"
 }
 ```
+
+`Request Moderated`, `Content Moderated`, and `Task not found` are also terminal. Only the three in-progress statuses mean "keep polling"; treat anything else as a failure.
 
 ## Error Responses
 

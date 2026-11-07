@@ -14,7 +14,7 @@ BFL API uses asynchronous generation. All requests return a `polling_url` for st
    └─> Immediate response: { "polling_url": "..." }
 
 2. GET polling_url (repeat until complete)
-   └─> { "status": "Pending" | "Ready" | "Error" }
+   └─> { "status": "Pending" | "Reasoning" | "Generating" | "Ready" | ... }
 
 3. When "Ready", download result sample URL
    └─> URL expires in 10 minutes
@@ -25,8 +25,15 @@ BFL API uses asynchronous generation. All requests return a `polling_url` for st
 | Status | Description | Action |
 |--------|-------------|--------|
 | `Pending` | Request queued/processing | Continue polling |
+| `Reasoning` | FLUX 3 is planning the output | Continue polling |
+| `Generating` | FLUX 3 is rendering | Continue polling |
 | `Ready` | Generation finished | Download result |
-| `Error` | Generation Error | Handle error |
+| `Error` | Generation Error | Stop, handle error |
+| `Request Moderated` | Prompt or input blocked by moderation | Stop, do not retry unchanged |
+| `Content Moderated` | Output blocked by moderation | Stop, do not retry unchanged |
+| `Task not found` | Unknown or expired task ID | Stop |
+
+Only `Pending`, `Reasoning`, and `Generating` mean "keep polling". Every other status is terminal and never later becomes `Ready`, so a loop that only checks for `Ready` and `Error` will poll a moderated task until it times out. Treat any status outside the in-progress set as a failure.
 
 ## Polling Strategies
 
@@ -46,8 +53,10 @@ def poll_fixed_interval(polling_url, headers, interval=2, timeout=120):
 
         if data["status"] == "Ready":
             return data["result"]
-        elif data["status"] == "Error":
-            raise Exception(data.get("error", "Generation Error"))
+        elif data["status"] not in ("Pending", "Reasoning", "Generating"):
+            # Error, Request Moderated, Content Moderated, Task not found:
+            # terminal and never become Ready, so stop instead of polling to timeout.
+            raise Exception(f"{data['status']}: {data.get('error', 'generation failed')}")
 
         time.sleep(interval)
 
@@ -72,8 +81,10 @@ def poll_with_backoff(polling_url, headers, max_attempts=30):
 
         if data["status"] == "Ready":
             return data["result"]
-        elif data["status"] == "Error":
-            raise Exception(data.get("error", "Generation Error"))
+        elif data["status"] not in ("Pending", "Reasoning", "Generating"):
+            # Error, Request Moderated, Content Moderated, Task not found:
+            # terminal and never become Ready, so stop instead of polling to timeout.
+            raise Exception(f"{data['status']}: {data.get('error', 'generation failed')}")
 
         # Exponential backoff with jitter
         delay = min(base_delay * (2 ** attempt), max_delay)
@@ -94,6 +105,8 @@ def poll_adaptive(polling_url, headers, timeout=120):
     start_time = time.time()
     delays = {
         "Pending": 2.0,      # Queue/processing
+        "Reasoning": 2.0,    # FLUX 3 planning step (can take a while)
+        "Generating": 1.5,   # FLUX 3 rendering
         None: 1.5            # Unknown/default
     }
 
@@ -105,8 +118,10 @@ def poll_adaptive(polling_url, headers, timeout=120):
 
         if status == "Ready":
             return data["result"]
-        elif status == "Error":
-            raise Exception(data.get("error", "Generation Error"))
+        elif status not in ("Pending", "Reasoning", "Generating"):
+            # Error, Request Moderated, Content Moderated, Task not found:
+            # terminal and never become Ready, so stop instead of polling to timeout.
+            raise Exception(f"{status}: {data.get('error', 'generation failed')}")
 
         delay = delays.get(status, delays[None])
         time.sleep(delay)
@@ -153,8 +168,10 @@ class BFLClient:
 
             if data["status"] == "Ready":
                 return data["result"]
-            elif data["status"] == "Error":
-                raise Exception(data.get("error"))
+            elif data["status"] not in ("Pending", "Reasoning", "Generating"):
+                # Error, Request Moderated, Content Moderated, Task not found:
+                # terminal and never become Ready, so stop instead of polling to timeout.
+                raise Exception(f"{data['status']}: {data.get('error', 'generation failed')}")
 
             time.sleep(delay)
             delay = min(delay * 1.5, 5.0)  # Gradual backoff
@@ -223,8 +240,10 @@ async def submit_and_poll(session, client, model, prompt):
 
             if data["status"] == "Ready":
                 return data["result"]
-            elif data["status"] == "Error":
-                raise Exception(data.get("error"))
+            elif data["status"] not in ("Pending", "Reasoning", "Generating"):
+                # Error, Request Moderated, Content Moderated, Task not found:
+                # terminal and never become Ready, so stop instead of polling to timeout.
+                raise Exception(f"{data['status']}: {data.get('error', 'generation failed')}")
 
         await asyncio.sleep(2)
 ```

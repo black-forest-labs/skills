@@ -63,8 +63,9 @@ while true; do
     IMAGE_URL=$(echo "${RESULT}" | grep -o '"sample":"[^"]*"' | cut -d'"' -f4)
     echo "Image URL: ${IMAGE_URL}"
     break
-  elif [ "${STATUS}" = "Error" ]; then
-    echo "Generation failed!"
+  elif [ "${STATUS}" != "Pending" ] && [ "${STATUS}" != "Reasoning" ] && [ "${STATUS}" != "Generating" ]; then
+    # Error, Request Moderated, Content Moderated, Task not found are terminal.
+    echo "Generation failed: ${STATUS}"
     echo "${RESULT}"
     exit 1
   fi
