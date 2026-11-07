@@ -25,6 +25,81 @@ All requests require the `x-key` header with your API key:
 x-key: YOUR_API_KEY
 ```
 
+## FLUX 3 Image Endpoints
+
+One endpoint per model handles text-to-image, editing, and multi-reference composition: the prompt decides whether to generate or edit, and there is no `mode` field.
+
+### FLUX 3 Image
+
+```
+POST /v1/flux-3-image
+```
+
+Maximum control: bounding boxes in the prompt to place elements, pixel-exact local edits, up to 10 references, up to 4K output.
+
+### FLUX 3 Image Klein
+
+```
+POST /v1/flux-3-image-klein
+```
+
+5.6B open-weights version of FLUX 3 Image, designed for image editing. Fast and low-cost; Klein Base supports LoRA training.
+
+### FLUX 3 Image Parameters
+
+| Parameter          | Type            | Required | Description                                                                                       |
+| ------------------ | --------------- | -------- | ------------------------------------------------------------------------------------------------- |
+| `prompt`           | string          | Yes      | Text description or edit instruction. Bounding boxes go as a JSON list at the end of the prompt   |
+| `images`           | string or array | No       | 1 to 10 reference images, each an http(s) URL or base64. The first is the image being edited      |
+| `aspect_ratio`     | string          | No       | `21:9` to `9:21` (15 ratios) or `auto` (default)                                                  |
+| `resolution`       | string          | No       | `768sq`, `1k` (default for text-to-image), `1.5k`, `2k`, `4k`                                     |
+| `width`, `height`  | integer         | No       | Exact output size; set both. Overrides `resolution` and `aspect_ratio`                            |
+| `safety_tolerance` | integer         | No       | 0 (strict) to 7, default 2                                                                        |
+
+**FLUX 3 Image only:**
+
+| Parameter    | Type    | Default    | Description                                                                                  |
+| ------------ | ------- | ---------- | -------------------------------------------------------------------------------------------- |
+| `grounding`  | boolean | `true`     | Ground the prompt with web and image search. Set `false` for invented subjects or speed      |
+| `resolution` | string  | -          | Also accepts `match_input` (edits only): output keeps the first reference's size, up to 4MP  |
+| `version`    | string  | `"latest"` | Endpoint version                                                                             |
+
+**FLUX 3 Image Klein only:**
+
+| Parameter       | Type    | Default  | Description                     |
+| --------------- | ------- | -------- | ------------------------------- |
+| `seed`          | integer | random   | Seed for reproducibility        |
+| `steps`         | integer | 16       | Denoising steps (1 to 16)       |
+| `output_format` | string  | `"jpeg"` | `"jpeg"` or `"png"`             |
+
+> **Klein is not a drop-in swap.** Both endpoints reject unknown fields, so a FLUX 3 Image payload that sets `grounding`, `version`, or `resolution: "match_input"` returns `422` on Klein, and `seed`, `steps`, or `output_format` return `422` on FLUX 3 Image. Neither accepts `webhook_url` or `webhook_secret`. Strip model-specific fields when switching endpoints.
+
+### FLUX 3 Image Example
+
+```bash
+curl -X POST "https://api.bfl.ai/v1/flux-3-image-klein" \
+  -H "x-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Make it a winter night: snow on the roof, the lake is frozen, warm light in the windows",
+    "images": ["https://example.com/cabin.jpg"]
+  }'
+```
+
+Response (`cost` is in credits, 1 credit = $0.01):
+
+```json
+{
+  "id": "7c7a9564-...",
+  "polling_url": "https://api.us7.bfl.ai/v1/get_result?id=7c7a9564-...",
+  "cost": 0.9,
+  "input_mp": null,
+  "output_mp": null
+}
+```
+
+The API rewrites the prompt before generating; the rewritten prompt is returned in `result.prompt`. FLUX 3 Image results do not include a `seed`; Klein results do.
+
 ## FLUX.2 Text-to-Image and Image-to-Image Endpoints
 
 ### FLUX.2 [klein] 4B
