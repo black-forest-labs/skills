@@ -46,7 +46,16 @@ Result URLs from the API are temporary. Download images immediately after genera
 
 ### Model Endpoints & Pricing
 
-> **Credit pricing:** 1 credit = $0.01 USD. FLUX.2 uses megapixel-based pricing (cost scales with resolution).
+> **Credit pricing:** 1 credit = $0.01 USD. FLUX 3 Image is priced per image by `resolution` tier. FLUX.2 uses megapixel-based pricing (cost scales with resolution).
+
+#### FLUX 3 Image Models
+
+| Model              | Path                     | `768sq` | `1k`   | `1.5k` | `2k`   | `4k`   | Best For                                              |
+| ------------------ | ------------------------ | ------- | ------ | ------ | ------ | ------ | ----------------------------------------------------- |
+| FLUX 3 Image       | `/v1/flux-3-image`       | $0.041  | $0.048 | -      | $0.100 | $0.607 | Layout control (bounding boxes), precise local edits  |
+| FLUX 3 Image Klein | `/v1/flux-3-image-klein` | $0.008  | $0.009 | $0.011 | $0.014 | $0.036 | Fast, low-cost generation and editing; open weights   |
+
+> **Request shape differs from FLUX.2:** references go in one `images` array (up to 10, URL or base64), size is set with `resolution` + `aspect_ratio` (or exact `width` + `height`), and there is no `webhook_url`, so poll for results. The submit response includes `cost` in credits. FLUX 3 Image has `grounding` on by default (web and image search); set `"grounding": false` for invented subjects or faster results. Klein is not a drop-in endpoint swap: see [references/endpoints.md](references/endpoints.md#flux-3-image-endpoints).
 
 #### FLUX.2 Models
 
@@ -143,7 +152,7 @@ FLUX.2 models support multiple input images for combining elements, style transf
 
 - **Polling**: Response includes `polling_url` for async results
 - **URL Expiration**: Result URLs expire after 10 minutes
-- **Webhook Support**: Configure `webhook_url` for production workloads
+- **Webhook Support**: Configure `webhook_url` for production workloads (not accepted by `/v1/flux-3-image` or `/v1/flux-3-image-klein`; poll those)
 
 ## API Key Setup
 

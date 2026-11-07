@@ -226,6 +226,10 @@ Decision guide for selecting the optimal FLUX model based on your requirements.
 
 | Inpainting    | FLUX.1 Fill                     |
 
+| Layout control / precise local edits | FLUX 3 Image       |
+
+| Lowest cost per image / open weights | FLUX 3 Image Klein |
+
 **Note:** All FLUX.2 models natively support image-to-image editing via reference images. Simply provide your source image(s) as references and describe the desired changes.
 
 **By Speed:**
@@ -243,6 +247,10 @@ Decision guide for selecting the optimal FLUX model based on your requirements.
 | FLUX.2 [flex]     | Medium         | Typography tasks        |
 
 | FLUX.2 [max]      | Slower         | Final hero images       |
+
+| FLUX 3 Image Klein | Very Fast     | High-volume edits       |
+
+| FLUX 3 Image      | Slower         | Layout control, precise edits |
 
 **By Quality:**
 
@@ -281,6 +289,16 @@ Decision guide for selecting the optimal FLUX model based on your requirements.
 | FLUX.2 [dev]      | -      | -    | Free    | Free    | Local dev (non-commercial)  |
 
 > **Pricing formula:** `(firstMP + (outputMP-1) * mpPrice) + (inputMP * mpPrice)` in cents
+
+> Priced per image by `resolution` tier, the same for text-to-image and editing. The submit response returns `cost` in credits.
+
+| Model              | `768sq` | `1k`   | `1.5k` | `2k`   | `4k`   | Volume Recommendation          |
+
+| ------------------ | ------- | ------ | ------ | ------ | ------ | ------------------------------ |
+
+| FLUX 3 Image Klein | $0.008  | $0.009 | $0.011 | $0.014 | $0.036 | High volume, editing at scale  |
+
+| FLUX 3 Image       | $0.041  | $0.048 | -      | $0.100 | $0.607 | Layout control, precise edits  |
 
 | Model                | Price/Image | Use Case                |
 
@@ -402,6 +420,28 @@ Decision guide for selecting the optimal FLUX model based on your requirements.
 
 - Weather/location data
 
+**Layout Control / Precise Local Edits:**
+
+**Recommended: FLUX 3 Image**
+
+- Bounding boxes in the prompt place every element (headline, product, each panel of a grid)
+
+- Recolor, move, replace, or remove one element while the rest stays unchanged
+
+- Up to 10 references in one `images` array
+
+- `grounding` is on by default (web and image search); set `false` for invented people or products
+
+**High-Volume Editing / Custom Styles:**
+
+**Recommended: FLUX 3 Image Klein**
+
+- About $0.009 per 1K image
+
+- Same prompt, `images`, and bounding box format as FLUX 3 Image (but not every field; see `bfl-api/references/endpoints.md`)
+
+- Open weights; train LoRAs on Klein Base
+
 **Local Development / Testing:**
 
 **Recommended: FLUX.2 [dev]**
@@ -474,6 +514,8 @@ Balance?    → FLUX.2 [pro]
 Text?       → FLUX.2 [flex]
 Edit?       → FLUX.2 [klein/pro/max] with reference images
 Free?       → FLUX.2 [dev]
+Layout?     → FLUX 3 Image (bounding boxes)
+Cheapest?   → FLUX 3 Image Klein
 ```
 
 - **Prefer**: FLUX.2 models (24 concurrent limit)
