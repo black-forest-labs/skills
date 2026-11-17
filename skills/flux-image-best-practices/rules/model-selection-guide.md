@@ -101,12 +101,12 @@ What's your primary need?
 
 #### FLUX 3 Image
 
-> Priced per image by `resolution` tier, the same for text-to-image and editing. The submit response returns `cost` in credits.
+> Priced per image by `resolution` tier, the same for text-to-image and editing. The submit response returns `cost` in credits. FLUX 3 Image accepts `1.5k`, but BFL has not published a price for it yet.
 
 | Model              | `768sq` | `1k`   | `1.5k` | `2k`   | `4k`   | Volume Recommendation          |
 | ------------------ | ------- | ------ | ------ | ------ | ------ | ------------------------------ |
 | FLUX 3 Image Klein | $0.008  | $0.009 | $0.011 | $0.014 | $0.036 | High volume, editing at scale  |
-| FLUX 3 Image       | $0.041  | $0.048 | -      | $0.100 | $0.607 | Layout control, precise edits  |
+| FLUX 3 Image       | $0.041  | $0.048 | unlisted | $0.100 | $0.607 | Layout control, precise edits  |
 
 #### FLUX.1 Models
 
