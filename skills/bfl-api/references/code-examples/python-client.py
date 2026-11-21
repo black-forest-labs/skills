@@ -244,7 +244,7 @@ class BFLClient:
         prompts: List[str],
         max_workers: int = None,
         **kwargs,
-    ) -> List[GenerationResult]:
+    ) -> List[Optional[GenerationResult]]:
         """
         Generate multiple images concurrently.
 
@@ -255,24 +255,27 @@ class BFLClient:
             **kwargs: Parameters applied to all generations
 
         Returns:
-            List of GenerationResult objects
+            One result per prompt, in the same order as prompts
+            (None where that generation failed)
         """
+        if not prompts:
+            return []
+
         max_workers = max_workers or min(len(prompts), self.max_concurrent)
-        results = []
+        results: List[Optional[GenerationResult]] = [None] * len(prompts)
 
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {
-                executor.submit(self.generate, model, prompt, **kwargs): prompt
-                for prompt in prompts
+                executor.submit(self.generate, model, prompt, **kwargs): i
+                for i, prompt in enumerate(prompts)
             }
 
             for future in as_completed(futures):
+                i = futures[future]
                 try:
-                    result = future.result()
-                    results.append(result)
+                    results[i] = future.result()
                 except Exception as e:
-                    logger.error(f"Generation failed: {e}")
-                    results.append(None)
+                    logger.error(f"Generation failed for prompt {i}: {e}")
 
         return results
 
