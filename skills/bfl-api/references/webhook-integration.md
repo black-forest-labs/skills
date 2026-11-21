@@ -171,12 +171,11 @@ function verifySignature(payload, signature, secret) {
     .update(payload)
     .digest('hex');
 
-  const providedSignature = signature.slice(7);
+  const expected = Buffer.from(expectedSignature);
+  const provided = Buffer.from(signature.slice(7));
 
-  return crypto.timingSafeEqual(
-    Buffer.from(expectedSignature),
-    Buffer.from(providedSignature)
-  );
+  // timingSafeEqual throws when the lengths differ, so check that first
+  return expected.length === provided.length && crypto.timingSafeEqual(expected, provided);
 }
 
 app.post('/api/bfl-webhook', async (req, res) => {
