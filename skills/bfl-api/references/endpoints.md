@@ -80,7 +80,7 @@ Text-to-image generation.
 ### FLUX.1 Kontext
 
 ```
-POST /v1/flux-kontext
+POST /v1/flux-kontext-pro
 ```
 
 ### FLUX.1 Kontext Max
@@ -92,7 +92,7 @@ POST /v1/flux-kontext-max
 ### FLUX.1 Fill
 
 ```
-POST /v1/flux-fill
+POST /v1/flux-pro-1.0-fill
 ```
 
 Inpainting and object removal - you can achieve inpainting and object removal with specific prompting style with FLUX.2 models for better performance.

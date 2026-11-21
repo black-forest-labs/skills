@@ -65,11 +65,11 @@ Result URLs from the API are temporary. Download images immediately after genera
 
 | Model                | Path                     | Price/Image | Best For                      |
 | -------------------- | ------------------------ | ----------- | ----------------------------- |
-| FLUX.1 Kontext [pro] | `/v1/flux-kontext`       | $0.04       | Image editing with context    |
+| FLUX.1 Kontext [pro] | `/v1/flux-kontext-pro`   | $0.04       | Image editing with context    |
 | FLUX.1 Kontext [max] | `/v1/flux-kontext-max`   | $0.08       | Max quality editing           |
 | FLUX1.1 [pro]        | `/v1/flux-pro-1.1`       | $0.04       | Standard T2I, fast & reliable |
 | FLUX1.1 [pro] Ultra  | `/v1/flux-pro-1.1-ultra` | $0.06       | Ultra high-resolution         |
-| FLUX1.1 [pro] Raw    | `/v1/flux-pro-1.1-raw`   | $0.06       | Candid photography feel       |
+| FLUX1.1 [pro] Raw    | `/v1/flux-pro-1.1-ultra` | $0.06       | Candid feel, `"raw": true`    |
 | FLUX.1 Fill [pro]    | `/v1/flux-pro-1.0-fill`  | $0.05       | Inpainting                    |
 
 > **Tip:** All FLUX.2 models support image editing via the `input_image` parameter - no separate editing endpoint needed. Use [bfl.ai/pricing](https://bfl.ai/pricing) calculator for exact costs at different resolutions.
