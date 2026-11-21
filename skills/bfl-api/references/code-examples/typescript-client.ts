@@ -447,12 +447,11 @@ export function verifyWebhookSignature(
     .update(payload)
     .digest("hex");
 
-  const providedSignature = signature.slice(7); // Remove 'sha256=' prefix
+  const expected = Buffer.from(expectedSignature);
+  const provided = Buffer.from(signature.slice(7)); // Remove 'sha256=' prefix
 
-  return crypto.timingSafeEqual(
-    Buffer.from(expectedSignature),
-    Buffer.from(providedSignature)
-  );
+  // timingSafeEqual throws when the lengths differ, so check that first
+  return expected.length === provided.length && crypto.timingSafeEqual(expected, provided);
 }
 
 // --- Example Usage ---
